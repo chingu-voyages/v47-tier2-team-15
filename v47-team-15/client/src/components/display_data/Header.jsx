@@ -2,10 +2,12 @@ import logo from '../../assets/img/logo.svg';
 import { useState } from 'react';
 
 function Header() {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+    const [active, setActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleNav = () => {
-    setIsNavOpen(!isNavOpen);
+    setIsOpen(!isOpen);
+    setActive(!active);
   };
 
   return (
@@ -14,16 +16,18 @@ function Header() {
         <nav className="flex flex-wrap justify-between items-center bg-[#1A183E] text-white p-2 px-4">
           <div className="flex flex-row items-center pb-4">
             <img src={logo} alt="logo" className="w-[4rem]" />
-            <span>CryptoView</span>
+            <span className="mt-4">CryptoView</span>
           </div>
 
           <div
             className={`md:flex justify-between items-center w-full md:w-auto ${
-              isNavOpen ? '' : 'hidden'
+                isOpen ? '' : 'hidden'
             }`}
             id="navbar-default"
           >
-            <ul className="flex-col items-center md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:text-sm md:font-medium py-1 md:py-0">
+            <ul
+              className={`flex-col items-center md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:text-sm md:font-medium py-1 md:py-0 transition-all delay-150 duration-300 overflow-hidden`}
+            >
               <li
                 className="md:bg-transparent text-white block pl-3 pr-4 py-2 md:p-0 rounded"
                 aria-current="page"
@@ -43,9 +47,9 @@ function Header() {
             <button
               data-collapse-toggle="navbar-default"
               type="button"
-              className={`inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-[#1A183E] dark:focus:ring-gray-600 ${isNavOpen ? 'absolute top-5 right-4' : ''}`}
+              className={`inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-[#1A183E] dark:focus:ring-gray-600 ${isOpen ? 'absolute top-7 right-4' : ''}`}
               aria-controls="navbar-default"
-              aria-expanded={isNavOpen ? 'true' : 'false'}
+              aria-expanded={isOpen ? 'true' : 'false'}
               onClick={toggleNav}
             >
               <span className="sr-only">Open main menu</span>
@@ -73,7 +77,7 @@ function Header() {
             </button>
           </div>
         </nav>
-        <hr className='text-white -mt-6'></hr>
+        <hr className="hidden md:block text-white -mt-6"></hr>
       </div>
     </>
   );
