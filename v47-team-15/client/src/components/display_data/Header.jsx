@@ -11,9 +11,10 @@ function Header() {
   return (
     <>
       <div className="max-w-screen mx-auto">
-        <nav className="flex flex-wrap justify-between items-center bg-[#1A183E] text-white border-b-white p-2 px-4">
-          <div className="flex">
+        <nav className="flex flex-wrap justify-between items-center bg-[#1A183E] text-white p-2 px-4">
+          <div className="flex flex-row items-center pb-4">
             <img src={logo} alt="logo" className="w-[4rem]" />
+            <span>CryptoView</span>
           </div>
 
           <div
@@ -72,6 +73,7 @@ function Header() {
             </button>
           </div>
         </nav>
+        <hr className='text-white -mt-6'></hr>
       </div>
     </>
   );
