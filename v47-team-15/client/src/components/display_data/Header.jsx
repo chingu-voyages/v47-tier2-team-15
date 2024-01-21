@@ -26,18 +26,18 @@ function Header() {
             id="navbar-default"
           >
             <ul
-              className={`flex-col items-center md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:text-sm md:font-medium py-1 md:py-0 transition-all delay-150 duration-300 overflow-hidden`}
+              className={`flex-col items-center md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:font-medium py-1 md:py-0 transition-all delay-150 duration-300 overflow-hidden px-6`}
             >
               <li
-                className="md:bg-transparent text-white block pl-3 pr-4 py-2 md:p-0 rounded"
+                className="md:bg-transparent text-lg text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer"
                 aria-current="page"
               >
                 Home
               </li>
-              <li className="md:bg-transparent text-white block pl-3 pr-4 py-2 md:p-0 rounded">
+              <li className="md:bg-transparent text-lg text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
                 Cryptocurrencies
               </li>
-              <li className="md:bg-transparent text-white block pl-3 pr-4 py-2 md:p-0 rounded">
+              <li className="md:bg-transparent text-lg text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
                 Portfolio
               </li>
             </ul>
