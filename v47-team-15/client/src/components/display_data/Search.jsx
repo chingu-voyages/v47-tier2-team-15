@@ -11,6 +11,7 @@ function Search({ onSearch }) {
   const handleClick = () => {
     console.log('Button clicked');
     onSearch(searchInput);
+    setSearchInput("");
   };
 
   return (
