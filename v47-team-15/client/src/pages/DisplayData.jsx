@@ -6,6 +6,7 @@ import Search from '../components/display_data/Search.jsx';
 
 function DisplayData() {
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -15,8 +16,12 @@ function DisplayData() {
           timeout: 15000,
           withCredentials: true,
         });
-        console.log('Fetched data:', response.data);
-        setData(response.data);
+
+        const responseData = response.data.data;
+
+        console.log('Fetched data:', responseData);
+        setData(responseData);
+        setFilteredData(responseData);
       } catch (error) {
         console.error('Error fetching data:', error.message);
         setError(error);
@@ -24,7 +29,20 @@ function DisplayData() {
     };
 
     fetchData();
-  }, []); 
+  }, []);
+
+
+  const handleSearch = (searchInput) => {
+    if (searchInput) {
+      const filteredResults = data.filter(item =>
+        item.name.toLowerCase().includes(searchInput.toLowerCase())
+      );
+      setFilteredData(filteredResults);
+      console.log("search results:", filteredResults)
+    } else {
+      setFilteredData(data);
+    }
+  };
 
   return (
     <>
@@ -33,8 +51,8 @@ function DisplayData() {
         <div>Error fetching data: {error.message}</div>
       ) : (
         <>
-          <InfoCards data={data} />
-          <Search />
+          <InfoCards data={filteredData} />
+          <Search onSearch={handleSearch} /> 
         </>
       )}
     </>
