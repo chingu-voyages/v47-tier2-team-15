@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const currenciesRoute = require('./routes/currenciesRoute');
+const globalRoute = require('./routes/globalRoute');
 const bodyParser = require('body-parser');
 
 app.use(express.json());
@@ -17,6 +18,7 @@ app.use('/api/currencies', (req, res, next) => {
 app.use(bodyParser.json());
 
 app.use('/api/currencies', currenciesRoute);
+app.use('/api/global', globalRoute);
 
 app.use(cors());
 

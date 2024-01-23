@@ -3,6 +3,7 @@ import axios from 'axios';
 import Header from '../components/display_data/Header.jsx';
 import InfoCards from '../components/display_data/InfoCards.jsx';
 import Search from '../components/display_data/Search.jsx';
+import Table from '../components/display_data/Table.jsx';
 
 function DisplayData() {
   const [data, setData] = useState([]);
@@ -53,6 +54,7 @@ function DisplayData() {
         <>
           <InfoCards data={filteredData} />
           <Search onSearch={handleSearch} /> 
+          <Table data={data} />
         </>
       )}
     </>
