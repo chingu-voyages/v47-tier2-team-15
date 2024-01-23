@@ -33,8 +33,10 @@ function InfoCards() {
             <p className="pb-4">Market Cap</p>
             <div className="flex flex-row gap-4">
               <span>{formatNumber(data, 'total_mcap', 2)}</span>
-              <span className={`rounded bg-[#1F3A43] px-1 ${getColor(data[0].mcap_change)}`}>
-              {data[0].mcap_change}%
+              <span
+                className={`rounded bg-[#1F3A43] px-1 ${getColor(data[0].mcap_change)}`}
+              >
+                {data[0].mcap_change}%
               </span>
             </div>
           </div>
@@ -42,8 +44,10 @@ function InfoCards() {
             <p className="pb-4">Volume 24h</p>
             <div className="flex flex-row gap-4">
               <span>{formatNumber(data, 'total_volume', 2)}</span>
-              <span className={`bg-[#1F3A43] rounded px-1 ${getColor(data[0].volume_change)}`}>
-              {data[0].volume_change}%
+              <span
+                className={`bg-[#1F3A43] rounded px-1 ${getColor(data[0].volume_change)}`}
+              >
+                {data[0].volume_change}%
               </span>
             </div>
           </div>
@@ -51,9 +55,7 @@ function InfoCards() {
             <p className="pb-4">BTC Dominance</p>
             <div className="flex flex-row gap-4">
               <span>{data[0].btc_d}%</span>
-              <span className="bg-[#461E3C] rounded px-1">
-                0.31%
-              </span>
+              <span className="bg-[#461E3C] rounded px-1">0.31%</span>
             </div>
           </div>
         </div>
