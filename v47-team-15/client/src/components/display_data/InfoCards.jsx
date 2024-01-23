@@ -8,20 +8,6 @@ function InfoCards() {
     return <div>No data available</div>;
   }
 
-  // const formatNumber = (data, name, decimal) => {
-  //   const value = data[0]?.[name];
-
-  //   if (value !== undefined && value !== null) {
-  //     return value.toFixed(decimal).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  //   } else {
-  //     return 'N/A';
-  //   }
-  // };
- 
-  // function getColor(number) {
-  //   return number >= 0 ? 'text-[#34B349]' : 'text-[#F02934]';
-  // }
-
   return (
     <>
       <div className="w-full flex flex-col justify-center items-center bg-[#1A183E] text-white p-4">

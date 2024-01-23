@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { formatAllNumber, getColor } from '../Helpers';
+import { getColor } from '../Helpers';
 
 function Table({ data }) {
 

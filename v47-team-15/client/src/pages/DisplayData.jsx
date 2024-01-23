@@ -4,6 +4,7 @@ import InfoCards from '../components/display_data/InfoCards.jsx';
 import Search from '../components/display_data/Search.jsx';
 import Table from '../components/display_data/Table.jsx';
 import useFetch from '../components/useFetch.jsx';
+import Footer from '../components/display_data/Footer.jsx';
 
 function DisplayData() {
   const { data, error } = useFetch('http://localhost:3003/api/currencies')
@@ -32,6 +33,7 @@ function DisplayData() {
           <InfoCards />
           <Search onSearch={handleSearch} /> 
           <Table data={data} filter={filteredData} />
+          <Footer />
         </>
       )}
     </>
