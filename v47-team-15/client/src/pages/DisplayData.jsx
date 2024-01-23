@@ -1,37 +1,14 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import Header from '../components/display_data/Header.jsx';
 import InfoCards from '../components/display_data/InfoCards.jsx';
 import Search from '../components/display_data/Search.jsx';
 import Table from '../components/display_data/Table.jsx';
+import useFetch from '../components/useFetch.jsx';
 
 function DisplayData() {
-  const [data, setData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:3003/api/currencies', {
-          timeout: 15000,
-          withCredentials: true,
-        });
-
-        const responseData = response.data.data;
-
-        console.log('Fetched data:', responseData);
-        setData(responseData);
-        setFilteredData(responseData);
-      } catch (error) {
-        console.error('Error fetching data:', error.message);
-        setError(error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+  const { data, error } = useFetch('http://localhost:3003/api/currencies')
+  const [ filteredData, setFilteredData ] = useState([])
+ 
 
   const handleSearch = (searchInput) => {
     if (searchInput) {
@@ -52,9 +29,9 @@ function DisplayData() {
         <div>Error fetching data: {error.message}</div>
       ) : (
         <>
-          <InfoCards data={filteredData} />
+          <InfoCards />
           <Search onSearch={handleSearch} /> 
-          <Table data={data} />
+          <Table data={data} filter={filteredData} />
         </>
       )}
     </>
