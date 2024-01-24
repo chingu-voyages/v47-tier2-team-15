@@ -8,8 +8,9 @@ function Table({ data, filter }) {
   return (
     <>
     <div className='bg-[#1A183E] py-8'>
-      <table className="min-w-3/5 mx-auto divide-y divide-gray-200">
-        <thead className="bg-gray-50">
+      <table className="min-w-3/5 mx-auto divide-y divide-gray-200 rounded-md">
+        <div className='overflow-y-auto max-h-[35rem]'>
+        <thead className="sticky top-0 bg-gray-50 z-10">
           <tr>
           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Rank
@@ -64,6 +65,7 @@ function Table({ data, filter }) {
             </tr>
           ))}
         </tbody>
+        </div>
       </table>
     </div>
     </>
