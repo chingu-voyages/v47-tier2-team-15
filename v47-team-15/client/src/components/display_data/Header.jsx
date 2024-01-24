@@ -12,7 +12,7 @@ function Header() {
 
   return (
     <>
-      <div className="max-w-screen mx-auto">
+      <div className="max-w-screen mx-auto sticky top-0 z-20">
         <nav className="flex flex-wrap justify-between items-center bg-[#1A183E] text-white p-2 px-4">
           <div className="flex flex-row items-center pb-4">
             <img src={logo} alt="logo" className="w-[4rem]" />
