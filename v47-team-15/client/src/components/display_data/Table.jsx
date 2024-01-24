@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
 import { getColor } from '../Helpers';
 
-function Table({ data }) {
+function Table({ data, filter }) {
+  const displayData = filter.length > 0 ? filter : data;
+
 
   return (
     <>
     <div className='bg-[#1A183E] py-8'>
-      <table className="min-w-4/5 mx-auto divide-y divide-gray-200">
+      <table className="min-w-3/5 mx-auto divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -46,7 +48,7 @@ function Table({ data }) {
           </tr>
         </thead>
         <tbody className="bg-[#24224B] text-white divide-y divide-gray-200">
-          {data.map((coin, index) => (
+          {displayData.map((coin, index) => (
             <tr key={index}>
               <td className="px-6 py-4 whitespace-nowrap">{coin.rank}</td>
               <td className="px-6 py-4 whitespace-nowrap">{coin.name}</td>
@@ -70,6 +72,7 @@ function Table({ data }) {
 
 Table.propTypes = {
   data: PropTypes.array.isRequired,
+  filter: PropTypes.array.isRequired
 };
 
 export default Table;
