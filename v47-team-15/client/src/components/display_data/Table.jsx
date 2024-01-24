@@ -1,14 +1,19 @@
 import PropTypes from 'prop-types';
 import { getColor } from '../Helpers';
 
-function Table({ data, filter }) {
+function Table({ data, filter, currentPage, itemsPerPage  }) {
   const displayData = filter.length > 0 ? filter : data;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const pageData = displayData.slice(startIndex, endIndex);
 
   return (
     <>
       <div className='bg-[#1A183E] py-8'>
       <table className="min-w-3/5 mx-auto divide-y divide-gray-200 rounded-md">
-        <div className='overflow-y-auto max-h-[35rem]'>
+        {/* <div className='overflow-y-auto max-h-[35rem]'> */}
         <thead className="sticky top-0 bg-gray-50 z-10">
           <tr>
           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -48,7 +53,7 @@ function Table({ data, filter }) {
           </tr>
         </thead>
         <tbody className="bg-[#24224B] text-white text-xs divide-y divide-gray-200">
-          {displayData.map((coin, index) => (
+          {pageData.map((coin, index) => (
             <tr key={index}>
               <td className="px-6 py-4 whitespace-nowrap">{coin.rank}</td>
               <td className="px-6 py-4 whitespace-nowrap">{coin.name}</td>
@@ -64,7 +69,7 @@ function Table({ data, filter }) {
             </tr>
           ))}
         </tbody>
-        </div>
+        {/* </div> */}
       </table>
     </div>
       {/* <div className="bg-[#1A183E] py-8">
@@ -118,6 +123,8 @@ function Table({ data, filter }) {
 Table.propTypes = {
   data: PropTypes.array.isRequired,
   filter: PropTypes.array.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  itemsPerPage: PropTypes.number.isRequired,
 };
 
 export default Table;
