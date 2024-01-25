@@ -16,7 +16,7 @@ function InfoCards() {
           <p className="pb-4">View a full list of active cryptocurrencies</p>
         </div>
         <div className="hidden md:flex flex-row items-center justify-center gap-8">
-          <div className="min-w-[18rem] bg-[#1D2A41] rounded py-4 px-10">
+          <div className="md:min-w-[14rem] lg:min-w-[18rem] bg-[#1D2A41] rounded py-4 px-10">
             <p className="pb-4">Market Cap</p>
             <div className="flex flex-row gap-4">
               <span>{formatNumber(data, 'total_mcap', 2)}</span>
@@ -27,7 +27,7 @@ function InfoCards() {
               </span>
             </div>
           </div>
-          <div className="min-w-[18rem] bg-[#1D2A41] rounded py-4 px-10">
+          <div className="md:min-w-[14rem] lg:min-w-[18rem] bg-[#1D2A41] rounded py-4 px-10">
             <p className="pb-4">Volume 24h</p>
             <div className="flex flex-row gap-4">
               <span>{formatNumber(data, 'total_volume', 2)}</span>
@@ -38,7 +38,7 @@ function InfoCards() {
               </span>
             </div>
           </div>
-          <div className="min-w-[18rem] bg-[#311B3D] rounded py-4 px-10">
+          <div className="md:min-w-[14rem] lg:min-w-[18rem] bg-[#311B3D] rounded py-4 px-10">
             <p className="pb-4">BTC Dominance</p>
             <div className="flex flex-row gap-4">
               <span>{data[0].btc_d}%</span>
