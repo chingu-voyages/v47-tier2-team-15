@@ -55,13 +55,13 @@ function Table({ data, filter, currentPage, itemsPerPage  }) {
               <td className="px-6 py-4 whitespace-nowrap">{coin.rank}</td>
               <td className="px-6 py-4 whitespace-nowrap">{coin.name}</td>
               <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">{coin.symbol}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{coin.price_usd}</td>
-              <td className={`hidden md:table-cell px-6 py-4 whitespace-nowrap ${getColor(coin.percent_change_1h)}`}>{coin.percent_change_1h}</td>
-              <td className={`hidden md:table-cell px-6 py-4 whitespace-nowrap ${getColor(coin.percent_change_7d)}`}>{coin.percent_change_7d}</td>
-              <td className={`hidden md:table-cell px-6 py-4 whitespace-nowrap ${getColor(coin.percent_change_24h)}`}>{coin.percent_change_24h}</td>
-              <td className="hidden lg:table-cell px-6 py-4 whitespace-nowrap">{coin.csupply}</td>
-              <td className="hidden lg:table-cell px-6 py-4 whitespace-nowrap">{coin.tsupply}</td>
-              <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">{coin.market_cap_usd}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{coin.price_usd}$</td>
+              <td className={`hidden md:table-cell px-6 py-4 whitespace-nowrap ${getColor(coin.percent_change_1h)}`}>{coin.percent_change_1h}%</td>
+              <td className={`hidden md:table-cell px-6 py-4 whitespace-nowrap ${getColor(coin.percent_change_7d)}`}>{coin.percent_change_7d}%</td>
+              <td className={`hidden md:table-cell px-6 py-4 whitespace-nowrap ${getColor(coin.percent_change_24h)}`}>{coin.percent_change_24h}%</td>
+              <td className="hidden lg:table-cell px-6 py-4 whitespace-nowrap">{coin.csupply}$</td>
+              <td className="hidden lg:table-cell px-6 py-4 whitespace-nowrap">{coin.tsupply}$</td>
+              <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">{coin.market_cap_usd}$</td>
             </tr>
           ))}
         </tbody>
