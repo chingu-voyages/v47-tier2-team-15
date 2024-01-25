@@ -19,7 +19,7 @@ function InfoCards() {
           <div className="md:min-w-[14rem] lg:min-w-[18rem] bg-[#1D2A41] rounded py-4 px-10">
             <p className="pb-4">Market Cap</p>
             <div className="flex flex-row gap-4">
-              <span>{formatNumber(data, 'total_mcap', 2)}</span>
+              <span>{formatNumber(data, 'total_mcap', 2)}$</span>
               <span
                 className={`rounded bg-[#1F3A43] px-1 ${getColor(data[0].mcap_change)}`}
               >
@@ -30,7 +30,7 @@ function InfoCards() {
           <div className="md:min-w-[14rem] lg:min-w-[18rem] bg-[#1D2A41] rounded py-4 px-10">
             <p className="pb-4">Volume 24h</p>
             <div className="flex flex-row gap-4">
-              <span>{formatNumber(data, 'total_volume', 2)}</span>
+              <span>{formatNumber(data, 'total_volume', 2)}$</span>
               <span
                 className={`bg-[#1F3A43] rounded px-1 ${getColor(data[0].volume_change)}`}
               >
