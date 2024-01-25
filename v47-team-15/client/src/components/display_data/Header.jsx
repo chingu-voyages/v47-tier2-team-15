@@ -21,7 +21,7 @@ function Header() {
 
           <div
             className={`md:flex justify-between items-center w-full md:w-auto ${
-              isOpen ? 'bg-[#1A183E]' : 'hidden'
+              isOpen ? 'bg-[#24224B] block fixed left-0 top-20 py-4' : 'hidden'
             }`}
             id="navbar-default"
           >
