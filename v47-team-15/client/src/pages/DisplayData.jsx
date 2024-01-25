@@ -34,6 +34,7 @@ function DisplayData() {
 
   return (
     <>
+    <div className='bg-[#1A183E] min-h-screen'>
       <Header />
       {error ? (
         <div>Error fetching data: {error.message}</div>
@@ -62,6 +63,7 @@ function DisplayData() {
           )}
         </>
       )}
+      </div>
     </>
   );
 }
