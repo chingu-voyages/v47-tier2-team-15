@@ -27,7 +27,7 @@ function Pagination({ totalItems, itemsPerPage, currentPage, onPageChange }) {
   };
 
   return (
-    <div className="flex flex-row justify-evenly items-center bg-[#1A183E] text-white pb-8">
+    <div className="flex flex-row justify-evenly items-center bg-[#1A183E] text-white py-4 sm:py-0 md:pb-8">
       <div>
         <button
           onClick={() => handlePageChange(currentPage - 1)}
