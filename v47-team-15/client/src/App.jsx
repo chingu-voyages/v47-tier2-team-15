@@ -1,7 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import DisplayData from './pages/DisplayData.jsx';
-import Registration from "./components/user_profile/Registration.jsx";
+import Registration from "./components/user_auth/Registration.jsx";
 import './App.css';
 
 function App() {
