@@ -12,12 +12,6 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    validate: {
-      validator: function (value) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-      },
-      message: 'Invalid email format',
-    },
   },
   password: {
     type: String,

@@ -1,16 +1,40 @@
 const passport = require('passport');
 const User = require('../models/user');
 const uuid = require('uuid');
+const Joi = require('joi');
+const passwordComplexity = require('joi-password-complexity');
 
+const passwordComplexityOptions = {
+  min: 8,
+  max: 30,
+  lowerCase: 1,
+  upperCase: 1,
+  numeric: 1,
+  symbol: 1,
+};
 exports.registerUser = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
+
+    const passwordValidationResult = passwordComplexity(
+      passwordComplexityOptions
+    ).validate(password, { abortEarly: false });
+
+    if (passwordValidationResult.error) {
+      return res.status(400).json({
+        error: 'Invalid password format',
+        details: passwordValidationResult.error.details,
+      });
+    }
 
     const newUser = new User({
       username,
       email,
       password,
     });
+
+    const hashedPassword = await bcrypt.hash(newUser.password, saltRounds);
+    newUser.password = hashedPassword;
 
     await newUser.save();
 
@@ -20,7 +44,15 @@ exports.registerUser = async (req, res, next) => {
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
     console.error('Error registering user:', error.message);
-    res.status(500).json({ error: 'Internal Server Error' });
+
+    // Handle specific error types
+    if (error.code === 11000) {
+      // Duplicate key error (E11000)
+      res.status(409).json({ error: 'Email already registered' });
+    } else {
+      // Other errors
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
   }
 };
 
