@@ -1,14 +1,25 @@
 import logo from '../../assets/img/logo.svg';
 import { useState } from 'react';
-import Registration from '../user_profile/Registration';
+import Registration from '../user_auth/Registration';
+import Login from '../user_auth/Login';
 
 function Header() {
   const [active, setActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+  const [isRegistrationModalOpen, setRegistrationModalOpen] = useState(false);
 
-  const toggleModal = () => {
+  const toggleModal = (type) => {
     setIsModalOpen(!isModalOpen);
+  
+    if (type === 'login') {
+      setLoginModalOpen(!isLoginModalOpen);
+      setRegistrationModalOpen(false);
+    } else if (type === 'signup') {
+      setRegistrationModalOpen(!isRegistrationModalOpen);
+      setLoginModalOpen(false);
+    }
   };
 
   const closeModal = () => {
@@ -82,14 +93,18 @@ function Header() {
                 />
               </svg>
             </button>
-            <button className="hidden md:block bg-white text-[#1A183E] rounded p-2 mx-1">
+            <button onClick={() => toggleModal()} className="hidden md:block bg-white text-[#1A183E] rounded p-2 mx-1">
               Login
             </button>
+
+            {isModalOpen && <Login closeModal={closeModal} isModalOpen={isModalOpen} />}
+
               <button onClick={() => toggleModal()} className="hidden md:block bg-[#00A83E] rounded p-2 mx-1">
               Sign up
             </button>
                   
             {isModalOpen && <Registration closeModal={closeModal} isModalOpen={isModalOpen} />}
+
           </div>
         </nav>
         <hr className="hidden md:block text-white -mt-6"></hr>
