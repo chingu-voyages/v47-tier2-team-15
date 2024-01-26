@@ -7,6 +7,7 @@ import useFetch from '../components/useFetch.jsx';
 import Footer from '../components/display_data/Footer.jsx';
 import Pagination from '../components/display_data/Pagination.jsx';
 import Spinner from '../components/display_data/Spinner.jsx';
+import Registration from '../components/user_profile/Registration.jsx';
 
 function DisplayData() {
   const { data, error, isLoading } = useFetch(
@@ -45,6 +46,7 @@ function DisplayData() {
           ) : (
             <>
               <InfoCards />
+              <Registration />
               <Search onSearch={handleSearch} />
               <Table
                 data={data}
