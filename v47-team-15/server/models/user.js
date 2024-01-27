@@ -19,6 +19,7 @@ const UserSchema = new Schema({
   },
 });
 
+
 // Middleware to hash the password before saving to the database
 UserSchema.pre('save', async function (next) {
   try {
