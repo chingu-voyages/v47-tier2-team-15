@@ -2,17 +2,20 @@ import logo from '../../assets/img/logo.svg';
 import { useState } from 'react';
 import Registration from '../user_auth/Registration';
 import Login from '../user_auth/Login';
+import { useContext } from 'react';
+import { UserContext } from '../userContext';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
+  const { username, setUsername } = useContext(UserContext);
   const [active, setActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [registrationModalOpen, setRegistrationModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleModal = (type) => {
-    // setIsModalOpen(!isModalOpen);
-  
     if (type === 'login') {
       setLoginModalOpen(!loginModalOpen);
       setRegistrationModalOpen(false);
@@ -31,6 +34,11 @@ function Header() {
   const toggleNav = () => {
     setIsOpen(!isOpen);
     setActive(!active);
+  };
+
+  const handleLogout = () => {
+    navigate('/currencies');
+    setUsername(''); 
   };
 
   return (
@@ -58,10 +66,12 @@ function Header() {
                 Home
               </li>
               <li className="md:bg-transparent text-lg text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
+              <Link to="/currencies">
                 Cryptocurrencies
+              </Link>
               </li>
               <li className="md:bg-transparent text-lg text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
-                Portfolio
+              <Link to="/profile">Portfolio</Link>
               </li>
             </ul>
           </div>
@@ -94,18 +104,27 @@ function Header() {
                 />
               </svg>
             </button>
-            <button onClick={() => toggleModal('login')} className="hidden md:block bg-white text-[#1A183E] rounded p-2 mx-1">
-              Login
-            </button>
+            {username ? (
+              // User is logged in, show logout button
+              <button onClick={handleLogout} className="hidden md:block bg-[#00A83E] rounded p-2 mx-1">
+                Logout
+              </button>
+            ) : (
+              // User is not logged in, show login and signup buttons
+              <>
+                <button onClick={() => toggleModal('login')} className="hidden md:block bg-white text-[#1A183E] rounded p-2 mx-1">
+                  Login
+                </button>
 
-            
-            {loginModalOpen && <Login closeModal={closeModal} loginModalOpen={loginModalOpen} setLoginModalOpen={setLoginModalOpen} setRegistrationModalOpen={setRegistrationModalOpen} />}
+                {loginModalOpen && <Login closeModal={closeModal} loginModalOpen={loginModalOpen} setLoginModalOpen={setLoginModalOpen} setRegistrationModalOpen={setRegistrationModalOpen} />}
 
-              <button onClick={() => toggleModal('signup')} className="hidden md:block bg-[#00A83E] rounded p-2 mx-1">
-              Sign up
-            </button>
+                <button onClick={() => toggleModal('signup')} className="hidden md:block bg-[#00A83E] rounded p-2 mx-1">
+                  Sign up
+                </button>
 
-            {registrationModalOpen && <Registration closeModal={closeModal} registrationModalOpen={registrationModalOpen} setLoginModalOpen={setLoginModalOpen} toggleModal={toggleModal} />}
+                {registrationModalOpen && <Registration closeModal={closeModal} registrationModalOpen={registrationModalOpen} setLoginModalOpen={setLoginModalOpen} toggleModal={toggleModal} />}
+              </>
+            )}
                   
             
 
