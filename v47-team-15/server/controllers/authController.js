@@ -1,16 +1,47 @@
 const passport = require('passport');
 const User = require('../models/user');
 const uuid = require('uuid');
+const Joi = require('joi');
+const passwordComplexity = require('joi-password-complexity');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const passwordComplexityOptions = {
+  min: 8,
+  max: 30,
+  lowerCase: 1,
+  upperCase: 1,
+  numeric: 1,
+  symbol: 1,
+};
 
 exports.registerUser = async (req, res, next) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password, confirmPassword } = req.body;
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      return res.status(400).json({ error: 'Passwords do not match' });
+    }
+
+    const passwordValidationResult = passwordComplexity(
+      passwordComplexityOptions
+    ).validate(password, { abortEarly: false });
+
+    if (passwordValidationResult.error) {
+      return res.status(400).json({
+        error: 'Invalid password format',
+        details: passwordValidationResult.error.details,
+      });
+    }
 
     const newUser = new User({
       username,
       email,
       password,
     });
+
+    const hashedPassword = await bcrypt.hash(newUser.password, saltRounds);
+    newUser.password = hashedPassword;
 
     await newUser.save();
 
@@ -20,12 +51,18 @@ exports.registerUser = async (req, res, next) => {
     res.status(201).json({
       message: 'User registered successfully',
       user: {
+        userID: newUser.userId,
         username: newUser.username,
-      }
+      },
     });
   } catch (error) {
     console.error('Error registering user:', error.message);
-    res.status(500).json({ error: 'Internal Server Error' });
+
+    if (error.code === 11000) {
+      res.status(409).json({ error: 'Email already registered' });
+    } else {
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
   }
 };
 
@@ -44,7 +81,13 @@ exports.loginUser = (req, res, next) => {
 
       // Redirect to user profile or send a response as needed
       // Example: res.redirect('/dashboard');
-      return res.status(200).json({ message: 'Login successful' });
+      return res.status(200).json({
+        message: 'Login successful',
+        user: {
+          userID: newUser.userId,
+          username: newUser.username,
+        },
+      });
     });
   })(req, res, next);
 };
@@ -55,6 +98,10 @@ exports.logoutUser = (req, res, next) => {
       return next(err);
     }
     // Redirect or send a response as needed
-    res.status(200).json({ message: 'Logout successful' });
+    res.status(200).json({
+      message: 'Logout successful',
+      userID: newUser.userId,
+      username: newUser.username,
+    });
   });
 };
