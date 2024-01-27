@@ -2,8 +2,12 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Joi from 'joi';
+import { useContext } from 'react';
+import { UserContext } from '../userContext';
 
 function Registration({ closeModal, isModalOpen }) {
+  const {username, setUsername, successMessage, setSuccessMessage} = useContext(UserContext);
+
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -19,8 +23,6 @@ function Registration({ closeModal, isModalOpen }) {
     confirmPassword: '',
     general: '',
   });
-  const [successMessage, setSuccessMessage] = useState(false);
-  const [username, setUsername] = useState('');
 
   const handleChange = (e) => {
     if (e.target.name === 'password' || e.target.name === 'confirmPassword') {
@@ -41,13 +43,6 @@ function Registration({ closeModal, isModalOpen }) {
         .custom((value, helpers) => {
           if (value !== formData.password) {
             return helpers.message('"confirm password" must match "password"');
-          }
-          return value;
-        })
-        .valid(Joi.ref('email'))
-        .custom((value, helpers) => {
-          if (value !== formData.email) {
-            return helpers.message('"Email already exists!"');
           }
           return value;
         })
@@ -88,10 +83,11 @@ function Registration({ closeModal, isModalOpen }) {
         },
       );
 
-      const user = response.data.user;
+      // const user = response.data.user;
       console.log('Registration successful:', response.data);
       setSuccessMessage(true);
-      setUsername(user.username);
+      setUsername(response.data.user.username);
+      closeModal();
     } catch (error) {
       console.error('Registration error:', error.message);
       setErrors({
@@ -229,9 +225,9 @@ function Registration({ closeModal, isModalOpen }) {
                 {/* {errors.password && (
                   <div className="text-red-500">{errors.password}</div>
                 )} */}
-                {/* {errors.confirmPassword && (
+                {errors.confirmPassword && (
                   <div className="text-red-500">{errors.confirmPassword}</div>
-                )} */}
+                )}
                 {successMessage && (
                   <div className="text-green-500">Welcome, {username}!</div>
                 )}
