@@ -25,7 +25,7 @@ function Login({ closeModal, loginModalOpen, setRegistrationModalOpen }) {
               </h1>
               <button
                 onClick={closeModal}
-                className="cursor-pointer text-white text-xl "
+                className="self-start cursor-pointer text-white text-xl "
               >
                 x
               </button>
@@ -79,8 +79,8 @@ function Login({ closeModal, loginModalOpen, setRegistrationModalOpen }) {
                 
               </div>
               <small className="text-white text-center">
-                You don't have an account? 
-                <button type="button" onClick={navigateToSignup}  className="text-blue-400 cursor-pointer"> Sign up</button>
+                Don't have an account? 
+                <button type="button" onClick={navigateToSignup}  className="text-blue-400 cursor-pointer px-1"> Sign up</button>
               </small>
             </form>
           </div>
