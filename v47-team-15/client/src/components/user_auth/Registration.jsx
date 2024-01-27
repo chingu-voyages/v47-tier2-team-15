@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import Joi from 'joi';
 
 function Registration({ closeModal, isModalOpen }) {
   const [formData, setFormData] = useState({
@@ -11,32 +12,92 @@ function Registration({ closeModal, isModalOpen }) {
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [errors, setErrors] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    general: '',
+  });
   const [successMessage, setSuccessMessage] = useState(false);
   const [username, setUsername] = useState('');
 
-
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === 'password' || e.target.name === 'confirmPassword') {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+    setErrors({ ...errors, [e.target.name]: '' });
   };
 
+  const validateForm = () => {
+    const schema = Joi.object({
+      username: Joi.string().alphanum().min(3).max(30).required(),
+      email: Joi.string().email({ tlds: { allow: false } }).required(),
+      password: Joi.string().min(8).max(30).required(),
+      confirmPassword: Joi.string()
+        .valid(Joi.ref('password'))
+        .custom((value, helpers) => {
+          if (value !== formData.password) {
+            return helpers.message('"confirm password" must match "password"');
+          }
+          return value;
+        })
+        .valid(Joi.ref('email'))
+        .custom((value, helpers) => {
+          if (value !== formData.email) {
+            return helpers.message('"Email already exists!"');
+          }
+          return value;
+        })
+        .required(),
+    });
+  
+    const { error } = schema.validate(formData, { abortEarly: false });
+  
+    if (error) {
+      const newErrors = {};
+      error.details.forEach((detail) => {
+        newErrors[detail.context.key] = detail.message;
+      });
+      
+      setErrors(newErrors);
+      return false;
+    }
+  
+    return true;
+  };
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
     setLoading(true);
-  
+
     try {
-      const response = await axios.post('http://localhost:3003/auth/register', formData, {
-        withCredentials: true,
-        responseType: 'json',
-      });
-  
-      const user = response.data.user
+      const response = await axios.post(
+        'http://localhost:3003/auth/register',
+        formData,
+        {
+          withCredentials: true,
+          responseType: 'json',
+        },
+      );
+
+      const user = response.data.user;
       console.log('Registration successful:', response.data);
       setSuccessMessage(true);
       setUsername(user.username);
     } catch (error) {
       console.error('Registration error:', error.message);
-      setError('Registration failed. Please try again.');
+      setErrors({
+        ...errors,
+        general: 'Registration failed. Please try again.',
+      });
     } finally {
       setLoading(false);
     }
@@ -80,11 +141,14 @@ function Registration({ closeModal, isModalOpen }) {
                   className="w-4/5 text-black px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
                   required
                 />
+                {errors.username && (
+                  <div className="text-red-500">{errors.username}</div>
+                )}
               </div>
 
               <div className="w-full mb-4 flex flex-col justify-center items-center">
                 <label
-                  htmlFor="fullName"
+                  htmlFor="email"
                   className="self-start px-16 text-white font-medium mb-1"
                 >
                   Email
@@ -98,6 +162,9 @@ function Registration({ closeModal, isModalOpen }) {
                   className="w-4/5 text-black px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
                   required
                 />
+                {errors.email && (
+                  <div className="text-red-500">{errors.email}</div>
+                )}
               </div>
 
               <div className="w-full mb-4 flex flex-col justify-center items-center">
@@ -116,6 +183,9 @@ function Registration({ closeModal, isModalOpen }) {
                   className="w-4/5 text-black px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
                   required
                 />
+                {errors.password && (
+                  <div className="text-red-500">{errors.password}</div>
+                )}
               </div>
 
               <div className="w-full mb-4 flex flex-col justify-center items-center">
@@ -134,7 +204,11 @@ function Registration({ closeModal, isModalOpen }) {
                   className="w-4/5 text-black px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
                   required
                 />
+                {errors.confirmPassword && (
+                  <div className="text-red-500">{errors.confirmPassword}</div>
+                )}
               </div>
+
               <div className="w-full mb-4 flex flex-col justify-center items-center">
                 <button
                   type="submit"
@@ -143,12 +217,26 @@ function Registration({ closeModal, isModalOpen }) {
                 >
                   {loading ? 'Signing Up...' : 'Sign Up'}
                 </button>
-                {error && <div className="text-red-500">{error}</div>}
+                {errors.general && (
+                  <div className="text-red-500">{errors.general}</div>
+                )}
+                {/* {errors.username && (
+                  <div className="text-red-500">{errors.username}</div>
+                )} */}
+                {/* {errors.email && (
+                  <div className="text-red-500">{errors.email}</div>
+                )} */}
+                {/* {errors.password && (
+                  <div className="text-red-500">{errors.password}</div>
+                )} */}
+                {/* {errors.confirmPassword && (
+                  <div className="text-red-500">{errors.confirmPassword}</div>
+                )} */}
                 {successMessage && (
-              <div className="text-green-500">Welcome, {username}!</div>
-            )}
+                  <div className="text-green-500">Welcome, {username}!</div>
+                )}
               </div>
-              <hr/>
+              <hr />
               <small className="text-white text-center pt-2">
                 If you already have an account proceed with{' '}
                 <span className="text-blue-400 cursor-pointer">login</span>
@@ -156,15 +244,14 @@ function Registration({ closeModal, isModalOpen }) {
             </form>
           </div>
         </div>
-        {/* </div> */}
       </div>
     </>
   );
 }
 
 Registration.propTypes = {
-  closeModal: PropTypes.func.isRequired,
-  isModalOpen: PropTypes.bool.isRequired,
+  closeModal: PropTypes.func,
+  isModalOpen: PropTypes.bool,
 };
 
 export default Registration;
