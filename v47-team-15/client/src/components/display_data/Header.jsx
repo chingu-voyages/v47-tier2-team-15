@@ -6,12 +6,12 @@ import Login from '../user_auth/Login';
 function Header() {
   const [active, setActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isRegistrationModalOpen, setRegistrationModalOpen] = useState(false);
 
   const toggleModal = (type) => {
-    setIsModalOpen(!isModalOpen);
+    // setIsModalOpen(!isModalOpen);
   
     if (type === 'login') {
       setLoginModalOpen(!isLoginModalOpen);
@@ -23,7 +23,8 @@ function Header() {
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    setRegistrationModalOpen(false);
+    setLoginModalOpen(false);
     console.log("close")
   };
 
@@ -93,17 +94,20 @@ function Header() {
                 />
               </svg>
             </button>
-            <button onClick={() => toggleModal()} className="hidden md:block bg-white text-[#1A183E] rounded p-2 mx-1">
+            <button onClick={() => toggleModal('login')} className="hidden md:block bg-white text-[#1A183E] rounded p-2 mx-1">
               Login
             </button>
 
-            {isModalOpen && <Login closeModal={closeModal} isModalOpen={isModalOpen} />}
+            
+            {isLoginModalOpen && <Login closeModal={closeModal} isLoginModalOpen={isLoginModalOpen} />}
 
-              <button onClick={() => toggleModal()} className="hidden md:block bg-[#00A83E] rounded p-2 mx-1">
+              <button onClick={() => toggleModal('signup')} className="hidden md:block bg-[#00A83E] rounded p-2 mx-1">
               Sign up
             </button>
+
+            {isRegistrationModalOpen && <Registration closeModal={closeModal} isRegistrationModalOpen={isRegistrationModalOpen} />}
                   
-            {isModalOpen && <Registration closeModal={closeModal} isModalOpen={isModalOpen} />}
+            
 
           </div>
         </nav>

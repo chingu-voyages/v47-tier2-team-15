@@ -2,12 +2,12 @@
 import PropTypes from 'prop-types';
 // import axios from 'axios';
 
-function Login({ closeModal, isModalOpen }) {
+function Login({ closeModal, isLoginModalOpen }) {
 
     
   return (
     <>
-      <div className={`max-w-2xl mx-auto ${isModalOpen ? '' : 'hidden'}`}>
+      <div className={`max-w-2xl mx-auto ${isLoginModalOpen ? '' : 'hidden'}`}>
         <div
           className="fixed top-0 left-0 right-0 bottom-0 z-40 bg-gray-500 opacity-40"
           onClick={closeModal}
@@ -87,8 +87,8 @@ function Login({ closeModal, isModalOpen }) {
 }
 
 Login.propTypes = {
-    closeModal: PropTypes.func.isRequired,
-    isModalOpen: PropTypes.bool.isRequired,
+    closeModal: PropTypes.func,
+    isLoginModalOpen: PropTypes.bool,
   };
 
 export default Login

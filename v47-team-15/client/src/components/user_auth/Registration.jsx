@@ -5,7 +5,7 @@ import Joi from 'joi';
 import { useContext } from 'react';
 import { UserContext } from '../userContext';
 
-function Registration({ closeModal, isModalOpen }) {
+function Registration({ closeModal, isRegistrationModalOpen }) {
   const {username, setUsername, successMessage, setSuccessMessage} = useContext(UserContext);
 
   const [formData, setFormData] = useState({
@@ -101,7 +101,7 @@ function Registration({ closeModal, isModalOpen }) {
 
   return (
     <>
-      <div className={`max-w-2xl mx-auto ${isModalOpen ? '' : 'hidden'}`}>
+      <div className={`max-w-2xl mx-auto ${isRegistrationModalOpen ? '' : 'hidden'}`}>
         <div
           className="fixed top-0 left-0 right-0 bottom-0 z-40 bg-gray-500 opacity-40"
           onClick={closeModal}
@@ -247,7 +247,7 @@ function Registration({ closeModal, isModalOpen }) {
 
 Registration.propTypes = {
   closeModal: PropTypes.func,
-  isModalOpen: PropTypes.bool,
+  isRegistrationModalOpen: PropTypes.bool,
 };
 
 export default Registration;
