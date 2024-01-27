@@ -120,7 +120,7 @@ function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) 
               </h1>
               <button
                 onClick={closeModal}
-                className="cursor-pointer text-white text-xl "
+                className="self-start cursor-pointer text-white text-xl"
               >
                 x
               </button>
@@ -139,7 +139,7 @@ function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) 
                   name="username"
                   value={formData.username}
                   onChange={handleChange}
-                  className="w-4/5 text-black px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                  className={`w-4/5 text-black px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500 ${errors.username ? 'focus:border-red-500' : ''}`}
                   required
                 />
                 {errors.username && (
@@ -160,7 +160,7 @@ function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) 
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-4/5 text-black px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                  className={`w-4/5 text-black px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500 ${errors.email ? 'focus:border-red-500' : ''}`}
                   required
                 />
                 {errors.email && (
@@ -181,7 +181,7 @@ function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) 
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-4/5 text-black px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                  className={`w-4/5 text-black px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500 ${errors.password ? 'focus:border-red-500' : ''}`}
                   required
                 />
                 {errors.password && (
@@ -202,7 +202,7 @@ function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) 
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="w-4/5 text-black px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                  className={`w-4/5 text-black px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500 ${errors.confirmPassword ? 'focus:border-red-500' : ''}`}
                   required
                 />
                 {errors.confirmPassword && (
@@ -221,12 +221,7 @@ function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) 
                 {errors.general && (
                   <div className="text-red-500">{errors.general}</div>
                 )}
-                {errors.confirmPassword && (
-                  <div className="text-red-500">{errors.confirmPassword}</div>
-                )}
-                {successMessage && (
-                  <div className="text-green-500">Welcome, {username}!</div>
-                )}
+               
               </div>
               <hr />
               <small className="text-white text-center pt-2">
