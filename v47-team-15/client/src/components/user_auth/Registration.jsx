@@ -5,8 +5,13 @@ import Joi from 'joi';
 import { useContext } from 'react';
 import { UserContext } from '../userContext';
 
-function Registration({ closeModal, isRegistrationModalOpen }) {
+function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) {
   const {username, setUsername, successMessage, setSuccessMessage} = useContext(UserContext);
+
+  const navigateToLogin = () => {
+    closeModal('signup'); 
+    setLoginModalOpen(true); 
+  };
 
   const [formData, setFormData] = useState({
     username: '',
@@ -101,7 +106,7 @@ function Registration({ closeModal, isRegistrationModalOpen }) {
 
   return (
     <>
-      <div className={`max-w-2xl mx-auto ${isRegistrationModalOpen ? '' : 'hidden'}`}>
+      <div className={`max-w-2xl mx-auto ${registrationModalOpen ? '' : 'hidden'}`}>
         <div
           className="fixed top-0 left-0 right-0 bottom-0 z-40 bg-gray-500 opacity-40"
           onClick={closeModal}
@@ -216,15 +221,6 @@ function Registration({ closeModal, isRegistrationModalOpen }) {
                 {errors.general && (
                   <div className="text-red-500">{errors.general}</div>
                 )}
-                {/* {errors.username && (
-                  <div className="text-red-500">{errors.username}</div>
-                )} */}
-                {/* {errors.email && (
-                  <div className="text-red-500">{errors.email}</div>
-                )} */}
-                {/* {errors.password && (
-                  <div className="text-red-500">{errors.password}</div>
-                )} */}
                 {errors.confirmPassword && (
                   <div className="text-red-500">{errors.confirmPassword}</div>
                 )}
@@ -235,7 +231,7 @@ function Registration({ closeModal, isRegistrationModalOpen }) {
               <hr />
               <small className="text-white text-center pt-2">
                 If you already have an account proceed with{' '}
-                <span className="text-blue-400 cursor-pointer">login</span>
+                <button type="button" onClick={navigateToLogin} className="text-blue-400 cursor-pointer">login</button>
               </small>
             </form>
           </div>
@@ -247,7 +243,8 @@ function Registration({ closeModal, isRegistrationModalOpen }) {
 
 Registration.propTypes = {
   closeModal: PropTypes.func,
-  isRegistrationModalOpen: PropTypes.bool,
+  registrationModalOpen: PropTypes.bool,
+  setLoginModalOpen: PropTypes.func,
 };
 
 export default Registration;

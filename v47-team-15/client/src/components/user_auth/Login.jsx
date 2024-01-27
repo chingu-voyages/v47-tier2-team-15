@@ -2,12 +2,16 @@
 import PropTypes from 'prop-types';
 // import axios from 'axios';
 
-function Login({ closeModal, isLoginModalOpen }) {
+function Login({ closeModal, loginModalOpen, setRegistrationModalOpen }) {
 
+  const navigateToSignup = () => {
+    closeModal('login'); 
+    setRegistrationModalOpen(true); 
+  };
     
   return (
     <>
-      <div className={`max-w-2xl mx-auto ${isLoginModalOpen ? '' : 'hidden'}`}>
+      <div className={`max-w-2xl mx-auto ${loginModalOpen ? '' : 'hidden'}`}>
         <div
           className="fixed top-0 left-0 right-0 bottom-0 z-40 bg-gray-500 opacity-40"
           onClick={closeModal}
@@ -68,14 +72,15 @@ function Login({ closeModal, isLoginModalOpen }) {
                 <button
                   type="submit"
                   className="w-1/4 bg-[#00A83E] text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-                //   disabled={loading}
+                  // disabled={loading}
                 >
+                  Login
                 </button>
                 
               </div>
               <small className="text-white text-center">
-                If you already have an account proceed with{' '}
-                <span className="text-blue-400 cursor-pointer">login</span>
+                You don't have an account? 
+                <button type="button" onClick={navigateToSignup}  className="text-blue-400 cursor-pointer"> Sign up</button>
               </small>
             </form>
           </div>
@@ -88,7 +93,8 @@ function Login({ closeModal, isLoginModalOpen }) {
 
 Login.propTypes = {
     closeModal: PropTypes.func,
-    isLoginModalOpen: PropTypes.bool,
+    loginModalOpen: PropTypes.bool,
+    setRegistrationModalOpen: PropTypes.func,
   };
 
 export default Login
