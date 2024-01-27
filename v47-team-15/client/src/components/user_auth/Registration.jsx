@@ -30,10 +30,10 @@ function Registration({ closeModal, isModalOpen }) {
         responseType: 'json',
       });
   
-      // const user = response.data.user
+      const user = response.data.user
       console.log('Registration successful:', response.data);
       setSuccessMessage(true);
-      setUsername(response.data.username);
+      setUsername(user.username);
     } catch (error) {
       console.error('Registration error:', error.message);
       setError('Registration failed. Please try again.');
@@ -145,7 +145,7 @@ function Registration({ closeModal, isModalOpen }) {
                 </button>
                 {error && <div className="text-red-500">{error}</div>}
                 {successMessage && (
-              <div className="text-green-500">Welcome, !</div>
+              <div className="text-green-500">Welcome, {username}!</div>
             )}
               </div>
               <hr/>
