@@ -55,7 +55,7 @@ function DisplayData() {
                 itemsPerPage={itemsPerPage}
               />
               <Pagination
-                totalItems={filteredData.length || data.length}
+                totalItems={(filteredData && filteredData.length) || data.length}
                 itemsPerPage={itemsPerPage}
                 currentPage={currentPage}
                 onPageChange={handlePageChange}
