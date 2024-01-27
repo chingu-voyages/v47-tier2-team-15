@@ -18,14 +18,16 @@ function DisplayData() {
   const itemsPerPage = 10;
 
   const handleSearch = (searchInput) => {
-    if (searchInput) {
-      const filteredResults = data.filter((item) =>
-        item.name.toLowerCase().includes(searchInput.toLowerCase()),
-      );
-      setFilteredData(filteredResults);
-      console.log('search results:', filteredResults);
-    } else {
-      setFilteredData(data);
+    if (data) {
+      if (searchInput) {
+        const filteredResults = data.filter((item) =>
+          item.name.toLowerCase().includes(searchInput.toLowerCase())
+        );
+        setFilteredData(filteredResults);
+        console.log('search results:', filteredResults);
+      } else {
+        setFilteredData(data);
+      }
     }
   };
 
@@ -49,13 +51,13 @@ function DisplayData() {
               <Registration />
               <Search onSearch={handleSearch} />
               <Table
-                data={data}
-                filter={filteredData}
+                data={data || []}
+                filter={filteredData || []}
                 currentPage={currentPage}
                 itemsPerPage={itemsPerPage}
               />
               <Pagination
-                totalItems={(filteredData && filteredData.length) || data.length}
+                totalItems={filteredData.length || data.length}
                 itemsPerPage={itemsPerPage}
                 currentPage={currentPage}
                 onPageChange={handlePageChange}
