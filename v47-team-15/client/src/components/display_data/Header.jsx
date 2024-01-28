@@ -45,7 +45,7 @@ function Header() {
   }
 
   const handleLogout = () => {
-    navigate('/currencies');
+    navigate('/');
     setUsername(''); 
   };
 
