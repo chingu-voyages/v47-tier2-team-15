@@ -45,6 +45,9 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
               <th className="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Market Cap
               </th>
+              <th className="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Favorite
+              </th>
             </tr>
           </thead>
           <tbody className="bg-[#24224B] text-white text-xs divide-y divide-gray-200">
@@ -81,6 +84,9 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
                 </td>
                 <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">
                   {formatTableNumbers(coin.market_cap_usd)}$
+                </td>
+                <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap text-center">
+                <i className='bx bx-star'></i>
                 </td>
               </tr>
             ))}
