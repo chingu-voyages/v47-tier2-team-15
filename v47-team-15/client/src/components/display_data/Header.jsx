@@ -36,6 +36,14 @@ function Header() {
     setActive(!active);
   };
 
+  const handleProfileClick = () => {
+    if (username) {
+      navigate('/profile');
+    } else {
+      toggleModal('login');
+    }
+  }
+
   const handleLogout = () => {
     navigate('/currencies');
     setUsername(''); 
@@ -66,12 +74,14 @@ function Header() {
                 Home
               </li>
               <li className="md:bg-transparent text-lg text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
-              <Link to="/currencies">
-                Cryptocurrencies
+              <Link to="/">
+                Home
               </Link>
               </li>
               <li className="md:bg-transparent text-lg text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
-              <Link to="/profile">Portfolio</Link>
+              <button onClick={handleProfileClick} type='button' className="">
+                Portfolio
+              </button>
               </li>
             </ul>
           </div>
