@@ -4,9 +4,11 @@ import axios from 'axios';
 import Joi from 'joi';
 import { useContext } from 'react';
 import { UserContext } from '../userContext';
+import { useNavigate } from 'react-router-dom';
 
 function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) {
   const {username, setUsername, successMessage, setSuccessMessage} = useContext(UserContext);
+  const navigate = useNavigate();
 
   const navigateToLogin = () => {
     closeModal('signup'); 
@@ -93,6 +95,7 @@ function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) 
       setSuccessMessage(true);
       setUsername(response.data.user.username);
       closeModal();
+      navigate('/profile');
     } catch (error) {
       console.error('Registration error:', error.message);
       setErrors({
@@ -221,7 +224,6 @@ function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) 
                 {errors.general && (
                   <div className="text-red-500">{errors.general}</div>
                 )}
-               
               </div>
               <hr />
               <small className="text-white text-center pt-2">
