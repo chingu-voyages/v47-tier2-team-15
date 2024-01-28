@@ -40,10 +40,7 @@ exports.registerUser = async (req, res, next) => {
       password,
     });
 
-    const hashedPassword = await bcrypt.hash(newUser.password, saltRounds);
-    newUser.password = hashedPassword;
-
-    await newUser.save();
+    await newUser.save(); // The pre-save middleware in UserSchema is handling the hashing
 
     newUser.userId = uuid.v4();
     await newUser.save();
@@ -65,7 +62,6 @@ exports.registerUser = async (req, res, next) => {
     }
   }
 };
-
 exports.loginUser = (req, res, next) => {
   passport.authenticate('local', (err, user) => {
     if (err) {
@@ -79,13 +75,12 @@ exports.loginUser = (req, res, next) => {
         return res.status(500).json({ error: 'Internal Server Error' });
       }
 
-      // Redirect to user profile or send a response as needed
-      // Example: res.redirect('/dashboard');
+      // Respond with user information
       return res.status(200).json({
         message: 'Login successful',
         user: {
-          userID: newUser.userId,
-          username: newUser.username,
+          userID: user.userId,
+          username: user.username,
         },
       });
     });
@@ -93,15 +88,17 @@ exports.loginUser = (req, res, next) => {
 };
 
 exports.logoutUser = (req, res, next) => {
+  const { userId, username } = req.user;
+
   req.logout((err) => {
     if (err) {
       return next(err);
     }
-    // Redirect or send a response as needed
+
     res.status(200).json({
       message: 'Logout successful',
-      userID: newUser.userId,
-      username: newUser.username,
+      userID: userId,
+      username: username,
     });
   });
 };
