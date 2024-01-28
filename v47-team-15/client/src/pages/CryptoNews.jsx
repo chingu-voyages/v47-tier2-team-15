@@ -1,8 +1,10 @@
-import React from 'react'
+import Header from "../components/display_data/Header"
 
 function CryptoNews() {
   return (
-    <div>CryptoNews</div>
+    <>
+        <Header />
+    </>
   )
 }
 
