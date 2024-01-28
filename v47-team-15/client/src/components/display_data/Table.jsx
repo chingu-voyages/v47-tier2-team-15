@@ -11,12 +11,15 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
 
   return (
     <>
-      <div className="bg-[#1A183E] py-8">
+      <div className="bg-[#1A183E] py-4 md:py-8">
         <table className="min-w-3/5 mx-auto divide-y divide-gray-200 rounded-md">
           <thead className="sticky top-0 bg-gray-50 z-10">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Rank
+              </th>
+              <th className="hidden sm:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Favorite
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Name
@@ -45,15 +48,15 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
               <th className="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Market Cap
               </th>
-              <th className="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Favorite
-              </th>
             </tr>
           </thead>
           <tbody className="bg-[#24224B] text-white text-xs divide-y divide-gray-200">
             {pageData.map((coin, index) => (
               <tr key={index}>
-                <td className="px-6 py-4 whitespace-nowrap">{coin.rank}</td>
+                <td className="text-center py-4 whitespace-nowrap">{coin.rank}</td>
+                <td className="hidden sm:table-cell py-4 whitespace-nowrap text-center">
+                <i className='bx bx-star'></i>
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap">{coin.name}</td>
                 <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">
                   {coin.symbol}
@@ -76,17 +79,14 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
                 >
                   {formatTableNumbers(coin.percent_change_24h)}%
                 </td>
-                <td className="hidden lg:table-cell px-6 py-4 whitespace-nowrap">
+                <td className="hidden lg:table-cell px-6 py-4 text-right whitespace-nowrap">
                   {formatTableNumbers(coin.csupply)}$
                 </td>
-                <td className="hidden lg:table-cell px-6 py-4 whitespace-nowrap">
+                <td className="hidden lg:table-cell px-6 py-4 text-right whitespace-nowrap">
                   {formatTableNumbers(coin.tsupply)}$
                 </td>
                 <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">
                   {formatTableNumbers(coin.market_cap_usd)}$
-                </td>
-                <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap text-center">
-                <i className='bx bx-star'></i>
                 </td>
               </tr>
             ))}

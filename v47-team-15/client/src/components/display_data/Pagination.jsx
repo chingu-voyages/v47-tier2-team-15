@@ -27,7 +27,7 @@ function Pagination({ totalItems, itemsPerPage, currentPage, onPageChange }) {
   };
 
   return (
-    <div className="flex flex-row justify-evenly items-center bg-[#1A183E] text-white py-4 sm:py-0 md:pb-8">
+    <div className="flex flex-row justify-evenly items-center bg-[#1A183E] text-white py-4 pb-8 md:pb-16">
       <div>
         <button
           onClick={() => handlePageChange(currentPage - 1)}
@@ -37,12 +37,12 @@ function Pagination({ totalItems, itemsPerPage, currentPage, onPageChange }) {
         </button>
       </div>
 
-      <div className="flex space-x-4">
+      <div className="flex space-x-2 md:space-x-4">
         {getPageRange().map((pageNumber) => (
           <button
             key={pageNumber}
             onClick={() => handlePageChange(pageNumber)}
-            className={pageNumber === currentPage ? 'w-10 h-10 border border-white rounded-full bg-[#24224B]' : ''}
+            className={pageNumber === currentPage ? 'w-6 h-6 md:w-10 md:h-10 border border-white rounded-full text-sm md:text:lg bg-[#24224B]' : ''}
           >
             {pageNumber}
           </button>

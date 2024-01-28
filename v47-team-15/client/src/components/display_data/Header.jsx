@@ -51,11 +51,11 @@ function Header() {
 
   return (
     <>
-      <div className={`max-w-screen mx-auto sticky top-0 z-20 ${isOpen ? 'fixed w-full transition-transform duration-300' : ''}`}>
+      <div className={`max-w-screen mx-auto sticky top-0 z-20 ${isOpen ? 'fixed w-full' : ''}`}>
         <nav className="flex flex-wrap justify-between items-center bg-[#1A183E] text-white p-2 px-4">
           <div className="flex flex-row items-center pb-4">
             <img src={logo} alt="logo" className="w-[4rem]" />
-            <span className="mt-4">CryptoView</span>
+            <span className="mt-4 md:text-xl">CryptoView</span>
           </div>
 
           <div
@@ -65,20 +65,20 @@ function Header() {
             id="navbar-default"
           >
             <ul
-              className={`flex-col items-center md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:font-medium py-1 md:py-0 px-6`}
+              className={`flex-col items-center md:flex-row flex md:space-x-16 mt-4 md:mt-0 md:font-medium py-1 md:py-0 px-6`}
             >
-              <li className="md:bg-transparent text-lg text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
+              <li className="md:bg-transparent md:text-xl text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
               <Link to="/">
                 Home
               </Link>
               </li>
-              <li className="md:bg-transparent text-lg text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
+              <li className="md:bg-transparent md:text-xl text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
               <button onClick={handleProfileClick} type='button' className="">
                 Portfolio
               </button>
               </li>
               <li
-                className="md:bg-transparent text-lg text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer"
+                className="md:bg-transparent md:text-xl text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer"
                 aria-current="page"
               >
                 <Link to="/news">News</Link>

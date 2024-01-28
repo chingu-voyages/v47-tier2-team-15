@@ -13,14 +13,14 @@ function InfoCards() {
 
   return (
     <>
-      <div className="w-full flex flex-col justify-center items-center bg-[#1A183E] text-white p-4">
+      <div className="w-full flex flex-col justify-center items-center bg-[#1A183E] text-white p-2 md:p-4">
         <div className="text-center py-6">
-          {successMessage ? 
+          {/* {successMessage ? 
             <p className="text-green-500">
             Welcome, {username}! Registration successful.</p>
             :
             <p>Welcome, guest!</p>
-          }
+          } */}
           
           <p className="text-2xl py-4">All Cryptocurrencies</p>
           <p className="pb-4">View a full list of active cryptocurrencies</p>
