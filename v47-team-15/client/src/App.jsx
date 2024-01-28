@@ -5,6 +5,7 @@ import Registration from "./components/user_auth/Registration.jsx";
 import './App.css';
 import { UserProvider } from "./components/userContext.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
+import CryptoNews from "./pages/CryptoNews.jsx"
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<DisplayData />} />
             <Route path="/register" element={<Registration />} />
             <Route path="/profile" element={<UserProfile />} />
+            <Route path="/news" element={<CryptoNews />} />
           </Routes>
         </UserProvider>
       </BrowserRouter>

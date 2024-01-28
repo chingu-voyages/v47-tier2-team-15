@@ -67,12 +67,6 @@ function Header() {
             <ul
               className={`flex-col items-center md:flex-row flex md:space-x-8 mt-4 md:mt-0 md:font-medium py-1 md:py-0 px-6`}
             >
-              <li
-                className="md:bg-transparent text-lg text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer"
-                aria-current="page"
-              >
-                Home
-              </li>
               <li className="md:bg-transparent text-lg text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
               <Link to="/">
                 Home
@@ -82,6 +76,12 @@ function Header() {
               <button onClick={handleProfileClick} type='button' className="">
                 Portfolio
               </button>
+              </li>
+              <li
+                className="md:bg-transparent text-lg text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer"
+                aria-current="page"
+              >
+                <Link to="/news">News</Link>
               </li>
             </ul>
           </div>
