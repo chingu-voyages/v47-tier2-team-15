@@ -6,9 +6,10 @@ import { useContext } from 'react';
 import { UserContext } from '../userContext';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function Header() {
-  const { username, setUsername } = useContext(UserContext);
+  const { username, setUsername, userId, setUserId } = useContext(UserContext);
   const [active, setActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
@@ -38,16 +39,39 @@ function Header() {
 
   const handleProfileClick = () => {
     if (username) {
+      setUsername(username);
+      setUserId(userId);
       navigate('/profile');
     } else {
       toggleModal('login');
     }
   }
 
-  const handleLogout = () => {
-    navigate('/');
-    setUsername(''); 
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post(
+        'http://localhost:3003/auth/logout',
+        null, 
+        {
+          withCredentials: true,
+          responseType: 'json',
+        }
+      );
+  
+      if (response.status === 200) {
+        localStorage.removeItem('authToken');
+        setUsername('');
+        setUserId('');
+        navigate('/');
+        console.error('Logout successful');
+      } else {
+        console.error('Logout failed');
+      }
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
   };
+  
 
   return (
     <>
@@ -116,7 +140,7 @@ function Header() {
             </button>
             {username ? (
               // User is logged in, show logout button
-              <button onClick={handleLogout} className="hidden md:block bg-[#00A83E] rounded p-2 mx-1">
+              <button onClick={() => handleLogout(userId)} className="hidden md:block bg-[#00A83E] rounded p-2 mx-1">
                 Logout
               </button>
             ) : (
