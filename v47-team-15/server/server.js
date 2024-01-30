@@ -6,6 +6,8 @@ const passport = require('passport');
 const authRoutes = require('./routes/authRoute');
 const currenciesRoute = require('./routes/currenciesRoute');
 const globalRoute = require('./routes/globalRoute');
+const profileRoute = require('./routes/profileRoute');
+const { errorHandler } = require('./middleware/errorMiddleware');
 require('dotenv').config();
 
 const app = express();
@@ -45,13 +47,11 @@ app.use(
 app.use('/auth', authRoutes);
 app.use('/api/currencies', currenciesRoute);
 app.use('/api/global', globalRoute);
+app.use('/profile', profileRoute);
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something went wrong!');
-});
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
-  console.log(`Server  running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -42,13 +42,9 @@ exports.registerUser = async (req, res, next) => {
 
     await newUser.save(); // The pre-save middleware in UserSchema is handling the hashing
 
-    newUser.userId = uuid.v4();
-    await newUser.save();
-
     res.status(201).json({
       message: 'User registered successfully',
       user: {
-        userID: newUser.userId,
         username: newUser.username,
       },
     });
@@ -62,6 +58,7 @@ exports.registerUser = async (req, res, next) => {
     }
   }
 };
+
 exports.loginUser = (req, res, next) => {
   passport.authenticate('local', (err, user) => {
     if (err) {
@@ -75,11 +72,9 @@ exports.loginUser = (req, res, next) => {
         return res.status(500).json({ error: 'Internal Server Error' });
       }
 
-      // Respond with user information
       return res.status(200).json({
         message: 'Login successful',
         user: {
-          userID: user.userId,
           username: user.username,
         },
       });
@@ -88,16 +83,14 @@ exports.loginUser = (req, res, next) => {
 };
 
 exports.logoutUser = (req, res, next) => {
-  const { userId, username } = req.user;
+  const { username } = req.user;
 
   req.logout((err) => {
     if (err) {
       return next(err);
     }
-
     res.status(200).json({
       message: 'Logout successful',
-      userID: userId,
       username: username,
     });
   });
