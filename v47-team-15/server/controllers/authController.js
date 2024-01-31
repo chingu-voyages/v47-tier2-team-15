@@ -18,7 +18,6 @@ exports.registerUser = async (req, res, next) => {
   try {
     const { username, email, password, confirmPassword } = req.body;
 
-    // Check if passwords match
     if (password !== confirmPassword) {
       return res.status(400).json({ error: 'Passwords do not match' });
     }
@@ -40,11 +39,12 @@ exports.registerUser = async (req, res, next) => {
       password,
     });
 
-    await newUser.save(); // The pre-save middleware in UserSchema is handling the hashing
+    await newUser.save();
 
     res.status(201).json({
       message: 'User registered successfully',
       user: {
+        _id: newUser._id,
         username: newUser.username,
       },
     });
@@ -72,10 +72,13 @@ exports.loginUser = (req, res, next) => {
         return res.status(500).json({ error: 'Internal Server Error' });
       }
 
-      return res.status(200).json({
+      const { _id, username, email } = user;
+      res.status(200).json({
         message: 'Login successful',
         user: {
-          username: user.username,
+          _id,
+          username,
+          email,
         },
       });
     });
@@ -83,7 +86,7 @@ exports.loginUser = (req, res, next) => {
 };
 
 exports.logoutUser = (req, res, next) => {
-  const { username } = req.user;
+  const { username, email, _id } = req.user || {};
 
   req.logout((err) => {
     if (err) {
@@ -91,7 +94,11 @@ exports.logoutUser = (req, res, next) => {
     }
     res.status(200).json({
       message: 'Logout successful',
-      username: username,
+      user: {
+        _id,
+        username,
+        email,
+      },
     });
   });
 };
