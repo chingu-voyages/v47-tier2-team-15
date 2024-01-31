@@ -18,6 +18,7 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  favoriteCoinIds: [{ type: String }],
 });
 
 // Middleware to hash the password before saving to the database
