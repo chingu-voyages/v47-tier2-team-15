@@ -1,4 +1,5 @@
 import Header from "../components/display_data/Header";
+import FavoriteCoins from "../components/user_profile/FavoriteCoins";
 import UserInfo from "../components/user_profile/UserInfo";
 
 function UserProfile() {
@@ -9,6 +10,7 @@ function UserProfile() {
         <div>
             <Header />
             <UserInfo />
+            <FavoriteCoins />
         </div>
     </>
   )

@@ -4,8 +4,8 @@ const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 const Chart = () => {
   const options = {
-    width: 150,
-    height: 150,
+    width: 250,
+    height: 250,
     theme: "dark2",
     animationEnabled: true,
     exportFileName: "My favorite coins",
@@ -15,7 +15,7 @@ const Chart = () => {
     },
     data: [{
       type: "pie",
-      showInLegend: false,
+      showInLegend: true,
       legendText: "{label}",
       toolTipContent: "{label}: <strong>{y}%</strong>",
       indexLabel: "{y}%",
@@ -26,7 +26,10 @@ const Chart = () => {
         { y: 15, label: "Tether" },
       ]
     }],
-    backgroundColor: "#1A183E"
+    backgroundColor: "#24224B",
+    borderThickness: 1,
+    borderColor: "#24224B",
+    cornerRadius: 10,
   };
 
   return (
