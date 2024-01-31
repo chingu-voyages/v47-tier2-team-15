@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { useContext } from 'react';
 import { UserContext } from '../userContext';
+import { useNavigate } from 'react-router-dom';
 
 function Login({ closeModal, loginModalOpen, setRegistrationModalOpen }) {
 
+  const navigate = useNavigate();
   const { setUsername, setSuccessMessage } = useContext(UserContext);
   const [formData, setFormData] = useState({
     email: '',
@@ -22,6 +24,7 @@ function Login({ closeModal, loginModalOpen, setRegistrationModalOpen }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    console.log(formData)
     setLoading(true);
 
     try {
@@ -31,15 +34,20 @@ function Login({ closeModal, loginModalOpen, setRegistrationModalOpen }) {
         {
           withCredentials: true,
           responseType: 'json',
-        },
+        }
       );
+      console.log(response)
       setUsername(response.data.user.username);
       setSuccessMessage(true);
       console.log('Login data:', response.data.user );
       closeModal();
+      navigate('profile');
     } catch (error) {
-      console.error('Login error:', error.message);
-      setError('Incorrect email or password. Please try again.');
+      if (error.response.status === 401) {
+        setError('Incorrect email or password. Please try again.');
+      } else {
+        setError('An error occurred. Please try again later.');
+      }
     } finally {
       setLoading(false);
     }

@@ -15,11 +15,11 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
         <table className="min-w-3/5 mx-auto divide-y divide-gray-200 rounded-md">
           <thead className="sticky top-0 bg-gray-50 z-10">
             <tr>
-              <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Rank
+            <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Favorite
               </th>
               <th className="hidden sm:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Favorite
+                Rank
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Name
@@ -42,7 +42,7 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
               <th className="hidden lg:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Circulating Supply
               </th>
-              <th className="hidden lg:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="hidden lg:table-cell px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Total Supply
               </th>
               <th className="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -53,10 +53,10 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
           <tbody className="bg-[#24224B] text-white text-xs divide-y divide-gray-200">
             {pageData.map((coin, index) => (
               <tr key={index}>
-                <td className="text-center py-4 whitespace-nowrap">{coin.rank}</td>
-                <td className="hidden sm:table-cell py-4 whitespace-nowrap text-center">
+                <td className="py-4 whitespace-nowrap text-center">
                 <i className='bx bx-star'></i>
                 </td>
+                <td className="hidden sm:table-cell text-center py-4 whitespace-nowrap">{coin.rank}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{coin.name}</td>
                 <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">
                   {coin.symbol}
