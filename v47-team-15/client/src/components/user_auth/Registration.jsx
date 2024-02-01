@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) {
   const {username, setUsername, successMessage, setSuccessMessage} = useContext(UserContext);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   const navigateToLogin = () => {
     closeModal('signup'); 
