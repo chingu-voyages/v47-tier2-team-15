@@ -5,10 +5,12 @@ import Registration from "./components/user_auth/Registration.jsx";
 import './App.css';
 import { UserProvider } from "./components/userContext.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
-import CryptoNews from "./pages/CryptoNews.jsx"
+import CryptoNews from "./pages/CryptoNews.jsx";
+import Login from "./components/user_auth/Login.jsx";
+
 
 function App() {
-
+  
   return (
     <>
       <BrowserRouter>
@@ -16,6 +18,8 @@ function App() {
           <Routes>
             <Route path="/" element={<DisplayData />} />
             <Route path="/register" element={<Registration />} />
+            <Route path="/login" element={<Login />} />
+            
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/news" element={<CryptoNews />} />
           </Routes>
