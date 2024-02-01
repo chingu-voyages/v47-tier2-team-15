@@ -1,4 +1,3 @@
-// // profileController.js
 // const User = require('../models/user');
 
 // exports.getProfile = (req, res) => {
@@ -7,18 +6,42 @@
 //   // Log the user data for debugging purposes
 //   console.log('User Data:', { username, email });
 
-//   // Render the profile page with user information
-//   res.render('profile', { username, email });
+//   // Send the user data as JSON response
+//   res.json({ username, email });
 // };
 
-const User = require('../models/user');
+const axios = require('axios');
 
-exports.getProfile = (req, res) => {
-  const { username, email } = req.user;
+const getCoinDetails = async (coinIds) => {
+  try {
+    const response = await axios.get(
+      `https://api.coinlore.net/api/ticker/?id=${coinIds}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching coin details:', error);
+    throw new Error('Failed to fetch coin details');
+  }
+};
 
-  // Log the user data for debugging purposes
-  console.log('User Data:', { username, email });
+exports.getProfile = async (req, res) => {
+  try {
+    const user = req.user;
 
-  // Send the user data as JSON response
-  res.json({ username, email });
+    console.log('User Data:', { username: user.username, email: user.email });
+
+    const favoriteCoinsDetails = await getCoinDetails(
+      user.favoriteCoinIds.join(',')
+    );
+
+    res.json({
+      username: user.username,
+      email: user.email,
+      _id: user._id,
+      favoriteCoinsDetails,
+    });
+  } catch (error) {
+    console.error('Error fetching profile data:', error);
+    res.status(500).json({ message: 'Failed to fetch profile data' });
+  }
 };

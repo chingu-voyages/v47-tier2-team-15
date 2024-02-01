@@ -7,6 +7,7 @@ const authRoutes = require('./routes/authRoute');
 const currenciesRoute = require('./routes/currenciesRoute');
 const globalRoute = require('./routes/globalRoute');
 const profileRoute = require('./routes/profileRoute');
+const favoritesRoutes = require('./routes/favoritesRoute');
 const { errorHandler } = require('./middleware/errorMiddleware');
 require('dotenv').config();
 
@@ -48,6 +49,7 @@ app.use('/auth', authRoutes);
 app.use('/api/currencies', currenciesRoute);
 app.use('/api/global', globalRoute);
 app.use('/profile', profileRoute);
+app.use('/api/favorites', favoritesRoutes);
 
 app.use(errorHandler);
 
