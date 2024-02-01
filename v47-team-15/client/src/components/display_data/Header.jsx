@@ -38,7 +38,7 @@ function Header() {
   };
 
   const handleProfileClick = () => {
-    if (username) {
+    if (userId) {
       setUsername(username);
       setUserId(userId);
       navigate('/profile');
@@ -62,8 +62,9 @@ function Header() {
         localStorage.removeItem('authToken');
         setUsername('');
         setUserId('');
+        toggleModal('login');
         navigate('/');
-        console.error('Logout successful');
+        console.log('Logout successful');
       } else {
         console.error('Logout failed');
       }
@@ -139,12 +140,10 @@ function Header() {
               </svg>
             </button>
             {username ? (
-              // User is logged in, show logout button
               <button onClick={() => handleLogout(userId)} className="hidden md:block bg-[#00A83E] rounded p-2 mx-1">
                 Logout
               </button>
             ) : (
-              // User is not logged in, show login and signup buttons
               <>
                 <button onClick={() => toggleModal('login')} className="hidden md:block bg-white text-[#1A183E] rounded p-2 mx-1">
                   Login
