@@ -10,7 +10,7 @@ const newsController = require("./newsController");
 router.get("/api/news", async (req, res) => {
   try {
     const { query, fromDate, sortBy } = req.query;
-    const apiKey = "YOUR_NEWS_API_KEY";
+    const apiKey = process.env.NEWS_API_KEY;
     const news = await newsController.getNews(query, fromDate, apiKey);
     res.json(news);
   } catch (error) {
