@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const newsController = require("./newsController");
+const newsController = require("../controllers/newsController");
 
-//The fromDate parameter allows searching for articles up to one month old. 
+//The fromDate parameter allows searching for articles up to one month old.
 //For instance, if today is the 1st of February 2024, the earliest date for 'fromDate' should be 2024-01-01.
 
 //Example API requests:
