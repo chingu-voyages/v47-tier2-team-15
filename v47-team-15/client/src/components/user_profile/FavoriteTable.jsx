@@ -27,7 +27,7 @@ function FavoriteTable() {
   }
 
   return (
-    <div className="bg-[#1A183E] pb-10">
+    <div className="bg-[#1A183E] pb-16">
       <table className="min-w-3/5 mx-auto divide-y divide-gray-200 rounded-md">
         <thead className="sticky top-0 bg-gray-50 z-10">
           <tr>
@@ -74,7 +74,7 @@ function FavoriteTable() {
               {formatTableNumbers(coin.market_cap_usd)}$
               </td>
               <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">
-                <button onClick={() => handleDelete(coin.id)}>Delete</button>
+                <button className='bg-[#461E3C] rounded px-1' onClick={() => handleDelete(coin.id)}>delete</button>
               </td>
             </tr>
           ))}
