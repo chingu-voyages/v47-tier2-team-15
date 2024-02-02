@@ -1,15 +1,15 @@
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-const session = require("express-session");
-const passport = require("passport");
-const authRoutes = require("./routes/authRoute");
-const currenciesRoute = require("./routes/currenciesRoute");
-const globalRoute = require("./routes/globalRoute");
-const profileRoute = require("./routes/profileRoute");
-const newsRoute = require("./routes/newsRoute");
-const { errorHandler } = require("./middleware/errorMiddleware");
-require("dotenv").config();
+const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const passport = require('passport');
+const authRoutes = require('./routes/authRoute');
+const currenciesRoute = require('./routes/currenciesRoute');
+const globalRoute = require('./routes/globalRoute');
+const profileRoute = require('./routes/profileRoute');
+const favoritesRoutes = require('./routes/favoritesRoute');
+const { errorHandler } = require('./middleware/errorMiddleware');
+require('dotenv').config();
 
 const app = express();
 
@@ -45,10 +45,11 @@ app.use(
 );
 
 // Routes
-app.use("/auth", authRoutes);
-app.use("/api/currencies", currenciesRoute);
-app.use("/api/global", globalRoute);
-app.use("/profile", profileRoute);
+app.use('/auth', authRoutes);
+app.use('/api/currencies', currenciesRoute);
+app.use('/api/global', globalRoute);
+app.use('/profile', profileRoute);
+app.use('/api/favorites', favoritesRoutes);
 
 app.use(errorHandler);
 

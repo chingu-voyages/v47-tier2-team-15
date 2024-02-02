@@ -1,7 +1,22 @@
 import PropTypes from 'prop-types';
 import { getColor, formatTableNumbers } from '../Helpers';
+import { useState } from 'react';
+import axios from 'axios';
 
 function Table({ data, filter, currentPage, itemsPerPage }) {
+  const [favorites, setFavorites] = useState([]);
+
+  const handleStarClick = async (coinId) => {
+    try {
+      const response = await axios.post('http://localhost:3003/api/favorites/add', { coinId });
+      setFavorites(response.data.favoriteCoinIds);
+      console.log("Coin added");
+    } catch (error) {
+      console.error('Error adding favorite coin:', error);
+    }
+  };
+
+
   const displayData = filter.length > 0 ? filter : data;
 
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -54,7 +69,12 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
             {pageData.map((coin, index) => (
               <tr key={index}>
                 <td className="py-4 whitespace-nowrap text-center">
-                <i className='bx bx-star'></i>
+                <i
+                className={`bx bx-star cursor-pointer ${
+                  favorites.includes(coin.id) ? 'text-yellow-500' : 'text-gray-300'
+                }`}
+                onClick={() => handleStarClick(coin.id)}
+              ></i>
                 </td>
                 <td className="hidden sm:table-cell text-center py-4 whitespace-nowrap">{coin.rank}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{coin.name}</td>
