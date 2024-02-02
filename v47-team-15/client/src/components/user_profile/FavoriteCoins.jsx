@@ -21,8 +21,8 @@ function FavoriteCoins() {
               <div className="flex flex-col items-center" key={coin.id}>
                 <i className="bx bx-star text-yellow-500 text-2xl"></i>
                 <p>{coin.name}</p>
-                <p>{coin.symbol}</p>
-                <p>{coin.price}</p>
+                <small className='text-gray-500'>{coin.symbol}</small>
+                <p>{coin.price_usd}</p>
               </div>
             ))}
           </div>
