@@ -1,4 +1,5 @@
 import useUserProfile from '../useUserProfile';
+import { formatTableNumbers } from '../Helpers';
 
 function FavoriteCoins() {
   const { favoriteCoins } = useUserProfile();
@@ -22,7 +23,7 @@ function FavoriteCoins() {
                 <i className="bx bx-star text-yellow-500 text-2xl"></i>
                 <p>{coin.name}</p>
                 <small className='text-gray-500'>{coin.symbol}</small>
-                <p>{coin.price_usd}</p>
+                <p>{formatTableNumbers(coin.price_usd)}$</p>
               </div>
             ))}
           </div>

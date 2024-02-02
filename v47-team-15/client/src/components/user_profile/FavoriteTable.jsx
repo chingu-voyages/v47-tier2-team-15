@@ -1,5 +1,7 @@
 import useUserProfile from '../useUserProfile';
 import axios from 'axios';
+import { formatTableNumbers } from '../Helpers';
+import { getColor } from '../Helpers';
 
 function FavoriteTable() {
   const { favoriteCoins, isLoading, error } = useUserProfile();
@@ -48,7 +50,7 @@ function FavoriteTable() {
               Market Cup
             </th>
             <th className="hidden sm:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Delete coin
+              Delete
             </th>
           </tr>
         </thead>
@@ -61,15 +63,15 @@ function FavoriteTable() {
                 {coin.symbol}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                {coin.price_usd}
+              {formatTableNumbers(coin.price_usd)}$
               </td>
               <td
-                className="hidden md:table-cell px-6 py-4 whitespace-nowrap"
-              >
-                {coin.percent_change_24h}
-              </td>
+                  className={`hidden md:table-cell px-6 py-4 whitespace-nowrap ${getColor(coin.percent_change_24h)}`}
+                >
+                  {formatTableNumbers(coin.percent_change_24h)}%
+                </td>
               <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">
-                {coin.market_cap_usd}
+              {formatTableNumbers(coin.market_cap_usd)}$
               </td>
               <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">
                 <button onClick={() => handleDelete(coin.id)}>Delete</button>
