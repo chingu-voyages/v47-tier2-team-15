@@ -1,7 +1,20 @@
 import useUserProfile from '../useUserProfile';
+import axios from 'axios';
 
 function FavoriteTable() {
   const { favoriteCoins, isLoading, error } = useUserProfile();
+
+  const handleDelete = async (coinId) => {
+    try {
+      await axios.delete(`http://localhost:3003/api/favorites/remove/${coinId}`, {
+        withCredentials: true,
+        responseType: 'json',
+      });
+    } catch (error) {
+      console.error('Error deleting coin:', error);
+    }
+  };
+  
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -12,7 +25,7 @@ function FavoriteTable() {
   }
 
   return (
-    <div className="bg-[#1A183E]">
+    <div className="bg-[#1A183E] pb-10">
       <table className="min-w-3/5 mx-auto divide-y divide-gray-200 rounded-md">
         <thead className="sticky top-0 bg-gray-50 z-10">
           <tr>
@@ -32,7 +45,10 @@ function FavoriteTable() {
               24h
             </th>
             <th className="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Market Cap
+              Market Cup
+            </th>
+            <th className="hidden sm:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+              Delete coin
             </th>
           </tr>
         </thead>
@@ -45,7 +61,7 @@ function FavoriteTable() {
                 {coin.symbol}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                {coin.price}
+                {coin.price_usd}
               </td>
               <td
                 className="hidden md:table-cell px-6 py-4 whitespace-nowrap"
@@ -54,6 +70,9 @@ function FavoriteTable() {
               </td>
               <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">
                 {coin.market_cap_usd}
+              </td>
+              <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">
+                <button onClick={() => handleDelete(coin.id)}>Delete</button>
               </td>
             </tr>
           ))}
