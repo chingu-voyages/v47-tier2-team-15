@@ -15,10 +15,10 @@ const app = express();
 
 mongoose
   .connect(process.env.MONGO_CONNECTION)
-  .then(() => console.log('Database connected! WIIIIIIII'))
+  .then(() => console.log("Database connected! WIIIIIIII"))
   .catch((err) => console.log(err));
 
-require('./passport/passport-config');
+require("./passport/passport-config");
 
 app.use(
   session({
@@ -38,8 +38,8 @@ app.use(express.json());
 // CORS
 app.use(
   cors({
-    origin: 'http://localhost:5173',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    origin: "http://localhost:5173",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
 );
