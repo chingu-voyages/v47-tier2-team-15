@@ -11,7 +11,10 @@ function AddCoins() {
   const handleStarClick = async () => {
     try {
       if (selectedCoinId) {
-        const response = await axios.post('http://localhost:3003/api/favorites/add', { coinId: selectedCoinId });
+        const response = await axios.post('http://localhost:3003/api/favorites/add', { coinId: selectedCoinId }, {
+          withCredentials: true,
+          responseType: 'json',
+        });
         console.log('Response from server:', response);
         setFavorites(response.data.favoriteCoinIds);
         console.log("Coin added");
