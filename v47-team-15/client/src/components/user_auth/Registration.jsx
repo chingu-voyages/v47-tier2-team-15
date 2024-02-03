@@ -95,7 +95,7 @@ function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) 
       setSuccessMessage(true);
       setUsername(response.data.user.username);
       closeModal();
-      navigate('/profile');
+      navigate('/portfolio');
     } catch (error) {
       console.error('Registration error:', error.message);
       setErrors({

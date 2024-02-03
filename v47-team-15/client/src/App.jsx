@@ -7,6 +7,8 @@ import { UserProvider } from "./components/userContext.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
 import CryptoNews from "./pages/CryptoNews.jsx";
 import Login from "./components/user_auth/Login.jsx";
+// import { useContext } from "react";
+// import { UserContext } from "./components/userContext.jsx";
 
 
 function App() {
@@ -20,7 +22,7 @@ function App() {
             <Route path="/register" element={<Registration />} />
             <Route path="/login" element={<Login />} />
             
-            <Route path="/profile" element={<UserProfile />} />
+            <Route path="/portfolio" element={<UserProfile />} />
             <Route path="/news" element={<CryptoNews />} />
           </Routes>
         </UserProvider>

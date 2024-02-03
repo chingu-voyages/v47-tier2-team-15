@@ -40,7 +40,7 @@ function Login({ closeModal, loginModalOpen, setRegistrationModalOpen }) {
       setSuccessMessage(true);
       console.log('Login data:', response.data.user);
       closeModal();
-      navigate('/profile');
+      navigate('/portfolio');
     } catch (error) {
       if (error.response.status === 401) {
         setError('Incorrect email or password. Please try again.');
