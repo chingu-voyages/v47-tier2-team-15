@@ -1,51 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
+import defaultImage from '../../assets/img/news.png';
 
-function NewsGrid() {
-  const [newsData, setNewsData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [newsPerPage] = useState(8);
+function NewsGrid({ newsData, itemsPerPage, currentPage }) {
 
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await axios.get('http://localhost:3003/api/news', {
-          withCredentials: true,
-          responseType: 'json',
-        });
-        setNewsData(response.data.articles);
-        console.log(response.data.articles);
-      } catch (error) {
-        console.error('Error fetching news data:', error.message);
-      }
-    };
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
 
-    fetchNews();
-  }, []);
-
-  const indexOfLastNews = currentPage * newsPerPage;
-  const indexOfFirstNews = indexOfLastNews - newsPerPage;
-  const currentNews = newsData.slice(indexOfFirstNews, indexOfLastNews);
-
-  const totalPages = Math.ceil(newsData.length / newsPerPage);
-
-  const paginate = (pageNumber) => {
-    if (pageNumber >= 1 && pageNumber <= totalPages) {
-      setCurrentPage(pageNumber);
-    }
-  };
-
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
+  const pageData = newsData.slice(startIndex, endIndex);
 
   const formatPublishedDate = (publishedDate) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -56,8 +17,8 @@ function NewsGrid() {
   return (
     <div className="bg-[#1A183E] p-12">
       <p className="text-center text-white text-2xl">Latest Cryptocurrency News</p>
-      <div className="flex flex-wrap justify-center mt-10">
-        {currentNews.map((news, index) => (
+      <div className="flex flex-wrap justify-center px-32 mt-10">
+        {pageData.map((news, index) => (
           <div key={index} className="p-4 max-w-sm w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
             <div className="flex flex-col bg-[#24224B] rounded-lg overflow-hidden">
               {news.urlToImage ? (
@@ -69,23 +30,27 @@ function NewsGrid() {
               ) : (
                 <img
                   className="w-full h-32 object-cover"
-                  src={news}
+                  src={defaultImage}
                   alt="default-news-image"
                 />
               )}
-              <small className='text-gray-500'>{formatPublishedDate(news.publishedAt)}</small>
+              
               <div className="p-4">
-                <h2 className="text-white dark:text-white text-lg font-medium mb-2">{news.title}</h2>
-                <p className="leading-relaxed text-base text-white dark:text-gray-300 mb-4">
-                  {news.description}
+              <small className='text-gray-500'>{formatPublishedDate(news.publishedAt)}</small>
+                <h2 className="text-white h-20 dark:text-white text-md font-medium mb-2 py-1">{news.title}</h2>
+                <p className="leading-relaxed h-24 text-sm text-white dark:text-gray-300 py-2 mb-4">
+                {news.description && news.description.length > 100
+                ? `${news.description.substring(0, 130)}...`
+                : news.description}
                 </p>
+                <hr/>
                 <a
                   href={news.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-black dark:text-white hover:text-blue-600 inline-flex items-center"
+                  className="text-gray-500 hover:text-blue-600 inline-flex items-center text-sm py-1"
                 >
-                  Learn More
+                  Go to original source
                   <svg
                     fill="none"
                     stroke="currentColor"
@@ -103,7 +68,7 @@ function NewsGrid() {
           </div>
         ))}
       </div>
-      <div className="flex justify-center mt-4">
+      {/* <div className="flex justify-center mt-4">
         <button onClick={handlePrevPage} className="mx-2 text-white" disabled={currentPage === 1}>
           Prev
         </button>
@@ -115,9 +80,13 @@ function NewsGrid() {
         <button onClick={handleNextPage} className="mx-2 text-white" disabled={currentPage === totalPages}>
           Next
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
+
+NewsGrid.propTypes = {
+  newsData: PropTypes.array.isRequired,
+};
 
 export default NewsGrid;
