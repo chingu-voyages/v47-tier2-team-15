@@ -41,7 +41,7 @@ function Header() {
     if (userId) {
       setUsername(username);
       setUserId(userId);
-      navigate('profile');
+      navigate('/profile');
     } else {
       toggleModal('login');
     }
