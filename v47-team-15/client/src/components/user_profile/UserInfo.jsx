@@ -15,7 +15,7 @@ function UserInfo() {
         <div className="w-28 h-28 text-center rounded-full bg-[#24224B] uppercase relative">
           <span className='text-3xl absolute top-8 left-0 right-0'>{username.charAt(0)}</span>
           </div>
-        <small>Your portfolio includes favourites</small>
+        <small>Your portfolio includes favorites</small>
       </div>
     </>
   );
