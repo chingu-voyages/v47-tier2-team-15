@@ -41,7 +41,7 @@ function Header() {
     if (userId) {
       setUsername(username);
       setUserId(userId);
-      navigate('/profile');
+      navigate('/portfolio');
     } else {
       toggleModal('login');
     }
@@ -97,9 +97,14 @@ function Header() {
                 <Link to="/">Home</Link>
               </li>
               <li className="md:bg-transparent md:text-xl text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
-                <button onClick={handleProfileClick} type="button" className="">
-                  Portfolio
-                </button>
+                {username ?
+                (<Link to="/portfolio">Portfolio</Link>)
+                :
+                (<button onClick={handleProfileClick} type="button" className="">
+                Portfolio
+              </button>)
+                }
+                
               </li>
               <li
                 className="md:bg-transparent md:text-xl text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer"
