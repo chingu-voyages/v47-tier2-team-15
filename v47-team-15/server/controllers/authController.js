@@ -73,6 +73,7 @@ exports.loginUser = (req, res, next) => {
       }
 
       const { _id, username, email } = user;
+      console.log('User logged in');
       res.status(200).json({
         message: 'Login successful',
         user: {
@@ -92,6 +93,7 @@ exports.logoutUser = (req, res, next) => {
     if (err) {
       return next(err);
     }
+    console.log('User logged out');
     res.status(200).json({
       message: 'Logout successful',
       user: {
