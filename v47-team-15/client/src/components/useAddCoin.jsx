@@ -1,32 +1,30 @@
-import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 
 function useAddCoin() {
-    const [selectedCoinId, setSelectedCoinId] = useState('');
-    const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
-    const handleClick = async () => {
-        try {
-          if (selectedCoinId) {
-            const response = await axios.post('http://localhost:3003/api/favorites/add', { coinId: selectedCoinId }, {
-              withCredentials: true,
-              responseType: 'json',
-            });
-            console.log('Response from server:', response);
-            setFavorites(response.data.favoriteCoinIds);
-            console.log("Coin added");
-            alert('Coin added successfully!');
-          } else {
-            console.error('No coin selected');
-            alert('Please select a coin before adding.');
-          }
-        } catch (error) {
-          console.error('Error adding favorite coin:', error);
-          alert('Failed to add coin. Please try again.');
-        }
-      };
-  return { selectedCoinId, setSelectedCoinId, handleClick }
+  const handleClick = async (selectedCoinId) => {
+    try {
+      const response = await axios.post(
+        'http://localhost:3003/api/favorites/add',
+        { coinId: selectedCoinId },
+        {
+          withCredentials: true,
+          responseType: 'json',
+        },
+      );
+      console.log('Response from server:', response);
+      setFavorites(selectedCoinId);
+      console.log('Coin added');
+      alert('Coin added successfully!');
+    } catch (error) {
+      console.error('Error adding favorite coin:', error);
+      alert('Failed to add coin. Please try again.');
+    }
+  };
+
+  return { handleClick };
 }
 
-export default useAddCoin
+export default useAddCoin;
