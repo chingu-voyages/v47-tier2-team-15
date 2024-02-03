@@ -38,10 +38,10 @@ function Header() {
   };
 
   const handleProfileClick = () => {
-    if (!userId) {
+    if (userId) {
       setUsername(username);
       setUserId(userId);
-      navigate('/profile');
+      navigate('profile');
     } else {
       toggleModal('login');
     }
