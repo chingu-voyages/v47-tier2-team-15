@@ -8,9 +8,7 @@ const newsController = require("../controllers/newsController");
 //Example API requests:
 //https://newsapi.org/v2/everything?q=crpto&from=$2024-01-05&sortBy=publishedAt&apiKey=${apiKey}&searchin=title,content
 
-router.get("/api/news", async (req, res) => {
-  console.log("Received request:", req.query);
-
+router.get("/", async (req, res) => {
   try {
     const { query, fromDate, sortBy } = req.query;
     const apiKey = process.env.NEWS_API_KEY;

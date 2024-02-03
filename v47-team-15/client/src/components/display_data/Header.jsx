@@ -29,7 +29,7 @@ function Header() {
   const closeModal = () => {
     setRegistrationModalOpen(false);
     setLoginModalOpen(false);
-    console.log("close")
+    console.log('close');
   };
 
   const toggleNav = () => {
@@ -41,23 +41,23 @@ function Header() {
     if (userId) {
       setUsername(username);
       setUserId(userId);
-      navigate('/profile');
+      navigate('profile');
     } else {
       toggleModal('login');
     }
-  }
+  };
 
   const handleLogout = async () => {
     try {
       const response = await axios.post(
         'http://localhost:3003/auth/logout',
-        null, 
+        null,
         {
           withCredentials: true,
           responseType: 'json',
-        }
+        },
       );
-  
+
       if (response.status === 200) {
         localStorage.removeItem('authToken');
         setUsername('');
@@ -72,11 +72,12 @@ function Header() {
       console.error('Error during logout:', error);
     }
   };
-  
 
   return (
     <>
-      <div className={`max-w-screen mx-auto sticky top-0 z-20 ${isOpen ? 'fixed w-full' : ''}`}>
+      <div
+        className={`max-w-screen mx-auto sticky top-0 z-20 ${isOpen ? 'fixed w-full' : ''}`}
+      >
         <nav className="flex flex-wrap justify-between items-center bg-[#1A183E] text-white p-2 px-4">
           <div className="flex flex-row items-center pb-4">
             <img src={logo} alt="logo" className="w-[4rem]" />
@@ -93,14 +94,12 @@ function Header() {
               className={`flex-col items-center md:flex-row flex md:space-x-16 mt-4 md:mt-0 md:font-medium py-1 md:py-0 px-6`}
             >
               <li className="md:bg-transparent md:text-xl text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
-              <Link to="/">
-                Home
-              </Link>
+                <Link to="/">Home</Link>
               </li>
               <li className="md:bg-transparent md:text-xl text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
-              <button onClick={handleProfileClick} type='button' className="">
-                Portfolio
-              </button>
+                <button onClick={handleProfileClick} type="button" className="">
+                  Portfolio
+                </button>
               </li>
               <li
                 className="md:bg-transparent md:text-xl text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer"
@@ -140,27 +139,47 @@ function Header() {
               </svg>
             </button>
             {username ? (
-              <button onClick={() => handleLogout(userId)} className="hidden md:block bg-[#00A83E] rounded p-2 mx-1">
+              <button
+                onClick={() => handleLogout(userId)}
+                className="hidden md:block bg-[#00A83E] rounded p-2 mx-1"
+              >
                 Logout
               </button>
             ) : (
               <>
-                <button onClick={() => toggleModal('login')} className="hidden md:block bg-white text-[#1A183E] rounded p-2 mx-1">
+                <button
+                  onClick={() => toggleModal('login')}
+                  className="hidden md:block bg-white text-[#1A183E] rounded p-2 mx-1"
+                >
                   Login
                 </button>
 
-                {loginModalOpen && <Login closeModal={closeModal} loginModalOpen={loginModalOpen} setLoginModalOpen={setLoginModalOpen} setRegistrationModalOpen={setRegistrationModalOpen} />}
+                {loginModalOpen && (
+                  <Login
+                    closeModal={closeModal}
+                    loginModalOpen={loginModalOpen}
+                    setLoginModalOpen={setLoginModalOpen}
+                    setRegistrationModalOpen={setRegistrationModalOpen}
+                  />
+                )}
 
-                <button onClick={() => toggleModal('signup')} className="hidden md:block bg-[#00A83E] rounded p-2 mx-1">
+                <button
+                  onClick={() => toggleModal('signup')}
+                  className="hidden md:block bg-[#00A83E] rounded p-2 mx-1"
+                >
                   Sign up
                 </button>
 
-                {registrationModalOpen && <Registration closeModal={closeModal} registrationModalOpen={registrationModalOpen} setLoginModalOpen={setLoginModalOpen} toggleModal={toggleModal} />}
+                {registrationModalOpen && (
+                  <Registration
+                    closeModal={closeModal}
+                    registrationModalOpen={registrationModalOpen}
+                    setLoginModalOpen={setLoginModalOpen}
+                    toggleModal={toggleModal}
+                  />
+                )}
               </>
             )}
-                  
-            
-
           </div>
         </nav>
         <hr className="hidden md:block text-white -mt-6"></hr>
