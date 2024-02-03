@@ -5,7 +5,7 @@ function FavoriteCoins() {
   const { favoriteCoins } = useUserProfile();
   console.log('fav coins', favoriteCoins);
 
-  const sortedCoins = favoriteCoins.slice().sort((a, b) => b.price - a.price);
+  const sortedCoins = Array.isArray(favoriteCoins) ? favoriteCoins.slice().sort((a, b) => b.price - a.price) : [];
 
   const top5Coins = sortedCoins.slice(0, 5);
 
