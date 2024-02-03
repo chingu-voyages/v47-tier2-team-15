@@ -1,6 +1,34 @@
 import news from '../../assets/img/news.png';
+// import useFetch from '../useFetch';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 function NewsGrid() {
+  const [newsData, setNewsData] = useState([]);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const backendResponse = await axios.get('http://localhost:3003/api/news', {
+          withCredentials: true,
+          responseType: 'json',
+        });
+        // const { query, fromDate, apiKey } = backendResponse.data;
+        // const response = await axios.get(
+        //   `https://newsapi.org/v2/everything?q=${query}&from=${fromDate}&sortBy=publishedAt&apiKey=${apiKey}&searchin=title,content`
+        // );
+
+        // setNewsData(response.data.articles);
+        console.log(backendResponse);
+      } catch (error) {
+        console.error('Error fetching news data:', error.message);
+      }
+    };
+    
+    fetchNews();
+  }, []);
+
   return (
     <>
       <div className="bg-[#1A183E] p-12">
