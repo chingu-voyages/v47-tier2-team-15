@@ -14,8 +14,9 @@ const useUserProfile = () => {
           responseType: 'json',
         });
         const userProfileData = response.data;
+        console.log(userProfileData);
 
-        setFavoriteCoins(userProfileData.favoriteCoinsDetails);
+        setFavoriteCoins(userProfileData.favoriteCoinsDetails || []);
         setIsLoading(false);
       } catch (error) {
         setError(error);
