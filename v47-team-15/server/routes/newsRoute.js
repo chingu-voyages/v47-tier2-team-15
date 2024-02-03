@@ -10,15 +10,14 @@ const newsController = require("../controllers/newsController");
 
 router.get("/", async (req, res) => {
   try {
-    const { query, fromDate, sortBy } = req.query;
+    const { fromDate } = req.query;
     const apiKey = process.env.NEWS_API_KEY;
-    const news = await newsController.getNews(query, fromDate, apiKey);
+    const news = await newsController.getNews(fromDate, apiKey);
     res.json(news);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
 
 module.exports = router;
