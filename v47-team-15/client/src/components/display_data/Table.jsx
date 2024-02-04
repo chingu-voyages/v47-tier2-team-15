@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
 import { getColor, formatTableNumbers } from '../Helpers';
+import { useState } from 'react';
+import axios from 'axios';
 import { useContext } from 'react';
 import { UserContext } from '../userContext';
 import useAddCoin from '../useAddCoin';
 
 function Table({ data, filter, currentPage, itemsPerPage }) {
+  const [favorites, setFavorites] = useState([]);
   const { username } = useContext(UserContext);
-  const { handleClick, selectedCoinId } = useAddCoin();
+  const { handleClick, setSelectedCoinId } = useAddCoin();
 
   const displayData = filter.length > 0 ? filter : data;
 
@@ -21,11 +24,11 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
         <table className="min-w-3/5 mx-auto divide-y divide-gray-200 rounded-md">
           <thead className="sticky top-0 bg-gray-50 z-10">
             <tr>
-              {username && (
-                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Favorite
-                </th>
-              )}
+              {username &&
+            <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Favorite
+              </th>
+              }
               <th className="hidden sm:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Rank
               </th>
@@ -61,23 +64,22 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
           <tbody className="bg-[#24224B] text-white text-xs divide-y divide-gray-200">
             {pageData.map((coin, index) => (
               <tr key={index}>
-                {username && (
-                  <td className="py-4 whitespace-nowrap text-center">
-                    <i
-                      className={`bx bx-star cursor-pointer ${selectedCoinId === coin.id ? 'text-yellow-500' : 'text-gray-300'}`}
-                      onClick={() => {
-                        if (coin.id) {
-                          handleClick(coin.id);
-                        } else {
-                          console.error('No coin ID available');
-                        }
-                      }}
-                    ></i>
-                  </td>
-                )}
-                <td className="hidden sm:table-cell text-center py-4 whitespace-nowrap">
-                  {coin.rank}
+                {username &&
+                <td className="py-4 whitespace-nowrap text-center">
+                <i
+                className="bx bx-star cursor-pointer text-gray-300"
+                onClick={() => {
+                  if (coin.id) {
+                    setSelectedCoinId(coin.id);
+                    handleClick();
+                  } else {
+                    console.error('No coin ID available');
+                  }
+                }}
+              ></i>
                 </td>
+                }
+                <td className="hidden sm:table-cell text-center py-4 whitespace-nowrap">{coin.rank}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{coin.name}</td>
                 <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">
                   {coin.symbol}
