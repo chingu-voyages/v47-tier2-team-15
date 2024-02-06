@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { UserContext } from '../userContext';
 import { useNavigate } from 'react-router-dom';
 
-function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) {
+function Registration({ closeModal, toggleModal, registrationModalOpen, setLoginModalOpen }) {
   const {username, setUsername, successMessage, setSuccessMessage} = useContext(UserContext);
   const navigate = useNavigate(); 
 
@@ -238,6 +238,7 @@ function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) 
 
 Registration.propTypes = {
   closeModal: PropTypes.func,
+  toggleModal: PropTypes.func,
   registrationModalOpen: PropTypes.bool,
   setLoginModalOpen: PropTypes.func,
 };

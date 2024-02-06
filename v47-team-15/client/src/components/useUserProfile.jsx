@@ -35,7 +35,7 @@ const useUserProfile = () => {
     fetchUserProfile();
   }, []);
 
-  return { favoriteCoins, isLoading, error };
+  return { favoriteCoins, setFavoriteCoins, isLoading, error };
 };
 
 export default useUserProfile;
