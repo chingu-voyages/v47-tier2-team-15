@@ -33,6 +33,12 @@ exports.registerUser = async (req, res, next) => {
       });
     }
 
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res.status(409).json({ error: 'Email already registered' });
+    }
+
     const newUser = new User({
       username,
       email,
@@ -41,21 +47,24 @@ exports.registerUser = async (req, res, next) => {
 
     await newUser.save();
 
-    res.status(201).json({
-      message: 'User registered successfully',
-      user: {
-        _id: newUser._id,
-        username: newUser.username,
-      },
+    // Automatically log in the user after successful registration
+    req.login(newUser, (err) => {
+      if (err) {
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+
+      res.status(201).json({
+        message: `User ${newUser.username} registered and logged in successfully`,
+        user: {
+          _id: newUser._id,
+          username: newUser.username,
+          email: newUser.email,
+        },
+      });
     });
   } catch (error) {
     console.error('Error registering user:', error.message);
-
-    if (error.code === 11000) {
-      res.status(409).json({ error: 'Email already registered' });
-    } else {
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
