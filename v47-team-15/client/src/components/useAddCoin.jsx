@@ -8,7 +8,6 @@ function useAddCoin() {
 
     const handleClick = async () => {
         try {
-          if (selectedCoinId) {
             const response = await axios.post('http://localhost:3003/api/favorites/add', { coinId: selectedCoinId }, {
               withCredentials: true,
               responseType: 'json',
@@ -17,10 +16,10 @@ function useAddCoin() {
             setFavorites(response.data.favoriteCoinIds);
             console.log("Coin added");
             alert('Coin added successfully!');
-          } else {
-            console.error('No coin selected');
-            alert('Please select a coin before adding.');
-          }
+          // } else {
+          //   console.error('No coin selected');
+          //   alert('Please select a coin before adding.');
+          // }
           } catch (error) {
           console.error('Error adding favorite coin:', error);
           alert('Failed to add coin. Please try again.');
