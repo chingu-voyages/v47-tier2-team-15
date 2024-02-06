@@ -34,11 +34,18 @@ exports.removeFavoriteCoin = async (req, res) => {
 
     const stringCoinId = coinId.toString();
 
-    // Remove the coin from favorites
+    console.log('Received coinId:', coinId);
+    console.log('Converted stringCoinId:', stringCoinId);
+
     user.favoriteCoinIds = user.favoriteCoinIds.filter(
       (id) => id !== stringCoinId
     );
+
+    console.log('Updated favoriteCoinIds:', user.favoriteCoinIds);
+
     await user.save();
+
+    console.log('Coin removed from favorites successfully');
 
     res.json({ message: 'Coin removed from favorites successfully' });
   } catch (error) {
