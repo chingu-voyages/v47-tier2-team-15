@@ -89,9 +89,7 @@ function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) 
           responseType: 'json',
         },
       );
-
-      // const user = response.data.user;
-      console.log('Registration successful:', response.data);
+      console.log('Registration successful:', response.data.user.username);
       setSuccessMessage(true);
       setUsername(response.data.user.username);
       closeModal();
