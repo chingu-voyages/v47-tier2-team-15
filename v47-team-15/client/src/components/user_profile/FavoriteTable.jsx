@@ -4,7 +4,7 @@ import { formatTableNumbers } from '../Helpers';
 import { getColor } from '../Helpers';
 
 function FavoriteTable() {
-  const { favoriteCoins, isLoading, error } = useUserProfile();
+  const { favoriteCoins, setFavoriteCoins, isLoading, error } = useUserProfile();
 
   const handleDelete = async (coinId) => {
     try {
@@ -12,6 +12,7 @@ function FavoriteTable() {
         withCredentials: true,
         responseType: 'json',
       });
+      setFavoriteCoins(prevCoins => prevCoins.filter(coin => coin.id !== coinId));
     } catch (error) {
       console.error('Error deleting coin:', error);
     }

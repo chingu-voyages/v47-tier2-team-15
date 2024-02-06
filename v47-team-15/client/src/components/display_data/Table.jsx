@@ -7,7 +7,7 @@ import { UserContext } from '../userContext';
 import useAddCoin from '../useAddCoin';
 
 function Table({ data, filter, currentPage, itemsPerPage }) {
-  const [favorites, setFavorites] = useState([]);
+  // const [favorites, setFavorites] = useState([]);
   const { username } = useContext(UserContext);
   const { handleClick, setSelectedCoinId } = useAddCoin();
 

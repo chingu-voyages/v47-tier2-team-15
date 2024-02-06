@@ -21,7 +21,7 @@ function useAddCoin() {
             console.error('No coin selected');
             alert('Please select a coin before adding.');
           }
-        } catch (error) {
+          } catch (error) {
           console.error('Error adding favorite coin:', error);
           alert('Failed to add coin. Please try again.');
         }
