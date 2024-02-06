@@ -6,15 +6,28 @@ import { getColor } from '../Helpers';
 function FavoriteTable() {
   const { favoriteCoins, setFavoriteCoins, isLoading, error } = useUserProfile();
 
+  console.log('first:', favoriteCoins)
   const handleDelete = async (coinId) => {
     try {
-      await axios.delete(`http://localhost:3003/api/favorites/remove/${coinId}`, {
-        withCredentials: true,
-        responseType: 'json',
-      });
-      setFavoriteCoins(prevCoins => prevCoins.filter(coin => coin.id !== coinId));
+      console.log("coin id", coinId);
+      await axios.post(
+        'http://localhost:3003/api/favorites/remove',
+        { coinId },
+        {
+          withCredentials: true,
+          responseType: 'json',
+        }
+      );
+
+      const updatedCoins = favoriteCoins.filter((coin) => coin.id !== coinId);
+      console.log('updated coins:', updatedCoins);
+      setFavoriteCoins([...updatedCoins]);
     } catch (error) {
-      console.error('Error deleting coin:', error);
+      if (error.response && error.response.status === 404) {
+        console.error(`Coin with ID ${coinId} not found.`);
+      } else {
+        console.error('Error deleting coin:', error);
+      }
     }
   };
   
