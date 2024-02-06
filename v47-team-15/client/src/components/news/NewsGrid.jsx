@@ -1,27 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+import useNews from '../useNews';
 
 function NewsGrid() {
-  const [newsData, setNewsData] = useState([]);
+  const { newsData } = useNews();
   const [currentPage, setCurrentPage] = useState(1);
   const [newsPerPage] = useState(8);
-
-  useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await axios.get('http://localhost:3003/api/news', {
-          withCredentials: true,
-          responseType: 'json',
-        });
-        setNewsData(response.data.articles);
-        console.log(response.data.articles);
-      } catch (error) {
-        console.error('Error fetching news data:', error.message);
-      }
-    };
-
-    fetchNews();
-  }, []);
 
   const indexOfLastNews = currentPage * newsPerPage;
   const indexOfFirstNews = indexOfLastNews - newsPerPage;
