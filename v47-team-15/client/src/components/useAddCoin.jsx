@@ -3,12 +3,14 @@ import axios from 'axios';
 import { UserContext } from './userContext';
 import { useState, useEffect } from 'react';
 import useUserProfile from './useUserProfile';
+import { useNavigate } from 'react-router-dom';
 
 function useAddCoin() {
   const { username } = useContext(UserContext);
   const [selectedCoinId, setSelectedCoinId] = useState('');
   const { favoriteCoins, setFavoriteCoins } = useUserProfile();
   const selectedCoinIdRef = useRef('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log('Username updated:', username);
@@ -46,9 +48,10 @@ function useAddCoin() {
   const handleAddCoin = (coinId) => {
     setSelectedCoinId(coinId);
     selectedCoinIdRef.current = coinId;
+    navigate('/portfolio');
   };
 
-  return { selectedCoinId, setSelectedCoinId, handleAddCoin };
+  return { favoriteCoins, selectedCoinId, setSelectedCoinId, handleAddCoin };
 }
 
 export default useAddCoin;
