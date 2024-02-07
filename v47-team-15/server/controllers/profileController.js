@@ -1,16 +1,6 @@
-// const User = require('../models/user');
+const User = require('../models/user');
 
-// exports.getProfile = (req, res) => {
-//   const { username, email } = req.user;
-
-//   // Log the user data for debugging purposes
-//   console.log('User Data:', { username, email });
-
-//   // Send the user data as JSON response
-//   res.json({ username, email });
-// };
-
-const axios = require("axios");
+const axios = require('axios');
 
 /**
  * Fetch details for a list of coins from the CoinLore API.
@@ -25,8 +15,8 @@ const getCoinDetails = async (coinIds) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error fetching coin details:", error);
-    throw new Error("Failed to fetch coin details");
+    console.error('Error fetching coin details:', error);
+    throw new Error('Failed to fetch coin details');
   }
 };
 
@@ -40,10 +30,10 @@ exports.getProfile = async (req, res) => {
   try {
     const user = req.user;
 
-    console.log("User Data:", { username: user.username, email: user.email });
+    console.log('User Data:', { username: user.username, email: user.email });
 
     const favoriteCoinsDetails = await getCoinDetails(
-      user.favoriteCoinIds.join(",")
+      user.favoriteCoinIds.join(',')
     );
 
     res.json({
@@ -53,7 +43,20 @@ exports.getProfile = async (req, res) => {
       favoriteCoinsDetails,
     });
   } catch (error) {
-    console.error("Error fetching profile data:", error);
-    res.status(500).json({ message: "Failed to fetch profile data" });
+    console.error('Error fetching profile data:', error);
+    res.status(500).json({ message: 'Failed to fetch profile data' });
   }
 };
+
+// exports.deleteAccount = async (req, res) => {
+//   try {
+//     const userId = req.user._id;
+
+//     await User.findByIdAndDelete(userId);
+
+//     res.json({ message: 'Account deleted successfully' });
+//   } catch (error) {
+//     console.error('Error deleting account:', error);
+//     res.status(500).json({ message: 'Failed to delete account' });
+//   }
+// };
