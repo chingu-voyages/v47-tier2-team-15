@@ -1,4 +1,3 @@
-// routes/currenciesRoute.js
 const express = require('express');
 const { getAllCurrencies } = require('../controllers/currenciesController');
 
