@@ -136,7 +136,7 @@ function Login({ closeModal, loginModalOpen, setRegistrationModalOpen }) {
                 </button>
               </small>
 
-              {error && <div className="text-red-500 mt-2">{error}</div>}
+              {error && <div className="text-red-500 text-center mt-2">{error}</div>}
             </form>
           </div>
         </div>
