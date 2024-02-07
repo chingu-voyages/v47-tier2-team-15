@@ -9,7 +9,7 @@ import useAddCoin from '../useAddCoin';
 function Table({ data, filter, currentPage, itemsPerPage }) {
   // const [favorites, setFavorites] = useState([]);
   const { username } = useContext(UserContext);
-  const { handleAddCoin } = useAddCoin();
+  const { handleAddCoin, favoriteCoins } = useAddCoin();
 
   const displayData = filter.length > 0 ? filter : data;
 
@@ -17,6 +17,10 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
   const endIndex = startIndex + itemsPerPage;
 
   const pageData = displayData.slice(startIndex, endIndex);
+
+  const isCoinInFavorites = (coinId) => {
+    return favoriteCoins && favoriteCoins.includes(coinId);
+  };
 
 
 
@@ -69,9 +73,11 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
                 {username &&
                 <td className="py-4 whitespace-nowrap text-center">
                 <i
-                className="bx bx-star cursor-pointer text-gray-300"
-                onClick={() => handleAddCoin(coin.id)}
-              ></i>
+                      className={`bx bx-star cursor-pointer ${
+                        isCoinInFavorites(coin.id) ? 'text-yellow-500' : 'text-gray-300'
+                      }`}
+                      onClick={() => handleAddCoin(coin.id)}
+                    ></i>
                 </td>
                 }
                 <td className="hidden sm:table-cell text-center py-4 whitespace-nowrap">{coin.rank}</td>

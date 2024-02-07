@@ -16,7 +16,7 @@ function AddCoins() {
   };
   return (
     <>
-      <div className="bg-[#1A183E] flex flex-row justify-around py-2">
+      <div className="bg-[#1A183E] flex flex-wrap flex-row justify-around py-2">
         <div className="flex flex-col justify-center items-center text-white gap-4 bg-[#24224B] p-6">
           <h1 className="text-2xl">Add favorite coins</h1>
           <small>Track your favorite cryptocurrencies easily.</small>
@@ -33,14 +33,16 @@ function AddCoins() {
               </option>
             ))}
           </select>
-          <button
+          {/* <button
             onClick={() => handleAddCoin(selectedCoinId)}
             className="border border-white rounded-md p-2"
           >
             Add coin
-          </button>
+          </button> */}
         </div>
+        <div className='mt-10 md:mt-0'>
         <FavoriteTable />
+        </div>
       </div>
     </>
   );

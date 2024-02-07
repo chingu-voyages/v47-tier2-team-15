@@ -5,14 +5,17 @@ function CryptoNews() {
   const { newsData } = useNews();
   return (
     <>
-      <div className="bg-[#1A183E] py-6 md:py-10">
-        <div className="flex flex-row justify-around items-center bg-[#24224B] rounded text-white p-4 mx-32">
-          <div className='text-2xl'>
+      <div className="bg-[#1A183E] pb-8 md:py-10">
+        <div className="flex flex-wrap flex-row justify-around items-center bg-[#24224B] rounded text-white p-4 mx-16 md:mx-32">
+          <div className='hidden md:block text-2xl'>
             <p>Crypto</p>
             <p>News</p>
           </div>
-          <div className="flex flex-col w-1/3 gap-2">
-            <div className="flex flex-row justify-between bg-white text-gray-600 p-4">
+          
+            <p className='md:hidden text-xl p-2'>Crypto News</p>
+          
+          <div className="flex flex-col w-full md:w-1/3 gap-2">
+            <div className="flex flex-row justify-between bg-white text-gray-600 p-2 md:p-4">
               <span>New feed</span>
               <Link to="/news" className="bg-[#1A183E] rounded text-white text-xs p-2">
                 View all

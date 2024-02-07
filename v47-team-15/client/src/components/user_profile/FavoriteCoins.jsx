@@ -12,7 +12,7 @@ function FavoriteCoins() {
   return (
     <>
       <div className="w-full bg-[#1A183E] pb-8">
-        <div className="bg-[#24224B] text-white py-10">
+        <div className="bg-[#24224B] text-white py-4 md:py-10">
           <h1 className="text-center text-3xl pb-4">My Favorite Coins</h1>
           <p className="text-center text-sm pb-6">
             View and manage your favorite cryptocurrencies.
@@ -21,9 +21,9 @@ function FavoriteCoins() {
             {top5Coins.map((coin) => (
               <div className="flex flex-col items-center" key={coin.id}>
                 <i className="bx bx-star text-yellow-500 text-2xl"></i>
-                <p>{coin.name}</p>
+                <p className='text-xs md:text-base'>{coin.name}</p>
                 <small className='text-gray-500'>{coin.symbol}</small>
-                <p>{formatTableNumbers(coin.price_usd)}$</p>
+                <p className='text-xs md:text-base'>{formatTableNumbers(coin.price_usd)}$</p>
               </div>
             ))}
           </div>
