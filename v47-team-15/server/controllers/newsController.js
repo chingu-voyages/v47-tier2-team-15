@@ -1,5 +1,12 @@
 const axios = require("axios");
 
+/**
+ * Fetch cryptocurrency news articles based on the specified fromDate and apiKey.
+ * @param {string} fromDate - The start date in the format 'YYYY-MM-DD' to search for articles from.
+ * @param {string} apiKey - The API key required for accessing the news API.
+ * @returns {Promise<object>} - A promise that resolves to the response data containing news articles.
+ * @throws {Error} - Throws an error if there is an issue fetching the news data.
+ */
 const getNews = async (fromDate, apiKey) => {
   try {
     const response = await axios.get(

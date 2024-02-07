@@ -1,12 +1,30 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { ensureAuthenticated } = require('../middleware/authMiddleware');
-const favoritesController = require('../controllers/favoritesController');
+const { ensureAuthenticated } = require("../middleware/authMiddleware");
+const favoritesController = require("../controllers/favoritesController");
 
-router.post('/add', ensureAuthenticated, favoritesController.addFavoriteCoin);
+/**
+ * POST endpoint to add a coin to the user's list of favorite coins.
+ * @route POST /favorites/add
+ * @group Favorites - Operations related to favorite coins
+ * @param {Request} req - The Express request object.
+ * @param {Response} res - The Express response object.
+ * @returns {void}
+ * @security JWT
+ */
+router.post("/add", ensureAuthenticated, favoritesController.addFavoriteCoin);
 
+/**
+ * POST endpoint to remove a coin from the user's list of favorite coins.
+ * @route POST /favorites/remove
+ * @group Favorites - Operations related to favorite coins
+ * @param {Request} req - The Express request object.
+ * @param {Response} res - The Express response object.
+ * @returns {void}
+ * @security JWT
+ */
 router.post(
-  '/remove',
+  "/remove",
   ensureAuthenticated,
   favoritesController.removeFavoriteCoin
 );
