@@ -42,9 +42,25 @@ function Registration({ closeModal, toggleModal, registrationModalOpen, setLogin
 
   const validateForm = () => {
     const schema = Joi.object({
-      username: Joi.string().alphanum().min(3).max(30).required(),
+      username: Joi.string().alphanum().min(3).max(12).required()
+      .messages({
+        'string.base': 'Username should be unique, containing letters and numbers.',
+        'string.alphanum': 'Username should only contain letters and numbers',
+        'string.min': 'Username should be at least 3 characters long',
+        'string.max': 'Username should not exceed 8 characters',
+        'any.required': 'Username is required',
+      }),
       email: Joi.string().email({ tlds: { allow: false } }).required(),
-      password: Joi.string().min(8).max(30).required(),
+      password: Joi.string()
+    .min(8)
+    .pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$'))
+    .required()
+    .messages({
+      'string.base': 'Password should be a string',
+      'string.min': 'Password should be at least 8 characters long',
+      'string.pattern.base': 'Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one symbol.',
+      'any.required': 'Password is required',
+    }),
       confirmPassword: Joi.string()
         .valid(Joi.ref('password'))
         .custom((value, helpers) => {
@@ -186,7 +202,7 @@ function Registration({ closeModal, toggleModal, registrationModalOpen, setLogin
                   required
                 />
                 {errors.password && (
-                  <div className="text-red-500">{errors.password}</div>
+                  <div className="text-red-500 text-center py-2 mx-6">{errors.password}</div>
                 )}
               </div>
 
