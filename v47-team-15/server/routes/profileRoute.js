@@ -15,6 +15,6 @@ const profileController = require('../controllers/profileController');
  * @security JWT
  */
 router.get('/', ensureAuthenticated, profileController.getProfile);
-router.delete('/delete', ensureAuthenticated, profileController.deleteAccount);
+// router.delete('/delete', ensureAuthenticated, profileController.deleteAccount);
 
 module.exports = router;
