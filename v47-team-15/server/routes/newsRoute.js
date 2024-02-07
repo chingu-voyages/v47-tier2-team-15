@@ -8,6 +8,14 @@ const newsController = require("../controllers/newsController");
 //Example API requests:
 //https://newsapi.org/v2/everything?q=crpto&from=$2024-01-05&sortBy=publishedAt&apiKey=${apiKey}&searchin=title,content
 
+/**
+ * GET endpoint to retrieve cryptocurrency news articles.
+ * @route GET /api/news
+ * @group News - Operations related to cryptocurrency news
+ * @param {Request} req - The Express request object.
+ * @param {Response} res - The Express response object.
+ * @returns {void}
+ */
 router.get("/", async (req, res) => {
   try {
     const { fromDate } = req.query;
