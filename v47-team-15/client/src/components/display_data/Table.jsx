@@ -9,7 +9,7 @@ import useAddCoin from '../useAddCoin';
 function Table({ data, filter, currentPage, itemsPerPage }) {
   // const [favorites, setFavorites] = useState([]);
   const { username } = useContext(UserContext);
-  const { handleClick, setSelectedCoinId } = useAddCoin();
+  const { handleAddCoin } = useAddCoin();
 
   const displayData = filter.length > 0 ? filter : data;
 
@@ -17,6 +17,8 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
   const endIndex = startIndex + itemsPerPage;
 
   const pageData = displayData.slice(startIndex, endIndex);
+
+
 
   return (
     <>
@@ -68,14 +70,7 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
                 <td className="py-4 whitespace-nowrap text-center">
                 <i
                 className="bx bx-star cursor-pointer text-gray-300"
-                onClick={() => {
-                  if (coin.id) {
-                    setSelectedCoinId(coin.id);
-                    handleClick();
-                  } else {
-                    console.error('No coin ID available');
-                  }
-                }}
+                onClick={() => handleAddCoin(coin.id)}
               ></i>
                 </td>
                 }

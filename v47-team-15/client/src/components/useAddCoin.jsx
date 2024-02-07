@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import axios from 'axios';
 import { UserContext } from './userContext';
 import { useState, useEffect } from 'react';
@@ -7,38 +7,48 @@ import useUserProfile from './useUserProfile';
 function useAddCoin() {
   const { username } = useContext(UserContext);
   const [selectedCoinId, setSelectedCoinId] = useState('');
-  const {favoriteCoins, setFavoriteCoins} = useUserProfile();
-  
+  const { favoriteCoins, setFavoriteCoins } = useUserProfile();
+  const selectedCoinIdRef = useRef('');
+
   useEffect(() => {
     console.log('Username updated:', username);
-  }, [username]);
 
-  const handleClick = async () => {
-    try {
-      if (username) {
-        const response = await axios.post(
-          'http://localhost:3003/api/favorites/add',
-          { coinId: selectedCoinId },
-          {
-            withCredentials: true,
-            responseType: 'json',
-          }
-        );
-        console.log('Response from server:', response);
-        setFavoriteCoins(response.data.favoriteCoinIds);
-        console.log('Coin added');
-        alert('Coin added successfully!');
-      } else {
-        console.error('Not logged in or no coin selected');
-        alert('Please log in and select a coin before adding.');
+    const handleClick = async () => {
+      try {
+        const coinIdToUse = selectedCoinIdRef.current || selectedCoinId;
+        if (username && coinIdToUse) {
+          const response = await axios.post(
+            'http://localhost:3003/api/favorites/add',
+            { coinId: coinIdToUse },
+            {
+              withCredentials: true,
+              responseType: 'json',
+            }
+          );
+
+          console.log('Response from server:', response);
+          setFavoriteCoins(response.data.favoriteCoinIds);
+          console.log('Coin added');
+          alert('Coin added successfully!');
+        } else {
+          console.log('Not logged in or no valid coin selected');
+          console.log('Please log in and select a valid coin before adding.');
+        }
+      } catch (error) {
+        console.error('Error adding favorite coin:', error);
+        alert('Failed to add coin. Please try again.');
       }
-    } catch (error) {
-      console.error('Error adding favorite coin:', error);
-      alert('Failed to add coin. Please try again.');
-    }
+    };
+
+    handleClick();
+  }, [username, selectedCoinId, setFavoriteCoins]);
+
+  const handleAddCoin = (coinId) => {
+    setSelectedCoinId(coinId);
+    selectedCoinIdRef.current = coinId;
   };
 
-  return { selectedCoinId, setSelectedCoinId, handleClick };
+  return { selectedCoinId, setSelectedCoinId, handleAddCoin };
 }
 
 export default useAddCoin;

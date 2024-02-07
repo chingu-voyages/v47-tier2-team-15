@@ -5,10 +5,15 @@ import useFetch from '../useFetch';
 import useAddCoin from '../useAddCoin';
 
 function AddCoins() {
-  const { selectedCoinId, setSelectedCoinId, handleClick } = useAddCoin();
+  const { selectedCoinId, setSelectedCoinId, handleAddCoin } = useAddCoin();
   
   const { data } = useFetch('http://localhost:3003/api/currencies');
   
+  const handleDropdownChange = (e) => {
+    const coinId = e.target.value;
+    setSelectedCoinId(coinId);
+    handleAddCoin(coinId); 
+  };
   return (
     <>
       <div className="bg-[#1A183E] flex flex-row justify-around py-2">
@@ -18,7 +23,7 @@ function AddCoins() {
           {/* <label htmlFor="coinDropdown">Select a Coin:</label> */}
           <select className="text-gray-500 rounded p-2"
             id="coinDropdown"
-            onChange={(e) => setSelectedCoinId(e.target.value)}
+            onChange={handleDropdownChange}
             value={selectedCoinId}
           >
             <option className="text-gray-500" value="">Select a coin</option>
@@ -29,7 +34,7 @@ function AddCoins() {
             ))}
           </select>
           <button
-            onClick={handleClick}
+            onClick={() => handleAddCoin(selectedCoinId)}
             className="border border-white rounded-md p-2"
           >
             Add coin
