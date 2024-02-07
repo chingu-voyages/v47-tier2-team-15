@@ -33,11 +33,11 @@ function FavoriteTable() {
   
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p className='text-white'>Loading...</p>;
   }
 
   if (error) {
-    return <p>Error fetching data: {error.message}</p>;
+    return <p className='text-white'>Error fetching data: {error.message}</p>;
   }
 
   return (

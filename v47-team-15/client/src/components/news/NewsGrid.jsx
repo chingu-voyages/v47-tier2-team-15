@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useNews from '../useNews';
 import Spinner from '../display_data/Spinner';
-import news from '../../assets/img/news.png';
+import newsImg from '../../assets/img/news.png';
 
 function NewsGrid() {
   const { newsData, isLoading, error } = useNews();
@@ -70,7 +70,7 @@ function NewsGrid() {
                       ) : (
                         <img
                           className="w-full h-32 object-cover"
-                          src={news}
+                          src={newsImg}
                           alt="default-news-image"
                         />
                       )}

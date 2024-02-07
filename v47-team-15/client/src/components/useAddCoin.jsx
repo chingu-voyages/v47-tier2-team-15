@@ -48,7 +48,7 @@ function useAddCoin() {
   const handleAddCoin = (coinId) => {
     setSelectedCoinId(coinId);
     selectedCoinIdRef.current = coinId;
-    navigate('/portfolio');
+    // navigate('/portfolio');
   };
 
   return { favoriteCoins, selectedCoinId, setSelectedCoinId, handleAddCoin };
