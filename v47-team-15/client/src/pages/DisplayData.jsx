@@ -10,7 +10,7 @@ import Spinner from '../components/display_data/Spinner.jsx';
 
 function DisplayData() {
   const { data, error, isLoading } = useFetch(
-    'http://localhost:3003/api/currencies',
+    'https://crypto-view-test.onrender.com/api/currencies',
   );
   const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "https://testtest11111111.netlify.app/",
+  "proxy": "https://crypto-view-test.onrender.com",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

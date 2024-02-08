@@ -2,7 +2,7 @@ import useFetch from '../useFetch';
 import { formatNumber, getColor } from '../Helpers';
 
 function InfoCards() {
-  const { data } = useFetch('http://localhost:3003/api/global');
+  const { data } = useFetch('https://crypto-view-test.onrender.com/api/global');
 
   if (!data || !data[0]) {
     return <div>No data available</div>;
