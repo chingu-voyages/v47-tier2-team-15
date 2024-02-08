@@ -1,10 +1,14 @@
 const express = require('express');
 const cors = require('cors');
+const path = require("path");
+const compression = require('compression');
 const currenciesRoute = require('./routes/currenciesRoute');
 const globalRoute = require('./routes/globalRoute');
 
 const app = express();
 const PORT = process.env.PORT || 3003;
+
+app.use(express.static(path.join(__dirname, "dist"))); 
 
 app.use(express.json());
 
