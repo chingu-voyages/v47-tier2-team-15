@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "http://localhost:3003",
+  "proxy": "https://crypto-view-test.onrender.com",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
