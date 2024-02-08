@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, "dist")));
 app.use(express.json());
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'https://65c4bca05f631d0ad181816b--jazzy-hotteok-614a27.netlify.app',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
