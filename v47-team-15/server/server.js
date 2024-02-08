@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require("path");
-const compression = require('compression');
+app.use(compression());
 const currenciesRoute = require('./routes/currenciesRoute');
 const globalRoute = require('./routes/globalRoute');
 
