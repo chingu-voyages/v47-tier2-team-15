@@ -15,12 +15,6 @@ require("dotenv").config();
 
 const app = express();
 app.use(express.static(path.join(__dirname, "dist")));
-mongoose
-  .connect(process.env.MONGO_CONNECTION)
-  .then(() => console.log("Database connected! WIIIIIIII"))
-  .catch((err) => console.log(err));
-
-require("./passport/passport-config");
 
 // CORS
 
@@ -31,6 +25,14 @@ app.use(cors({
   allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept,Authorization',
   exposedHeaders: 'Access-Control-Allow-Origin,Access-Control-Allow-Credentials',
 }));
+
+
+mongoose
+  .connect(process.env.MONGO_CONNECTION)
+  .then(() => console.log("Database connected! WIIIIIIII"))
+  .catch((err) => console.log(err));
+
+require("./passport/passport-config");
 
 
 app.use(
