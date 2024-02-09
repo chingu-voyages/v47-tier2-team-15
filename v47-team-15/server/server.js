@@ -40,9 +40,11 @@ app.use(express.json());
 // CORS
 
 app.use(cors({
-  origin: 'https://merry-liger-e1e902.netlify.app/',
+  origin: 'https://merry-liger-e1e902.netlify.app',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
+  allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept,Authorization',
+  exposedHeaders: 'Access-Control-Allow-Origin,Access-Control-Allow-Credentials',
 }));
 
 
