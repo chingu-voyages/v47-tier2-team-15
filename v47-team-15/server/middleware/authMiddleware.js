@@ -8,7 +8,6 @@ module.exports.ensureAuthenticated = function (req, res, next) {
 
   // Log information about the unauthorized request
   console.error(`Unauthorized access: ${req.method} ${req.originalUrl}`);
-  console.error('Request Headers:', req.headers); // Log request headers
 
   // Send a JSON response with an error message
   res
