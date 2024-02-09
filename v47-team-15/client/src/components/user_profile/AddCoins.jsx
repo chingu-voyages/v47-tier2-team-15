@@ -7,7 +7,7 @@ import useAddCoin from '../useAddCoin';
 function AddCoins() {
   const { selectedCoinId, setSelectedCoinId, handleAddCoin } = useAddCoin();
   
-  const { data } = useFetch('http://localhost:3003/api/currencies');
+  const { data } = useFetch('https://crypto-view-test.onrender.com/api/currencies');
   
   const handleDropdownChange = (e) => {
     const coinId = e.target.value;

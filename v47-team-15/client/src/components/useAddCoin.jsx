@@ -20,7 +20,7 @@ function useAddCoin() {
         const coinIdToUse = selectedCoinIdRef.current || selectedCoinId;
         if (username && coinIdToUse) {
           const response = await axios.post(
-            'http://localhost:3003/api/favorites/add',
+            'https://crypto-view-test.onrender.com/api/favorites/add',
             { coinId: coinIdToUse },
             {
               withCredentials: true,

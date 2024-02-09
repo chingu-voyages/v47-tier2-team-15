@@ -13,7 +13,7 @@ const useUserProfile = () => {
     const fetchUserProfile = async () => {
       try {
         // if (username) {
-        const response = await axios.get('http://localhost:3003/profile', {
+        const response = await axios.get('https://crypto-view-test.onrender.com/profile', {
           withCredentials: true,
           responseType: 'json',
           timeout: '5000',

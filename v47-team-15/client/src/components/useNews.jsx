@@ -10,7 +10,7 @@ function useNews() {
       const fetchNews = async () => {
         try {
           setIsLoading(true);
-          const response = await axios.get('http://localhost:3003/api/news', {
+          const response = await axios.get('https://crypto-view-test.onrender.com/api/news', {
             withCredentials: true,
             responseType: 'json',
           });
