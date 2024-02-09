@@ -7,28 +7,35 @@ import CryptoNews from "../components/user_profile/CryptoNews";
 import { useContext } from 'react';
 import { UserContext } from '../components/userContext';
 import DisplayData from './DisplayData';
+import useUserProfile from "../components/useUserProfile";
+import Spinner from "../components/display_data/Spinner";
 
 function UserProfile() {
   const { username } = useContext(UserContext);
+  const { isLoading } = useUserProfile();
 
   return (
     <>
-    {username ? (
+      {username ? (
         <div>
-            <Header />
-            <UserInfo />
-            <FavoriteCoins />
-            <AddCoins />
-            <CryptoNews />
-            <Footer />
-            </div>
-            )
-        : (
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <>
+              <Header />
+              <UserInfo />
+              <FavoriteCoins />
+              <AddCoins />
+              <CryptoNews />
+              <Footer />
+            </>
+          )}
+        </div>
+      ) : (
         <DisplayData />
-        )
-        }
+      )}
     </>
-  )
+  );
 }
 
-export default UserProfile
+export default UserProfile;

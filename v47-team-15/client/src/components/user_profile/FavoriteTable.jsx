@@ -37,12 +37,24 @@ function FavoriteTable() {
   }
 
   if (error) {
-    return <p className='text-white'>Error fetching data: {error.message}</p>;
+    return <p className='text-white text-center'>Error fetching data: {error.message}</p>;
   }
 
   return (
     <div className="bg-[#1A183E] pb-16">
-      <table className="min-w-3/5 mx-auto divide-y divide-gray-200 rounded-md">
+      {favoriteCoins.length === 0 ? 
+        (
+          <div className='flex flex-col justify-between gap-6'>
+            <p className='text-white text-center text-xl'>Track your favorite cryptocurrencies easily</p>
+            <div className='text-center'>
+              <i className='bx bxl-bitcoin text-yellow-600 text-[3rem] animate-bounce' style={{ animationDelay: '0s' }}></i>
+              <i className='bx bxl-bitcoin text-yellow-600 text-[1.5rem] animate-bounce' style={{ animationDelay: '0.4s' }}></i>
+              <i className='bx bxl-bitcoin text-yellow-600 text-[4rem] animate-bounce' style={{ animationDelay: '0.7s' }}></i>
+            </div>
+          </div>
+          )
+          :
+      (<table className="min-w-3/5 mx-auto divide-y divide-gray-200 rounded-md">
         <thead className="sticky top-0 bg-gray-50 z-10">
           <tr>
             <th className="hidden sm:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -94,6 +106,9 @@ function FavoriteTable() {
           ))}
         </tbody>
       </table>
+  )
+  
+}
     </div>
   );
 }

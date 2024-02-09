@@ -47,22 +47,22 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Price
               </th>
-              <th className="hidden md:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="hidden md:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                 1h
               </th>
-              <th className="hidden md:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="hidden md:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                 24h
               </th>
-              <th className="hidden md:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="hidden md:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                 7d
               </th>
-              <th className="hidden lg:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="hidden lg:table-cell px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Circulating Supply
               </th>
               <th className="hidden lg:table-cell px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Total Supply
               </th>
-              <th className="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="hidden sm:table-cell px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Market Cap
               </th>
             </tr>
@@ -82,24 +82,24 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
                 }
                 <td className="hidden sm:table-cell text-center py-4 whitespace-nowrap">{coin.rank}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{coin.name}</td>
-                <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">
+                <td className="hidden sm:table-cell px-6 py-4 text-center whitespace-nowrap">
                   {coin.symbol}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {formatTableNumbers(coin.price_usd)}$
                 </td>
                 <td
-                  className={`hidden md:table-cell px-6 py-4 whitespace-nowrap ${getColor(coin.percent_change_1h)}`}
+                  className={`hidden md:table-cell px-6 py-4 text-center whitespace-nowrap ${getColor(coin.percent_change_1h)}`}
                 >
                   {formatTableNumbers(coin.percent_change_1h)}%
                 </td>
                 <td
-                  className={`hidden md:table-cell px-6 py-4 whitespace-nowrap ${getColor(coin.percent_change_7d)}`}
+                  className={`hidden md:table-cell px-6 py-4 text-center whitespace-nowrap ${getColor(coin.percent_change_7d)}`}
                 >
                   {formatTableNumbers(coin.percent_change_7d)}%
                 </td>
                 <td
-                  className={`hidden md:table-cell px-6 py-4 whitespace-nowrap ${getColor(coin.percent_change_24h)}`}
+                  className={`hidden md:table-cell px-6 py-4 text-center whitespace-nowrap ${getColor(coin.percent_change_24h)}`}
                 >
                   {formatTableNumbers(coin.percent_change_24h)}%
                 </td>
@@ -109,7 +109,7 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
                 <td className="hidden lg:table-cell px-6 py-4 text-right whitespace-nowrap">
                   {formatTableNumbers(coin.tsupply)}$
                 </td>
-                <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">
+                <td className="hidden sm:table-cell px-6 py-4 text-right whitespace-nowrap">
                   {formatTableNumbers(coin.market_cap_usd)}$
                 </td>
               </tr>

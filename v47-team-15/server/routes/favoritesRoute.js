@@ -10,7 +10,7 @@ const favoritesController = require("../controllers/favoritesController");
  * @param {Request} req - The Express request object.
  * @param {Response} res - The Express response object.
  * @returns {void}
- * @security JWT
+ * @security Passport
  */
 router.post("/add", ensureAuthenticated, favoritesController.addFavoriteCoin);
 
