@@ -55,7 +55,7 @@ passport.serializeUser((user, done) => {
  * @param {string} id - The user ID retrieved from session.
  * @param {Function} done - Callback function to indicate completion.
  */
-passp;
+
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);
