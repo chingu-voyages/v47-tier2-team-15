@@ -1,11 +1,18 @@
-const express = require('express');
-const cors = require('cors');
-const path = require("path");
-const currenciesRoute = require('./routes/currenciesRoute');
-const globalRoute = require('./routes/globalRoute');
+const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const session = require("express-session");
+const passport = require("passport");
+const authRoutes = require("./routes/authRoute");
+const currenciesRoute = require("./routes/currenciesRoute");
+const globalRoute = require("./routes/globalRoute");
+const profileRoute = require("./routes/profileRoute");
+const favoritesRoutes = require("./routes/favoritesRoute");
+const newsRoute = require("./routes/newsRoute");
+const { errorHandler } = require("./middleware/errorMiddleware");
+require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 3003;
 
 app.use(express.static(path.join(__dirname, "dist")));
 
@@ -19,9 +26,9 @@ app.use(cors({
   exposedHeaders: 'Access-Control-Allow-Origin,Access-Control-Allow-Credentials',
 }));
 
-app.use('/api/currencies', currenciesRoute);
-app.use('/api/global', globalRoute);
+app.use(errorHandler);
 
+const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

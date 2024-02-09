@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <>
-      <div className="flex flex-row justify-center py-4 md:mt-0 md:font-medium py-1 md:py-0 transition-all delay-150 duration-300 overflow-hidden px-6 bg-[#1A183E] text-white font-thin text-xs">
+      <div className="w-full fixed bottom-0 pb-2 py-4 text-center bg-[#1A183E] text-white font-thin text-xs">
           &copy; 2024 | Chingu |
         <a
           href="https://github.com/chingu-voyages/v47-tier2-team-15"

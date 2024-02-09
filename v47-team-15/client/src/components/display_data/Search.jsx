@@ -28,7 +28,7 @@ function Search({ onSearch }) {
         <input
           type="text"
           placeholder="Search cryptocurrencies"
-          className="w-1/2 md:w-1/4 mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-[#311B3D] focus:ring-[#40254f] block rounded-md sm:text-sm focus:ring-1"
+          className="w-1/2 md:w-1/4 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-[#311B3D] focus:ring-[#40254f] block rounded-md sm:text-sm focus:ring-1"
           value={searchInput}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}

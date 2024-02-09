@@ -7,6 +7,7 @@ import useFetch from '../components/useFetch.jsx';
 import Footer from '../components/display_data/Footer.jsx';
 import Pagination from '../components/display_data/Pagination.jsx';
 import Spinner from '../components/display_data/Spinner.jsx';
+import Registration from '../components/user_auth/Registration.jsx';
 
 function DisplayData() {
   const { data, error, isLoading } = useFetch(
@@ -17,14 +18,16 @@ function DisplayData() {
   const itemsPerPage = 10;
 
   const handleSearch = (searchInput) => {
-    if (searchInput) {
-      const filteredResults = data.filter((item) =>
-        item.name.toLowerCase().includes(searchInput.toLowerCase()),
-      );
-      setFilteredData(filteredResults);
-      console.log('search results:', filteredResults);
-    } else {
-      setFilteredData(data);
+    if (data) {
+      if (searchInput) {
+        const filteredResults = data.filter((item) =>
+          item.name.toLowerCase().includes(searchInput.toLowerCase())
+        );
+        setFilteredData(filteredResults);
+        console.log('search results:', filteredResults);
+      } else {
+        setFilteredData(data);
+      }
     }
   };
 
@@ -34,6 +37,7 @@ function DisplayData() {
 
   return (
     <>
+    <div className='bg-[#1A183E] min-h-screen'>
       <Header />
       {error ? (
         <div>Error fetching data: {error.message}</div>
@@ -44,15 +48,16 @@ function DisplayData() {
           ) : (
             <>
               <InfoCards />
+              <Registration />
               <Search onSearch={handleSearch} />
               <Table
-                data={data}
-                filter={filteredData}
+                data={data || []}
+                filter={filteredData || []}
                 currentPage={currentPage}
                 itemsPerPage={itemsPerPage}
               />
               <Pagination
-                totalItems={filteredData.length || data.length}
+                totalItems={filteredData ? data.length : 0}
                 itemsPerPage={itemsPerPage}
                 currentPage={currentPage}
                 onPageChange={handlePageChange}
@@ -62,6 +67,7 @@ function DisplayData() {
           )}
         </>
       )}
+      </div>
     </>
   );
 }
