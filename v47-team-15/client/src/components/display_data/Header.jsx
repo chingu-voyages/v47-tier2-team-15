@@ -79,11 +79,12 @@ function Header() {
         className={`max-w-screen mx-auto sticky top-0 z-20 ${isOpen ? 'fixed w-full' : ''}`}
       >
         <nav className="flex flex-wrap justify-between items-center bg-[#1A183E] text-white p-2 px-4">
-          <div className="flex flex-row items-center pb-4">
-            <img src={logo} alt="logo" className="w-[4rem]" />
-            <span className="mt-4 md:text-xl">CryptoView</span>
-          </div>
-
+          <Link to="/">
+            <div className="flex flex-row items-center pb-4">
+              <img src={logo} alt="logo" className="w-[4rem]" />
+              <span className="mt-4 md:text-xl">CryptoView</span>
+            </div>
+          </Link>
           <div
             className={`md:flex justify-between items-center w-full md:w-auto ${
               isOpen ? 'bg-[#24224B] block fixed left-0 top-20 py-4' : 'hidden'
@@ -97,14 +98,17 @@ function Header() {
                 <Link to="/">Home</Link>
               </li>
               <li className="md:bg-transparent md:text-xl text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
-                {username ?
-                (<Link to="/portfolio">Portfolio</Link>)
-                :
-                (<button onClick={handleProfileClick} type="button" className="">
-                Portfolio
-              </button>)
-                }
-                
+                {username ? (
+                  <Link to="/portfolio">Portfolio</Link>
+                ) : (
+                  <button
+                    onClick={handleProfileClick}
+                    type="button"
+                    className=""
+                  >
+                    Portfolio
+                  </button>
+                )}
               </li>
               <li
                 className="md:bg-transparent md:text-xl text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer"
