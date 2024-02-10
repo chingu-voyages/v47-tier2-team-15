@@ -14,10 +14,8 @@ const { errorHandler } = require("./middleware/errorMiddleware");
 require("dotenv").config();
 
 const app = express();
-app.use(express.static(path.join(__dirname, "dist")));
 
-// CORS
-
+// CORS Configuration
 app.use(cors({
   origin: 'https://merry-liger-e1e902.netlify.app',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -26,15 +24,15 @@ app.use(cors({
   exposedHeaders: 'Access-Control-Allow-Origin,Access-Control-Allow-Credentials',
 }));
 
+// Serve static files
+app.use(express.static(path.join(__dirname, "dist")));
 
 mongoose
   .connect(process.env.MONGO_CONNECTION)
   .then(() => console.log("Database connected! WIIIIIIII"))
   .catch((err) => console.log(err));
 
-require("./passport/passport-config");
-
-
+// Session Configuration
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -43,13 +41,15 @@ app.use(
   })
 );
 
+// Passport Configuration
+require("./passport/passport-config");
+
 // Initialize Passport
 app.use(passport.initialize());
 app.use(passport.session());
 
 // JSON request parsing
 app.use(express.json());
-
 
 // Routes
 app.use("/auth", authRoutes);

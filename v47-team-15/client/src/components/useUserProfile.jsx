@@ -13,7 +13,11 @@ const useUserProfile = () => {
     const fetchUserProfile = async () => {
       try {
         // if (username) {
-        const response = await axios.get('/profile');
+        const response = await axios.get('/profile', {
+          withCredentials: true,
+          responseType: 'json',
+          timeout: '5000',
+        });
         const userProfileData = response.data;
         console.log(userProfileData);
 
