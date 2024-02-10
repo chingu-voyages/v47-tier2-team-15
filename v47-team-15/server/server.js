@@ -17,7 +17,7 @@ const app = express();
 
 // CORS Configuration
 app.use(cors({
-  origin: 'https://stunning-truffle-616dc5.netlify.app',
+  origin: 'https://merry-liger-e1e902.netlify.app',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
