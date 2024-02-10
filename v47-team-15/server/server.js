@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const path = require("path");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
@@ -24,8 +23,6 @@ app.use(cors({
   exposedHeaders: 'Access-Control-Allow-Origin,Access-Control-Allow-Credentials',
 }));
 
-// Serve static files
-app.use(express.static(path.join(__dirname, "dist")));
 
 mongoose
   .connect(process.env.MONGO_CONNECTION)
