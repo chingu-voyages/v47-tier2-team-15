@@ -87,7 +87,7 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
                   {coin.symbol}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {formatTableNumbers(coin.price_usd)}$
+                  ${formatTableNumbers(coin.price_usd)}
                 </td>
                 <td
                   className={`hidden md:table-cell px-6 py-4 text-center whitespace-nowrap ${getColor(coin.percent_change_1h)}`}
@@ -105,13 +105,13 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
                   {formatTableNumbers(coin.percent_change_24h)}%
                 </td>
                 <td className="hidden lg:table-cell px-6 py-4 text-right whitespace-nowrap">
-                  {formatTableNumbers(coin.csupply)}$
+                  {formatTableNumbers(coin.csupply)}
                 </td>
                 <td className="hidden lg:table-cell px-6 py-4 text-right whitespace-nowrap">
-                  {formatTableNumbers(coin.tsupply)}$
+                  {formatTableNumbers(coin.tsupply)}
                 </td>
                 <td className="hidden sm:table-cell px-6 py-4 text-right whitespace-nowrap">
-                  {formatTableNumbers(coin.market_cap_usd)}$
+                  ${formatTableNumbers(coin.market_cap_usd)}
                 </td>
               </tr>
             ))}
