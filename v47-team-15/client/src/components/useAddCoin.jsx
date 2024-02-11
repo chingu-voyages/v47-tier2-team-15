@@ -1,36 +1,39 @@
-import { useContext, useRef } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { UserContext } from './userContext';
-import { useState, useEffect } from 'react';
 import useUserProfile from './useUserProfile';
-import { useNavigate } from 'react-router-dom';
 
 function useAddCoin() {
   const { username } = useContext(UserContext);
   const [selectedCoinId, setSelectedCoinId] = useState('');
   const { favoriteCoins, setFavoriteCoins } = useUserProfile();
-  const selectedCoinIdRef = useRef('');
-  const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('Username updated:', username);
-
     const handleClick = async () => {
       try {
-        const coinIdToUse = selectedCoinIdRef.current || selectedCoinId;
+        const coinIdToUse = selectedCoinId;
         if (username && coinIdToUse) {
-          const response = await axios.post(
+          await axios.post(
             'http://localhost:3003/api/favorites/add',
             { coinId: coinIdToUse },
             {
               withCredentials: true,
               responseType: 'json',
-            }
+            },
           );
 
-          console.log('Response from server:', response);
-          setFavoriteCoins(response.data.favoriteCoinIds);
-          console.log('Coin added');
+          const updatedProfileResponse = await axios.get(
+            'http://localhost:3003/profile',
+            {
+              withCredentials: true,
+              responseType: 'json',
+              timeout: '5000',
+            },
+          );
+
+          const userProfileData = updatedProfileResponse.data;
+          setFavoriteCoins([...userProfileData.favoriteCoinsDetails]);
+          console.log('Coin added', userProfileData.favoriteCoinsDetails);
           alert('Coin added successfully!');
         } else {
           console.log('Not logged in or no valid coin selected');
@@ -47,11 +50,19 @@ function useAddCoin() {
 
   const handleAddCoin = (coinId) => {
     setSelectedCoinId(coinId);
-    selectedCoinIdRef.current = coinId;
-    // navigate('/portfolio');
   };
 
-  return { favoriteCoins, selectedCoinId, setSelectedCoinId, handleAddCoin };
+  useEffect(() => {
+    console.log('Favorite coins updated', favoriteCoins);
+  }, [favoriteCoins]);
+
+  return {
+    favoriteCoins,
+    setFavoriteCoins,
+    selectedCoinId,
+    setSelectedCoinId,
+    handleAddCoin,
+  };
 }
 
 export default useAddCoin;

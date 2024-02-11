@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-// import { useContext } from 'react';
-// import UserContext from '../components/userContext';
+import { useContext } from 'react';
+import { UserContext } from './userContext';
 
 const useUserProfile = () => {
   const [favoriteCoins, setFavoriteCoins] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const { username } = useContext(UserContext);
+  const { username } = useContext(UserContext);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        // if (username) {
+        if (username) {
         const response = await axios.get('http://localhost:3003/profile', {
           withCredentials: true,
           responseType: 'json',
@@ -23,9 +23,9 @@ const useUserProfile = () => {
 
         setFavoriteCoins(userProfileData.favoriteCoinsDetails);
         setIsLoading(false);
-        // } else {
-        //   console.log("no user found!")
-        // }
+        } else {
+          console.log("no user found!")
+        }
       } catch (error) {
         setError(error);
         setIsLoading(false);
@@ -34,6 +34,10 @@ const useUserProfile = () => {
 
     fetchUserProfile();
   }, []);
+
+  // useEffect(() => {
+  //   setFavoriteCoins((prevCoins) => [...prevCoins]);
+  // }, [favoriteCoins]);
 
   return { favoriteCoins, setFavoriteCoins, isLoading, error };
 };
