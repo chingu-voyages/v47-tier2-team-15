@@ -49,7 +49,7 @@ function DisplayData() {
             <>
               <InfoCards />
               <Registration />
-              <Search onSearch={handleSearch} />
+              <Search onSearch={handleSearch} setFilteredData={setFilteredData} data={data} />
               <Table
                 data={data || []}
                 filter={filteredData || []}
