@@ -7,7 +7,6 @@ import { UserContext } from '../userContext';
 import useAddCoin from '../useAddCoin';
 
 function Table({ data, filter, currentPage, itemsPerPage }) {
-  // const [favorites, setFavorites] = useState([]);
   const { username } = useContext(UserContext);
   const { handleAddCoin, favoriteCoins } = useAddCoin();
 
@@ -19,10 +18,8 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
   const pageData = displayData.slice(startIndex, endIndex);
 
   const isCoinInFavorites = (coinId) => {
-    return favoriteCoins && favoriteCoins.includes(coinId);
+    return favoriteCoins.some((coin) => coin.id === coinId);
   };
-
-
 
   return (
     <>
@@ -30,11 +27,11 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
         <table className="min-w-3/5 mx-auto divide-y divide-gray-200 rounded-md">
           <thead className="sticky top-0 bg-gray-50 z-10">
             <tr>
-              {username &&
-            <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Favorite
-              </th>
-              }
+              {username && (
+                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Favorite
+                </th>
+              )}
               <th className="hidden sm:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Rank
               </th>
@@ -70,17 +67,21 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
           <tbody className="bg-[#24224B] text-white text-xs divide-y divide-gray-200">
             {pageData.map((coin, index) => (
               <tr key={index}>
-                {username &&
-                <td className="py-4 whitespace-nowrap text-center">
-                <i
+                {username && (
+                  <td className="py-4 whitespace-nowrap text-center">
+                    <i
                       className={`bx bx-star cursor-pointer ${
-                        isCoinInFavorites(coin.id) ? 'text-yellow-500' : 'text-gray-300'
+                        isCoinInFavorites(coin.id)
+                          ? 'text-yellow-500'
+                          : 'text-gray-300'
                       }`}
                       onClick={() => handleAddCoin(coin.id)}
                     ></i>
+                  </td>
+                )}
+                <td className="hidden sm:table-cell text-center py-4 whitespace-nowrap">
+                  {coin.rank}
                 </td>
-                }
-                <td className="hidden sm:table-cell text-center py-4 whitespace-nowrap">{coin.rank}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{coin.name}</td>
                 <td className="hidden sm:table-cell px-6 py-4 text-center whitespace-nowrap">
                   {coin.symbol}
