@@ -13,18 +13,18 @@ const useUserProfile = () => {
     const fetchUserProfile = async () => {
       try {
         if (username) {
-        const response = await axios.get('http://localhost:3003/profile', {
-          withCredentials: true,
-          responseType: 'json',
-          timeout: '5000',
-        });
-        const userProfileData = response.data;
-        console.log(userProfileData);
+          const response = await axios.get('http://localhost:3003/profile', {
+            withCredentials: true,
+            responseType: 'json',
+            timeout: '5000',
+          });
+          const userProfileData = response.data;
+          console.log(userProfileData);
 
-        setFavoriteCoins(userProfileData.favoriteCoinsDetails);
-        setIsLoading(false);
+          setFavoriteCoins(userProfileData.favoriteCoinsDetails);
+          setIsLoading(false);
         } else {
-          console.log("no user found!")
+          console.log('no user found!');
         }
       } catch (error) {
         setError(error);
@@ -33,11 +33,7 @@ const useUserProfile = () => {
     };
 
     fetchUserProfile();
-  }, []);
-
-  // useEffect(() => {
-  //   setFavoriteCoins((prevCoins) => [...prevCoins]);
-  // }, [favoriteCoins]);
+  }, [username]);
 
   return { favoriteCoins, setFavoriteCoins, isLoading, error };
 };
