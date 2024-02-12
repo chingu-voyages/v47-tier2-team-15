@@ -156,37 +156,39 @@ function Header() {
               </button>
             ) : (
               <>
-                <button
-                  onClick={() => toggleModal('login')}
-                  className="hidden md:block bg-white text-[#1A183E] rounded p-2 mx-1"
-                >
-                  Login
-                </button>
+                <div className="flex">
+                  <button
+                    onClick={() => toggleModal('login')}
+                    className="hidden md:block bg-white text-[#1A183E] rounded p-2 mx-1 mb-3"
+                  >
+                    Login
+                  </button>
 
-                {loginModalOpen && (
-                  <Login
-                    closeModal={closeModal}
-                    loginModalOpen={loginModalOpen}
-                    setLoginModalOpen={setLoginModalOpen}
-                    setRegistrationModalOpen={setRegistrationModalOpen}
-                  />
-                )}
+                  {loginModalOpen && (
+                    <Login
+                      closeModal={closeModal}
+                      loginModalOpen={loginModalOpen}
+                      setLoginModalOpen={setLoginModalOpen}
+                      setRegistrationModalOpen={setRegistrationModalOpen}
+                    />
+                  )}
 
-                <button
-                  onClick={() => toggleModal('signup')}
-                  className="hidden md:block bg-[#00A83E] rounded p-2 mx-1"
-                >
-                  Sign up
-                </button>
+                  <button
+                    onClick={() => toggleModal('signup')}
+                    className="hidden md:block bg-[#00A83E] rounded p-2 mx-1 mb-3"
+                  >
+                    Sign up
+                  </button>
 
-                {registrationModalOpen && (
-                  <Registration
-                    closeModal={closeModal}
-                    registrationModalOpen={registrationModalOpen}
-                    setLoginModalOpen={setLoginModalOpen}
-                    toggleModal={toggleModal}
-                  />
-                )}
+                  {registrationModalOpen && (
+                    <Registration
+                      closeModal={closeModal}
+                      registrationModalOpen={registrationModalOpen}
+                      setLoginModalOpen={setLoginModalOpen}
+                      toggleModal={toggleModal}
+                    />
+                  )}
+                </div>
               </>
             )}
           </div>

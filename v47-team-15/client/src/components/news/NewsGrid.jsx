@@ -41,13 +41,13 @@ function NewsGrid() {
               <p className="text-center text-white text-2xl">
                 Latest Cryptocurrency News
               </p>
-              <div className="flex flex-wrap justify-center mt-10">
+              <div className="flex flex-wrap justify-center mt-30">
                 {currentNews.map((news, index) => (
                   <div
                     key={index}
                     className="p-4 max-w-sm w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
                   >
-                    <div className="flex flex-col bg-[#24224B] rounded-lg overflow-hidden">
+                    <div className="flex flex-col bg-[#24224B] rounded-md overflow-hidden">
                       {news.urlToImage ? (
                         <img
                           className="w-full h-32 object-cover"
