@@ -1,3 +1,4 @@
+import DeleteAccount from '../DeleteAccount';
 import { UserContext } from '../userContext';
 import { useContext } from 'react';
 
@@ -14,6 +15,7 @@ function UserInfo() {
           </span>
         </div>
         <small>Your portfolio includes favorites</small>
+        <DeleteAccount />
       </div>
     </>
   );
