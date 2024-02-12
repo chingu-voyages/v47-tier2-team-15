@@ -66,17 +66,8 @@ function AddCoins() {
               </option>
             ))}
           </select>
-          {/* <button
-            onClick={() => handleAddCoin(selectedCoinId)}
-            className="border border-white rounded-md p-2"
-          >
-            Add coin
-          </button> */}
         </div>
         <div className="mt-10 md:mt-0">
-          {/* <FavoriteTable /> */}
-
-          {/* Table */}
           <div className="bg-[#1A183E] pb-16">
             {favoriteCoins.length === 0 ? (
               <div className="flex flex-col justify-between gap-6">
