@@ -3,7 +3,7 @@ import { UserContext } from './userContext';
 import axios from 'axios';
 
 const DeleteAccount = () => {
-  const { userId, setUserId, setUsername } = useContext(UserContext);
+  const { userId, setUserId } = useContext(UserContext);
 
   const deleteAccount = async () => {
     try {
@@ -17,7 +17,6 @@ const DeleteAccount = () => {
       });
       console.log('userId:', userId);
       setUserId(null);
-      setUsername(null);
       console.log('Account deleted successfully!');
     } else {
         alert("You must be logged in to delete an account!")
