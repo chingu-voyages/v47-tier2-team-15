@@ -4,7 +4,7 @@ import { UserContext } from './userContext';
 import useUserProfile from './useUserProfile';
 
 function useAddCoin() {
-  const { username } = useContext(UserContext);
+  const { userId } = useContext(UserContext);
   const [selectedCoinId, setSelectedCoinId] = useState('');
   const { favoriteCoins, setFavoriteCoins } = useUserProfile();
 
@@ -12,7 +12,7 @@ function useAddCoin() {
     const handleClick = async () => {
       try {
         const coinIdToUse = selectedCoinId;
-        if (username && coinIdToUse) {
+        if (userId && coinIdToUse) {
           if (!Array.isArray(favoriteCoins)) {
             console.error('Invalid favoriteCoins format:', favoriteCoins);
             alert('Failed to add coin. Please try again.');
@@ -63,7 +63,7 @@ function useAddCoin() {
     };
   
     handleClick();
-  }, [username, selectedCoinId, setFavoriteCoins, favoriteCoins]);
+  }, [userId, selectedCoinId, setFavoriteCoins, favoriteCoins]);
   
   const handleAddCoin = (coinId) => {
     setSelectedCoinId(coinId);
