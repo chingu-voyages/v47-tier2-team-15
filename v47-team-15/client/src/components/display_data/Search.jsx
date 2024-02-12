@@ -57,7 +57,7 @@ function Search({ onSearch, setFilteredData, data }) {
 Search.propTypes = {
   onSearch: PropTypes.func.isRequired,
   data: PropTypes.array.isRequired,
-  setFilteredData: PropTypes.array.isRequired,
+  setFilteredData: PropTypes.func.isRequired,
 };
 
 export default Search;
