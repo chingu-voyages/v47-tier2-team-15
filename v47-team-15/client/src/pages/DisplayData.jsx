@@ -21,7 +21,7 @@ function DisplayData() {
     if (data) {
       if (searchInput) {
         const filteredResults = data.filter((item) =>
-          item.name.toLowerCase().includes(searchInput.toLowerCase())
+          item.name.toLowerCase().includes(searchInput.toLowerCase()),
         );
         setFilteredData(filteredResults);
         console.log('search results:', filteredResults);
@@ -37,36 +37,42 @@ function DisplayData() {
 
   return (
     <>
-    <div className='bg-[#1A183E] min-h-screen'>
-      <Header />
-      {error ? (
-        <div>Error fetching data: {error.message}</div>
-      ) : (
-        <>
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            <>
-              <InfoCards />
-              <Registration />
-              <Search onSearch={handleSearch} setFilteredData={setFilteredData} data={data} />
-              <Table
-                data={data || []}
-                filter={filteredData || []}
-                currentPage={currentPage}
-                itemsPerPage={itemsPerPage}
-              />
-              <Pagination
-                totalItems={filteredData.length > 0 ? filteredData.length : data.length}
-                itemsPerPage={itemsPerPage}
-                currentPage={currentPage}
-                onPageChange={handlePageChange}
-              />
-              <Footer />
-            </>
-          )}
-        </>
-      )}
+      <div className="bg-[#1A183E] min-h-screen">
+        <Header />
+        {error ? (
+          <div>Error fetching data: {error.message}</div>
+        ) : (
+          <>
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <>
+                <InfoCards />
+                <Registration />
+                <Search
+                  onSearch={handleSearch}
+                  setFilteredData={setFilteredData}
+                  data={data}
+                />
+                <Table
+                  data={data || []}
+                  filter={filteredData || []}
+                  currentPage={currentPage}
+                  itemsPerPage={itemsPerPage}
+                />
+                <Pagination
+                  totalItems={
+                    filteredData.length > 0 ? filteredData.length : data.length
+                  }
+                  itemsPerPage={itemsPerPage}
+                  currentPage={currentPage}
+                  onPageChange={handlePageChange}
+                />
+                <Footer />
+              </>
+            )}
+          </>
+        )}
       </div>
     </>
   );

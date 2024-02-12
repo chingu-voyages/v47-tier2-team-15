@@ -7,20 +7,18 @@ const useUserProfile = () => {
   const [favoriteCoins, setFavoriteCoins] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { username } = useContext(UserContext);
+  const { userId } = useContext(UserContext);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        if (username) {
+        if (userId) {
           const response = await axios.get('http://localhost:3003/profile', {
             withCredentials: true,
             responseType: 'json',
             timeout: '5000',
           });
           const userProfileData = response.data;
-          console.log(userProfileData);
-
           setFavoriteCoins(userProfileData.favoriteCoinsDetails);
           setIsLoading(false);
         } else {
@@ -29,11 +27,15 @@ const useUserProfile = () => {
       } catch (error) {
         setError(error);
         setIsLoading(false);
+        console.error('Error fetching user profile:', error);
+        setTimeout(() => {
+          fetchUserProfile();
+        }, 3000);
       }
     };
 
     fetchUserProfile();
-  }, [username]);
+  }, [userId]);
 
   return { favoriteCoins, setFavoriteCoins, isLoading, error };
 };

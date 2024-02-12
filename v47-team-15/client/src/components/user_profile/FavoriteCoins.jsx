@@ -1,8 +1,9 @@
-import useUserProfile from '../useUserProfile';
+// import useUserProfile from '../useUserProfile';
 import { formatTableNumbers } from '../Helpers';
+import useAddCoin from '../useAddCoin';
 
 function FavoriteCoins() {
-  const { favoriteCoins } = useUserProfile();
+  const { favoriteCoins } = useAddCoin();
   console.log('fav coins', favoriteCoins);
 
   const sortedCoins = Array.isArray(favoriteCoins)

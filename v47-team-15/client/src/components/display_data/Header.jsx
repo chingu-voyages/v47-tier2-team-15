@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Header() {
-  const { username, setUsername, userId, setUserId } = useContext(UserContext);
+  const { userId, setUserId } = useContext(UserContext);
   const [active, setActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
@@ -39,7 +39,6 @@ function Header() {
 
   const handleProfileClick = () => {
     if (userId) {
-      setUsername(username);
       setUserId(userId);
       navigate('/portfolio');
     } else {
@@ -59,8 +58,6 @@ function Header() {
       );
 
       if (response.status === 200) {
-        localStorage.removeItem('authToken');
-        setUsername('');
         setUserId('');
         toggleModal('login');
         navigate('/');
@@ -98,7 +95,7 @@ function Header() {
                 <Link to="/">Home</Link>
               </li>
               <li className="md:bg-transparent md:text-xl text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
-                {username ? (
+                {userId ? (
                   <Link to="/portfolio">Portfolio</Link>
                 ) : (
                   <button
@@ -147,7 +144,7 @@ function Header() {
                 />
               </svg>
             </button>
-            {username ? (
+            {userId ? (
               <button
                 onClick={() => handleLogout(userId)}
                 className="hidden md:block bg-[#00A83E] rounded p-2 mx-1"
