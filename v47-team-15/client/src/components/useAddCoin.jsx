@@ -65,7 +65,7 @@ function useAddCoin() {
                 'Invalid favoriteCoinsDetails format:',
                 userProfileData.favoriteCoinsDetails,
               );
-              alert('Failed to add coin. Please try again.');
+              setErrorMessage('Failed to add coin. Please try again.');
             }
             setSelectedCoinId('');
           }
