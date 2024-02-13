@@ -27,7 +27,7 @@ const useUserProfile = () => {
       } catch (error) {
         setError(error);
         setIsLoading(false);
-        console.error('Error fetching user profile:', error);
+        // console.error('Error fetching user profile:', error);
         setTimeout(() => {
           fetchUserProfile();
         }, 3000);
