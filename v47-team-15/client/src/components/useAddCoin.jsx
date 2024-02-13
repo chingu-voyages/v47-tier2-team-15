@@ -74,7 +74,7 @@ function useAddCoin() {
         }
       } catch (error) {
         console.error('Error adding favorite coin:', error);
-        alert('Failed to add coin. Please try again.');
+        setErrorMessage('Failed to add coin. Please try again.');
       }
     };
 
