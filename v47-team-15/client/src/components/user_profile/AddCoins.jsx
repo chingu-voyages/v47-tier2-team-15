@@ -27,7 +27,7 @@ function AddCoins() {
     try {
       console.log('coin id', coinId);
       await axios.post(
-        '/api/favorites/remove',
+        'https://crypto-view-test.onrender.com/api/favorites/remove',
         { coinId },
         {
           withCredentials: true,

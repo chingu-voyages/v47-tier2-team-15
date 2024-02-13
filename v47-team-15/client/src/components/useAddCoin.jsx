@@ -34,7 +34,7 @@ function useAddCoin() {
             // alert('You cannot add more than 7 favorite coins!');
           } else {
             await axios.post(
-              '/api/favorites/add',
+              'https://crypto-view-test.onrender.com/api/favorites/add',
               { coinId: coinIdToUse },
               {
                 withCredentials: true,
@@ -43,7 +43,7 @@ function useAddCoin() {
             );
 
             const updatedProfileResponse = await axios.get(
-              '/profile',
+              'https://crypto-view-test.onrender.com/profile',
               {
                 withCredentials: true,
                 responseType: 'json',
