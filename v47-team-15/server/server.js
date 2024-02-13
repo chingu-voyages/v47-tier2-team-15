@@ -48,7 +48,7 @@ app.use(
 );
 app.use(
   cors({
-    origin: 'https://cryptoview-us13.onrender.com/',
+    origin: 'https://cryptoview-us13.onrender.com',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     allowedHeaders:
