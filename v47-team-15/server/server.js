@@ -50,7 +50,7 @@ app.use(express.json());
 // CORS
 app.use(
   cors({
-    origin: 'http://localhost:5173/',
+    origin: 'https://cryptoview-us13.onrender.com/',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   })
