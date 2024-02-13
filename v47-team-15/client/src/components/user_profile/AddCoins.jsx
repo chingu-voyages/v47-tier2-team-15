@@ -15,7 +15,7 @@ function AddCoins() {
     errorMessage,
     setSuccessMessage,
   } = useAddCoin();
-  const { data } = useFetch('https://cryptoview-us13.onrender.com//api/currencies');
+  const { data } = useFetch('https://cryptoview-us13.onrender.com/api/currencies');
 
   const handleDropdownChange = (e) => {
     const coinId = e.target.value;
