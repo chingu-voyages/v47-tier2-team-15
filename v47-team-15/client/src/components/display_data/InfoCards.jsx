@@ -12,21 +12,14 @@ function InfoCards() {
   }
 
   return (
-    <>
-      <div className="w-full flex flex-col justify-center items-center bg-[#1A183E] text-white p-2 md:p-4">
+    <div className="w-full overflow-x-auto">
+      <div className="max-w-screen-xl mx-auto flex flex-col justify-center items-center bg-[#1A183E] text-white p-2 md:p-4">
         <div className="text-center py-6">
-          {/* {successMessage ? 
-            <p className="text-green-500">
-            Welcome, {username}! Registration successful.</p>
-            :
-            <p>Welcome, guest!</p>
-          } */}
-          
-          <p className="text-2xl py-4">All Cryptocurrencies</p>
+          <p className="text-2xl py-4 font-bold">All Cryptocurrencies</p>
           <p className="pb-4">View a full list of active cryptocurrencies</p>
         </div>
-        <div className="hidden md:flex flex-row items-center justify-center gap-8">
-          <div className="md:min-w-[14rem] lg:min-w-[18rem] bg-[#1D2A41] rounded py-4 px-10">
+        <div className="hidden md:flex flex-row justify-center gap-8">
+          <div className="bg-[#1D2A41] rounded py-4 px-10">
             <p className="pb-4">Market Cap</p>
             <div className="flex flex-row gap-4">
               <span>{formatNumber(data, 'total_mcap', 2)}$</span>
@@ -37,7 +30,7 @@ function InfoCards() {
               </span>
             </div>
           </div>
-          <div className="md:min-w-[14rem] lg:min-w-[18rem] bg-[#1D2A41] rounded py-4 px-10">
+          <div className="bg-[#1D2A41] rounded py-4 px-10">
             <p className="pb-4">Volume 24h</p>
             <div className="flex flex-row gap-4">
               <span>{formatNumber(data, 'total_volume', 2)}$</span>
@@ -48,7 +41,7 @@ function InfoCards() {
               </span>
             </div>
           </div>
-          <div className="md:min-w-[14rem] lg:min-w-[18rem] bg-[#311B3D] rounded py-4 px-10">
+          <div className="bg-[#311B3D] rounded py-4 px-10">
             <p className="pb-4">BTC Dominance</p>
             <div className="flex flex-row gap-4">
               <span>{data[0].btc_d}%</span>
@@ -57,7 +50,7 @@ function InfoCards() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
