@@ -1,8 +1,8 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const { ensureAuthenticated } = require("../middleware/authMiddleware");
+const { ensureAuthenticated } = require('../middleware/authMiddleware');
 
-const profileController = require("../controllers/profileController");
+const profileController = require('../controllers/profileController');
 
 // Protected route - only accessible to authenticated users
 /**
@@ -14,7 +14,7 @@ const profileController = require("../controllers/profileController");
  * @returns {void}
  * @security Passport
  */
-router.get("/", ensureAuthenticated, profileController.getProfile);
-// router.delete('/delete', ensureAuthenticated, profileController.deleteAccount);
+router.get('/', ensureAuthenticated, profileController.getProfile);
+router.delete('/delete', ensureAuthenticated, profileController.deleteAccount);
 
 module.exports = router;

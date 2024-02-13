@@ -28,16 +28,8 @@ mongoose
   .then(() => console.log('Database connected! WIIIIIIII'))
   .catch((err) => console.log(err));
 
-const store = new MongoDBStore({
-  uri: process.env.MONGO_CONNECTION,
-  collection: 'sessions',
-});
+require("./passport/passport-config");
 
-store.on('error', function (error) {
-  console.error('Session store error:', error);
-});
-
-// Session Configuration
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -47,9 +39,6 @@ app.use(
   })
 );
 
-// Passport Configuration
-require('./passport/passport-config');
-
 // Initialize Passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -57,13 +46,23 @@ app.use(passport.session());
 // JSON request parsing
 app.use(express.json());
 
+// CORS
+// app.use(
+//   cors({
+//     origin: "http://localhost:5173",
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     credentials: true,
+//   })
+// );
+
 // Routes
-app.use('/auth', authRoutes);
-app.use('/api/currencies', currenciesRoute);
-app.use('/api/global', globalRoute);
-app.use('/profile', profileRoute);
-app.use('/api/favorites', favoritesRoutes);
-app.use('/api/news', newsRoute);
+app.use("/auth", authRoutes);
+app.use("/api/currencies", currenciesRoute);
+app.use("/api/global", globalRoute);
+app.use("/profile", profileRoute);
+app.use("/api/favorites", favoritesRoutes);
+app.use("/api/news", newsRoute);
+
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3003;

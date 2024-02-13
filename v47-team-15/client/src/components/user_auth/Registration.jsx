@@ -7,7 +7,7 @@ import { UserContext } from '../userContext';
 import { useNavigate } from 'react-router-dom';
 
 function Registration({ closeModal, toggleModal, registrationModalOpen, setLoginModalOpen }) {
-  const {username, setUsername, successMessage, setSuccessMessage} = useContext(UserContext);
+  const {setUserId, setUsername, successMessage, setSuccessMessage} = useContext(UserContext);
   const navigate = useNavigate(); 
 
   const navigateToLogin = () => {
@@ -108,6 +108,7 @@ function Registration({ closeModal, toggleModal, registrationModalOpen, setLogin
       console.log('Registration successful:', response.data.user.username);
       setSuccessMessage(true);
       setUsername(response.data.user.username);
+      setUserId(response.data.user._id);
       closeModal();
       navigate('/portfolio');
     } catch (error) {

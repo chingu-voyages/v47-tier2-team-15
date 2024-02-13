@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Login({ closeModal, loginModalOpen, setRegistrationModalOpen }) {
   const navigate = useNavigate();
-  const { setUsername, setSuccessMessage } = useContext(UserContext);
+  const { setUserId, setUsername, setSuccessMessage } = useContext(UserContext);
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -37,6 +37,7 @@ function Login({ closeModal, loginModalOpen, setRegistrationModalOpen }) {
       );
       console.log(response);
       setUsername(response.data.user.username);
+      setUserId(response.data.user._id);
       setSuccessMessage(true);
       console.log('Login data:', response.data.user);
       closeModal();

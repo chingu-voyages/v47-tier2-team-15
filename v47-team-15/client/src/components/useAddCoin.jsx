@@ -1,40 +1,76 @@
-import { useContext, useRef } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { UserContext } from './userContext';
-import { useState, useEffect } from 'react';
 import useUserProfile from './useUserProfile';
-import { useNavigate } from 'react-router-dom';
 
 function useAddCoin() {
-  const { username } = useContext(UserContext);
+  const { userId } = useContext(UserContext);
   const [selectedCoinId, setSelectedCoinId] = useState('');
   const { favoriteCoins, setFavoriteCoins } = useUserProfile();
-  const selectedCoinIdRef = useRef('');
-  const navigate = useNavigate();
+  const [successMessage, setSuccessMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
 
   useEffect(() => {
-    console.log('Username updated:', username);
-
     const handleClick = async () => {
       try {
-        const coinIdToUse = selectedCoinIdRef.current || selectedCoinId;
-        if (username && coinIdToUse) {
-          const response = await axios.post(
-            '/api/favorites/add',
-            { coinId: coinIdToUse },
-            {
-              withCredentials: true,
-              responseType: 'json',
-            }
-          );
+        const coinIdToUse = selectedCoinId;
+        if (userId && coinIdToUse) {
+          const isCoinAlreadyInFavorites =
+            Array.isArray(favoriteCoins) &&
+            favoriteCoins.some((coin) => coin.id === coinIdToUse);
+          if (isCoinAlreadyInFavorites) {
+            setErrorMessage('Coin is already in your favorites!');
+            setTimeout(() => {
+              setErrorMessage(false);
+            }, 3000);
+            setSelectedCoinId('');
+            // alert('Coin is already in your favorites!');
+          } else if (favoriteCoins.length >= 7) {
+            setErrorMessage('You cannot add more than 7 favorite coins!');
+            setTimeout(() => {
+              setErrorMessage(false);
+            }, 3000);
+            setSelectedCoinId('');
+            // alert('You cannot add more than 7 favorite coins!');
+          } else {
+            await axios.post(
+              'https://crypto-view-test.onrender.com/api/favorites/add',
+              { coinId: coinIdToUse },
+              {
+                withCredentials: true,
+                responseType: 'json',
+              },
+            );
 
-          console.log('Response from server:', response);
-          setFavoriteCoins(response.data.favoriteCoinIds);
-          console.log('Coin added');
-          alert('Coin added successfully!');
+            const updatedProfileResponse = await axios.get(
+              'https://crypto-view-test.onrender.com/profile',
+              {
+                withCredentials: true,
+                responseType: 'json',
+                timeout: '5000',
+              },
+            );
+
+            const userProfileData = updatedProfileResponse.data;
+            if (Array.isArray(userProfileData.favoriteCoinsDetails)) {
+              setFavoriteCoins([...userProfileData.favoriteCoinsDetails]);
+              setSuccessMessage('Coin successfully added!');
+              setTimeout(() => {
+                setSuccessMessage(false);
+              }, 3000);
+              console.log('Coin added', userProfileData.favoriteCoinsDetails);
+              // alert('Coin added successfully!');
+            } else {
+              console.error(
+                'Invalid favoriteCoinsDetails format:',
+                userProfileData.favoriteCoinsDetails,
+              );
+              alert('Failed to add coin. Please try again.');
+            }
+            setSelectedCoinId('');
+          }
         } else {
           console.log('Not logged in or no valid coin selected');
-          console.log('Please log in and select a valid coin before adding.');
         }
       } catch (error) {
         console.error('Error adding favorite coin:', error);
@@ -43,15 +79,26 @@ function useAddCoin() {
     };
 
     handleClick();
-  }, [username, selectedCoinId, setFavoriteCoins]);
+  }, [userId, selectedCoinId, setFavoriteCoins, favoriteCoins]);
 
   const handleAddCoin = (coinId) => {
     setSelectedCoinId(coinId);
-    selectedCoinIdRef.current = coinId;
-    // navigate('/portfolio');
   };
 
-  return { favoriteCoins, selectedCoinId, setSelectedCoinId, handleAddCoin };
+  useEffect(() => {
+    console.log('Favorite coins updated', favoriteCoins);
+  }, [favoriteCoins]);
+
+  return {
+    favoriteCoins,
+    setFavoriteCoins,
+    selectedCoinId,
+    setSelectedCoinId,
+    handleAddCoin,
+    successMessage,
+    errorMessage,
+    setSuccessMessage,
+  };
 }
 
 export default useAddCoin;

@@ -2,11 +2,13 @@ import useUserProfile from '../useUserProfile';
 import axios from 'axios';
 import { formatTableNumbers } from '../Helpers';
 import { getColor } from '../Helpers';
+import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import useAddCoin from '../useAddCoin';
 
 function FavoriteTable() {
-  const { favoriteCoins, setFavoriteCoins, isLoading, error } = useUserProfile();
+  const { favoriteCoins, setFavoriteCoins } = useAddCoin();
 
-  console.log('first:', favoriteCoins)
   const handleDelete = async (coinId) => {
     try {
       console.log("coin id", coinId);
@@ -30,15 +32,7 @@ function FavoriteTable() {
       }
     }
   };
-  
-
-  if (isLoading) {
-    return <p className='text-white'>Loading...</p>;
-  }
-
-  if (error) {
-    return <p className='text-white text-center'>Error fetching data: {error.message}</p>;
-  }
+ 
 
   return (
     <div className="bg-[#1A183E] pb-16">
@@ -111,6 +105,11 @@ function FavoriteTable() {
 }
     </div>
   );
+}
+
+FavoriteTable.propTypes = {
+  favoriteCoins: PropTypes.array.isRequired,
+  setFavoriteCoins:PropTypes.func.isRequired,
 }
 
 export default FavoriteTable;
