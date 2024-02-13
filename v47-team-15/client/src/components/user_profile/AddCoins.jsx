@@ -15,7 +15,7 @@ function AddCoins() {
     errorMessage,
     setSuccessMessage,
   } = useAddCoin();
-  const { data } = useFetch('https://crypto-view-backend.onrender.com/api/currencies');
+  const { data } = useFetch('/api/currencies');
 
   const handleDropdownChange = (e) => {
     const coinId = e.target.value;
@@ -27,7 +27,7 @@ function AddCoins() {
     try {
       console.log('coin id', coinId);
       await axios.post(
-        'https://crypto-view-backend.onrender.com/api/favorites/remove',
+        '/api/favorites/remove',
         { coinId },
         {
           withCredentials: true,

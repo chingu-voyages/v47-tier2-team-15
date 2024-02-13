@@ -12,7 +12,7 @@ const DeleteAccount = () => {
       if (userId) {
         console.log('userId:', userId);
         console.log('Attempting to delete account...');
-        await axios.delete('https://crypto-view-backend.onrender.com/profile/delete', {
+        await axios.delete('/profile/delete', {
           data: { userId },
           withCredentials: true,
           responseType: 'json',

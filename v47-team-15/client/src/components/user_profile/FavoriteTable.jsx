@@ -13,7 +13,7 @@ function FavoriteTable() {
     try {
       console.log("coin id", coinId);
       await axios.post(
-        'https://crypto-view-backend.onrender.com/api/favorites/remove',
+        '/api/favorites/remove',
         { coinId },
         {
           withCredentials: true,
