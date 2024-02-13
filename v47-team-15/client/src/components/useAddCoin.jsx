@@ -14,7 +14,7 @@ function useAddCoin() {
     const handleClick = async () => {
       try {
         const coinIdToUse = selectedCoinId;
-        if (coinIdToUse) {
+        if (userId && coinIdToUse) {
           const isCoinAlreadyInFavorites =
             Array.isArray(favoriteCoins) &&
             favoriteCoins.some((coin) => coin.id === coinIdToUse);

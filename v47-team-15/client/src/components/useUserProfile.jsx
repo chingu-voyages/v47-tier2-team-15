@@ -12,7 +12,7 @@ const useUserProfile = () => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        // if (userId) {
+        if (userId) {
           const response = await axios.get('https://crypto-view-test.onrender.com/profile', {
             withCredentials: true,
             responseType: 'json',
@@ -21,9 +21,9 @@ const useUserProfile = () => {
           const userProfileData = response.data;
           setFavoriteCoins(userProfileData.favoriteCoinsDetails);
           setIsLoading(false);
-        // } else {
-        //   console.log('no user found!');
-        // }
+        } else {
+          console.log('no user found!');
+        }
       } catch (error) {
         if (error.response && error.response.status === 401) {
           console.log("Error fetching", error)
