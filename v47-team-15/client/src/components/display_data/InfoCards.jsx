@@ -3,7 +3,7 @@ import { formatNumber, getColor } from '../Helpers';
 
 
 function InfoCards() {
-  const { data } = useFetch('/api/global');
+  const { data } = useFetch('https://cryptoview-us13.onrender.com//api/global');
 
   if (!data || !data[0]) {
     return <div>No data available</div>;
