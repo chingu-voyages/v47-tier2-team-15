@@ -15,21 +15,23 @@ require('dotenv').config();
 
 const app = express();
 
-// CORS Configuration
-app.use(cors({
-  origin: 'https://merry-liger-e1e902.netlify.app',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-}));
-
-
 mongoose
   .connect(process.env.MONGO_CONNECTION)
   .then(() => console.log('Database connected! WIIIIIIII'))
   .catch((err) => console.log(err));
 
-require("./passport/passport-config");
 
+
+const store = new MongoDBStore({
+  uri: process.env.MONGO_CONNECTION,
+  collection: 'sessions',
+});
+
+store.on('error', function (error) {
+  console.error('Session store error:', error);
+});
+require('./passport/passport-config');
+// Session Configuration
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -38,7 +40,6 @@ app.use(
     store: store,
   })
 );
-
 // Initialize Passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -47,21 +48,21 @@ app.use(passport.session());
 app.use(express.json());
 
 // CORS
-// app.use(
-//   cors({
-//     origin: "http://localhost:5173",
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: 'http://localhost:5173/',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  })
+);
 
 // Routes
-app.use("/auth", authRoutes);
-app.use("/api/currencies", currenciesRoute);
-app.use("/api/global", globalRoute);
-app.use("/profile", profileRoute);
-app.use("/api/favorites", favoritesRoutes);
-app.use("/api/news", newsRoute);
+app.use('/auth', authRoutes);
+app.use('/api/currencies', currenciesRoute);
+app.use('/api/global', globalRoute);
+app.use('/profile', profileRoute);
+app.use('/api/favorites', favoritesRoutes);
+app.use('/api/news', newsRoute);
 
 app.use(errorHandler);
 
