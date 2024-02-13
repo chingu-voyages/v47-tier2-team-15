@@ -50,9 +50,11 @@ app.use(express.json());
 // CORS
 app.use(
   cors({
-    origin: 'https://cryptoview-us13.onrender.com/',
+    origin: 'https://cryptoview-us13.onrender.com',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
+    allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept,Authorization',
+    exposedHeaders: 'Access-Control-Allow-Origin,Access-Control-Allow-Credentials',
   })
 );
 
