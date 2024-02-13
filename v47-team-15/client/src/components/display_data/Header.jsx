@@ -49,7 +49,7 @@ function Header() {
   const handleLogout = async () => {
     try {
       const response = await axios.post(
-        'https://crypto-view-test.onrender.com/auth/logout',
+        ' https://crypto-view-backend.onrender.com/auth/logout',
         null,
         {
           withCredentials: true,

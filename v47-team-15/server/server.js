@@ -15,12 +15,12 @@ require('dotenv').config();
 
 const app = express();
 
+// CORS Configuration
+
 mongoose
   .connect(process.env.MONGO_CONNECTION)
   .then(() => console.log('Database connected! WIIIIIIII'))
   .catch((err) => console.log(err));
-
-
 
 const store = new MongoDBStore({
   uri: process.env.MONGO_CONNECTION,
@@ -30,7 +30,7 @@ const store = new MongoDBStore({
 store.on('error', function (error) {
   console.error('Session store error:', error);
 });
-require('./passport/passport-config');
+
 // Session Configuration
 app.use(
   session({
@@ -38,8 +38,28 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: store,
+    // cookie: {
+    //   maxAge: 1000 * 60 * 60 * 24 * 7,
+    //   httpOnly: true,
+    //   sameSite: 'none',
+    //   secure: true,
+    // },
   })
 );
+app.use(
+  cors({
+    origin: 'https://crypto-view-xlcd.onrender.com',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    allowedHeaders:
+      'Origin,X-Requested-With,Content-Type,Accept,Authorization, Set-Cookie, Cookie',
+    exposedHeaders:
+      'Access-Control-Allow-Origin,Access-Control-Allow-Credentials, Set-Cookie, Cookie',
+  })
+);
+// Passport Configuration
+require('./passport/passport-config');
+
 // Initialize Passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -47,25 +67,13 @@ app.use(passport.session());
 // JSON request parsing
 app.use(express.json());
 
-// CORS
-app.use(
-  cors({
-    origin: 'https://cryptoview-us13.onrender.com',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-    allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept,Authorization',
-    exposedHeaders: 'Access-Control-Allow-Origin,Access-Control-Allow-Credentials',
-  })
-);
-
 // Routes
 app.use('/auth', authRoutes);
 app.use('/api/currencies', currenciesRoute);
 app.use('/api/global', globalRoute);
-app.use('/profile', profileRoute);
+app.use('/api', profileRoute);
 app.use('/api/favorites', favoritesRoutes);
 app.use('/api/news', newsRoute);
-
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3003;
