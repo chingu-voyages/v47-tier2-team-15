@@ -25,12 +25,12 @@ const useUserProfile = () => {
           console.log('no user found!');
         }
       } catch (error) {
-        setError(error);
+        if (error.response && error.response.status === 401) {
+          console.log("Error fetching favorite coins!")
+        } else {
+          setError(error);
+        }
         setIsLoading(false);
-        // console.error('Error fetching user profile:', error);
-        setTimeout(() => {
-          fetchUserProfile();
-        }, 3000);
       }
     };
 
