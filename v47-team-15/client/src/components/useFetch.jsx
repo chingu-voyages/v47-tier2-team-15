@@ -14,6 +14,7 @@ function useFetch(url) {
         const response = await axios.get(url, {
           timeout: 15000,
           withCredentials: true,
+          responseType: 'json',
         });
 
         const responseData = response.data.data;
