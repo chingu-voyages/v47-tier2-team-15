@@ -71,7 +71,7 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/api/currencies', currenciesRoute);
 app.use('/api/global', globalRoute);
-app.use('/api', profileRoute);
+app.use('/profile', profileRoute);
 app.use('/api/favorites', favoritesRoutes);
 app.use('/api/news', newsRoute);
 app.use(errorHandler);
