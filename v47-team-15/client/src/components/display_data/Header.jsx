@@ -64,14 +64,16 @@ function Header() {
   };
 
   return (
-    <header className="bg-[#1A183E] text-white">
+    <header className="sticky top-0 bg-[#1A183E] text-white z-10">
       {/* Top section with logo, signup, and login buttons */}
       <div className="flex justify-between items-center px-4 py-2 md:px-8">
         {/* Logo */}
-        <div className="flex items-center">
-          <img src={logo} alt="logo" className="w-10 h-10" />
-          <span className="ml-2 text-xl">CryptoView</span>
-        </div>
+        <Link to="/">
+          <div className="flex items-center">
+            <img src={logo} alt="logo" className="w-10 h-10" />
+            <span className="ml-2 text-xl">CryptoView</span>
+          </div>
+        </Link>
         {/* Navigation Links */}
         <nav className="hidden md:flex md:items-center">
           <ul className="flex space-x-4">
