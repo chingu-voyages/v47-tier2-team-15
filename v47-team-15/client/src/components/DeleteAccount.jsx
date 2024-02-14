@@ -8,12 +8,13 @@ const DeleteAccount = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const navigate = useNavigate();
 
+  
   const deleteAccount = async () => {
     try {
       if (userId) {
         console.log('userId:', userId);
         console.log('Attempting to delete account...');
-        await axios.delete('http://localhost:3003/profile/delete', {
+        await axios.delete('https://crypto-view-test.onrender.com/profile/delete', {
           data: { userId },
           withCredentials: true,
           responseType: 'json',
@@ -31,12 +32,13 @@ const DeleteAccount = () => {
   };
 
   const handleDeleteAccount = () => {
-    deleteAccount();
-  };
+      deleteAccount();
+    }
+
 
   const toggleDeleteModal = () => {
     setDeleteModalOpen(true);
-  };
+  }
 
   const closeModal = () => {
     setDeleteModalOpen(false);
@@ -45,14 +47,14 @@ const DeleteAccount = () => {
 
   return (
     <>
-      <div>
-        <button
-          className="border border-white rounded text-white text-sm p-2"
-          onClick={toggleDeleteModal}
-        >
-          Delete Account
-        </button>
-      </div>
+    <div>
+    <button
+        className="border border-white rounded text-white text-sm p-2"
+        onClick={toggleDeleteModal}
+      >
+        Delete Account
+      </button>
+    </div>
       <div className={`max-w-2xl mx-auto ${deleteModalOpen ? '' : 'hidden'}`}>
         <div
           className="fixed top-0 left-0 right-0 bottom-0 z-40 bg-gray-500 opacity-40"
@@ -73,27 +75,16 @@ const DeleteAccount = () => {
               </button>
             </div>
             <div>
-              <p className="text-center py-4">
-                Are you sure you want to delete your account?
-              </p>
-              <div className="w-full flex flex-row justify-center items-center gap-6 py-4">
-                <button
-                  onClick={handleDeleteAccount}
-                  className="bg-[#00A83E] rounded text-white py-1 px-4"
-                >
-                  Yes
-                </button>
-                <button
-                  onClick={closeModal}
-                  className="border border-white rounded text-white py-1 px-4"
-                >
-                  No
-                </button>
-              </div>
+            <p className='text-center py-4'>Are you sure you want to delete your account?</p>
+            <div className='w-full flex flex-row justify-center items-center gap-6 py-4'>
+            <button onClick={handleDeleteAccount} className='bg-red-500 rounded text-white py-1 px-4'>Yes</button>
+            <button onClick={closeModal} className='bg-[#00A83E] rounded text-white py-1 px-4'>No</button>
+            </div>
             </div>
           </div>
         </div>
       </div>
+      
     </>
   );
 };
