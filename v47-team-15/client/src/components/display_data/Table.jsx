@@ -1,14 +1,12 @@
 import PropTypes from 'prop-types';
 import { getColor, formatTableNumbers } from '../Helpers';
-import { useState } from 'react';
-import axios from 'axios';
 import { useContext } from 'react';
 import { UserContext } from '../userContext';
 import useAddCoin from '../useAddCoin';
 
 function Table({ data, filter, currentPage, itemsPerPage }) {
   const { username } = useContext(UserContext);
-  const { handleAddCoin, favoriteCoins } = useAddCoin();
+  const { handleAddCoin, favoriteCoins, successMessage, errorMessage } = useAddCoin();
 
   const displayData = filter.length > 0 ? filter : data;
 
@@ -23,7 +21,23 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
 
   return (
     <>
-      <div className="bg-[#1A183E] py-4 md:py-8">
+      <div className="relative bg-[#1A183E] py-4 md:py-8">
+        <div
+          className="absolute top-0 left-0 right-0 transition-opacity duration-300 z-50"
+          style={{ opacity: successMessage ? 1 : 0 }}
+        >
+          <p className="text-center text-green-500 bg-[#24224B] rounded p-2">
+            {successMessage}
+          </p>
+        </div>
+        <div
+          className="absolute top-0 left-0 right-0 transition-opacity duration-300 z-50"
+          style={{ opacity: errorMessage ? 1 : 0 }}
+        >
+          <p className="text-center text-red-500 bg-[#24224B] rounded p-2">
+            {errorMessage}
+          </p>
+        </div>
         <table className="min-w-3/5 mx-auto divide-y divide-gray-200 rounded-md">
           <thead className="sticky top-0 bg-gray-50 z-10">
             <tr>
