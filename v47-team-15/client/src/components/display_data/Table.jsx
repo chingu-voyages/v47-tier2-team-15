@@ -23,7 +23,7 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
     <>
       <div className="relative bg-[#1A183E] py-4 md:py-8">
         <div
-          className="absolute top-0 left-0 right-0 transition-opacity duration-300 z-50 py-2"
+          className="absolute top-0 left-0 right-0 transition-opacity duration-300 z-50"
           style={{ opacity: successMessage ? 1 : 0 }}
         >
           <p className="text-center text-green-500 bg-[#24224B] rounded p-2">
@@ -31,7 +31,7 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
           </p>
         </div>
         <div
-          className="absolute top-0 left-0 right-0 transition-opacity duration-300 z-50 py-2"
+          className="absolute top-0 left-0 right-0 transition-opacity duration-300 z-50"
           style={{ opacity: errorMessage ? 1 : 0 }}
         >
           <p className="text-center text-red-500 bg-[#24224B] rounded p-2">
