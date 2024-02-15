@@ -28,7 +28,7 @@ function Login({ closeModal, loginModalOpen, setRegistrationModalOpen }) {
 
     try {
       const response = await axios.post(
-        'https://crypto-view-test.onrender.com/auth/login',
+        'http://localhost:3003/auth/login',
         formData,
         {
           withCredentials: true,

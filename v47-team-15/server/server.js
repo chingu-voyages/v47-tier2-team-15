@@ -16,12 +16,12 @@ require('dotenv').config();
 const app = express();
 
 // Enable trust proxy
-app.set('trust proxy', 1);
+// app.set('trust proxy', 1);
 
 // CORS Configuration
 app.use(
   cors({
-    origin: 'https://cryptoview-us13.onrender.com',
+    origin: 'http://localhost:5173',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     allowedHeaders:

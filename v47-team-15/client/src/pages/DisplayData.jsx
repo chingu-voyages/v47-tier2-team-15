@@ -11,7 +11,7 @@ import Registration from '../components/user_auth/Registration.jsx';
 
 function DisplayData() {
   const { data, error, isLoading } = useFetch(
-    'https://crypto-view-test.onrender.com/api/currencies',
+    'http://localhost:3003/api/currencies',
   );
   const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
