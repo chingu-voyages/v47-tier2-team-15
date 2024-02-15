@@ -10,6 +10,16 @@ const passwordComplexityOptions = {
   symbol: 1,
 };
 
+function isValidFormat(input, type) {
+  if (type === 'username') {
+    const regex = /^[a-zA-Z0-9]{3,8}$/;
+    return regex.test(input);
+  } else if (type === 'email') {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(input);
+  }
+  return false;
+}
 /**
  * Register a new user.
  * @param {import('express').Request} req - The Express request object.
@@ -21,8 +31,23 @@ exports.registerUser = async (req, res, next) => {
   try {
     const { username, email, password, confirmPassword } = req.body;
 
-    if (password !== confirmPassword) {
-      return res.status(400).json({ error: 'Passwords do not match' });
+    if (
+      !isValidFormat(username, 'username') ||
+      !isValidFormat(email, 'email')
+    ) {
+      return res.status(400).json({
+        error:
+          'Invalid username or email format. Username must have 3 to 8 alphanumeric characters. Email must be in a valid format.',
+      });
+    }
+    const existingUsername = await User.findOne({ username });
+    if (existingUsername) {
+      return res.status(409).json({ error: 'Username already taken' });
+    }
+
+    const existingEmail = await User.findOne({ email });
+    if (existingEmail) {
+      return res.status(409).json({ error: 'Email already registered' });
     }
 
     const passwordValidationResult = passwordComplexity(
@@ -35,13 +60,9 @@ exports.registerUser = async (req, res, next) => {
         details: passwordValidationResult.error.details,
       });
     }
-
-    const existingUser = await User.findOne({ email });
-
-    if (existingUser) {
-      return res.status(409).json({ error: 'Email already registered' });
+    if (password !== confirmPassword) {
+      return res.status(400).json({ error: 'Passwords do not match' });
     }
-
     const newUser = new User({
       username,
       email,
