@@ -24,10 +24,10 @@ app.use(
     origin: 'http://localhost:5173',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
-    allowedHeaders:
-      'Origin,X-Requested-With,Content-Type,Accept,Authorization, Set-Cookie, Cookie',
-    exposedHeaders:
-      'Access-Control-Allow-Origin,Access-Control-Allow-Credentials, Set-Cookie, Cookie',
+    // allowedHeaders:
+    //   'Origin,X-Requested-With,Content-Type,Accept,Authorization, Set-Cookie, Cookie',
+    // exposedHeaders:
+    //   'Access-Control-Allow-Origin,Access-Control-Allow-Credentials, Set-Cookie, Cookie',
   })
 );
 
@@ -52,11 +52,11 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: store,
-    cookie: {
-      secure: true, 
-      sameSite: 'none', 
-      maxAge: 1000 * 60 * 60 * 24 * 7,
-    },
+    // cookie: {
+    //   secure: true,
+    //   sameSite: 'none',
+    //   maxAge: 1000 * 60 * 60 * 24 * 7,
+    // },
   })
 );
 
