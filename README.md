@@ -21,10 +21,7 @@ To ensure your Chrome browser will accept 3rd party cookies for the CrytpoTracke
 - click "third-party cookies"
 - at the bottom of the page in the section "Allowed to use third-party cookies" click "Add"
 - Enter the URL: https://cryptoview-us13.onrender.com
-- ![image](https://github.com/chingu-voyages/v47-tier2-team-15/assets/3475476/14e12cd2-db51-47fc-ac36-fea2ab1d7e87)
-
 -![image]![git](https://github.com/chingu-voyages/v47-tier2-team-15/assets/140349116/888dd276-2bbd-4157-ab1f-2a44e78c9082)
-
 
 Here's a brief preview of the Crypto View Web App in action.
 
