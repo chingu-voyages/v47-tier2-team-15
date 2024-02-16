@@ -24,8 +24,6 @@ To ensure your Chrome browser will accept 3rd party cookies for the CrytpoTracke
 - ![image](https://github.com/chingu-voyages/v47-tier2-team-15/assets/3475476/14e12cd2-db51-47fc-ac36-fea2ab1d7e87)
 
 
-![Crypto View Web App Demo](demo.gif)
-
 Here's a brief preview of the Crypto View Web App in action.
 
 ## Deployment
