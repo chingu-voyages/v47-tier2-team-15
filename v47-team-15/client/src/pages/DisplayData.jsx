@@ -39,8 +39,8 @@ function DisplayData() {
       <div className="bg-[#1A183E] min-h-screen">
         <Header />
         {error ? (
-          <div className="text-center">
-            Error fetching data: {error.message}
+          <div className="text-center text-white">
+            API is not available right now, try later!
           </div>
         ) : (
           <>
