@@ -23,13 +23,16 @@ To ensure your Chrome browser will accept 3rd party cookies for the CrytpoTracke
 - Enter the URL: https://cryptoview-us13.onrender.com
 - ![image](https://github.com/chingu-voyages/v47-tier2-team-15/assets/3475476/14e12cd2-db51-47fc-ac36-fea2ab1d7e87)
 
-[Uploading image (1).webp…]()
+-![image]![git](https://github.com/chingu-voyages/v47-tier2-team-15/assets/140349116/888dd276-2bbd-4157-ab1f-2a44e78c9082)
+
 
 Here's a brief preview of the Crypto View Web App in action.
 
-## Deployment
+##  Demo of the Crypto View Web App 
+![cryptoview-ezgif com-video-to-gif-converter](https://github.com/chingu-voyages/v47-tier2-team-15/assets/140349116/12a672ce-401b-4d9a-91e0-1c1bbbb27dda)
 
-Check out the live demo of the Crypto View Web App [here](https://your-deployed-app-url.com).
+
+## Deployment
 
 ## Requirements & Specifications
 - **Structure:** Focus on full-stack development, incorporating both frontend and backend components.
