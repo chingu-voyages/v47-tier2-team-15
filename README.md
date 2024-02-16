@@ -54,6 +54,13 @@ Working branches will be merged into the development branch during weekly develo
 A PR to merge to the master should reflect the goals of the prior week's sprint and produce an updated MVP. All team members must approve a request for merging into the master branch.
 
 ## Tech Stack
+- Backend Node.js Express.js MongoDB Mongoose Passport.js and api delete info about CoinGecko
+-Node.js: JavaScript runtime for server-side applications.
+-Express.js: Minimalist web framework for Node.js.
+-MongoDB: NoSQL database for flexible data storage.
+-Mongoose: MongoDB object modeling for Node.js.
+-Passport.js: Authentication middleware for Node.js.
+
 - **Frontend:** 
   - React.js with Vite for fast development and optimized builds.
   - HTML for structuring the frontend components.
