@@ -19,6 +19,9 @@ Cryptocurrencies are an integral part of today's financial landscape, necessitat
 ##  Demo of the Crypto View Web App 
 ![cryptoview-ezgif com-video-to-gif-converter](https://github.com/chingu-voyages/v47-tier2-team-15/assets/140349116/12a672ce-401b-4d9a-91e0-1c1bbbb27dda)
 
+
+Uploading cryptoview .mp4…
+
 ## Key Features
 1. **Cryptocurrency Data:** Access real-time market data, including market cap, volume, price, and changes.
 2. **Cryptocurrency Information:** Dive into detailed info for each cryptocurrency, including name, symbol, price, 24-hour changes, volume, supply, and market cap.
