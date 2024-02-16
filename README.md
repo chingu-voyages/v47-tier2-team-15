@@ -70,7 +70,7 @@ A PR to merge to the master should reflect the goals of the prior week's sprint 
   - MongoDB: NoSQL database for flexible data storage.
   - Mongoose: MongoDB object modeling for Node.js.
   - Passport.js: Authentication middleware for Node.js.
-  - 
+    
 - **APIs:**
   - CoinGecko API for real-time cryptocurrency market data.
   - NewsAPI for fetching the latest cryptocurrency news.
