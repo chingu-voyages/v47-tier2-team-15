@@ -16,7 +16,7 @@ function UserInfo() {
             {username.charAt(0)}
           </span>
         </div>
-        <p className='text-base'>Your portfolio includes favorites</p>
+        <p className="text-base">Your portfolio includes favorites</p>
         <DeleteAccount />
       </div>
     </>

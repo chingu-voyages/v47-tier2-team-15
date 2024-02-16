@@ -24,14 +24,12 @@ function useAddCoin() {
               setErrorMessage(false);
             }, 3000);
             setSelectedCoinId('');
-            // alert('Coin is already in your favorites!');
           } else if (favoriteCoins.length >= 7) {
             setErrorMessage('You cannot add more than 7 favorite coins!');
             setTimeout(() => {
               setErrorMessage(false);
             }, 3000);
             setSelectedCoinId('');
-            // alert('You cannot add more than 7 favorite coins!');
           } else {
             await axios.post(
               'https://crypto-view-test.onrender.com/api/favorites/add',
@@ -58,22 +56,15 @@ function useAddCoin() {
               setTimeout(() => {
                 setSuccessMessage(false);
               }, 3000);
-              console.log('Coin added', userProfileData.favoriteCoinsDetails);
-              // alert('Coin added successfully!');
             } else {
-              console.error(
-                'Invalid favoriteCoinsDetails format:',
-                userProfileData.favoriteCoinsDetails,
-              );
               setErrorMessage('Failed to add coin. Please try again.');
             }
             setSelectedCoinId('');
           }
         } else {
-          console.log('Not logged in or no valid coin selected');
+          alert('Not logged in or no valid coin selected');
         }
       } catch (error) {
-        console.error('Error adding favorite coin:', error);
         setErrorMessage('Failed to add coin. Please try again.');
       }
     };
@@ -85,9 +76,7 @@ function useAddCoin() {
     setSelectedCoinId(coinId);
   };
 
-  useEffect(() => {
-    console.log('Favorite coins updated', favoriteCoins);
-  }, [favoriteCoins]);
+  useEffect(() => {}, [favoriteCoins]);
 
   return {
     favoriteCoins,

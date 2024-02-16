@@ -12,22 +12,18 @@ const DeleteAccount = () => {
   const deleteAccount = async () => {
     try {
       if (userId) {
-        console.log('userId:', userId);
-        console.log('Attempting to delete account...');
         await axios.delete('https://crypto-view-test.onrender.com/profile/delete', {
           data: { userId },
           withCredentials: true,
           responseType: 'json',
         });
-        console.log('userId:', userId);
         setUserId('');
         navigate('/');
-        console.log('Account deleted successfully!');
       } else {
         alert('You must be logged in to delete an account!');
       }
     } catch (error) {
-      console.error('Error deleting account:', error);
+      alert('Error deleting account:', error);
     }
   };
 

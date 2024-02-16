@@ -35,11 +35,9 @@ function Login({ closeModal, loginModalOpen, setRegistrationModalOpen }) {
           responseType: 'json',
         },
       );
-      console.log(response);
       setUsername(response.data.user.username);
       setUserId(response.data.user._id);
       setSuccessMessage(true);
-      console.log('Login data:', response.data.user);
       closeModal();
       navigate('/portfolio');
     } catch (error) {
@@ -126,22 +124,22 @@ function Login({ closeModal, loginModalOpen, setRegistrationModalOpen }) {
                 </button>
               </div>
               <small className="text-white text-center">
-                Don't have an account?
+                Don't have an account?{' '}
                 <button
                   type="button"
                   onClick={navigateToSignup}
                   className="text-blue-400 cursor-pointer px-1"
                 >
-                  {' '}
                   Sign up
                 </button>
               </small>
 
-              {error && <div className="text-red-500 text-center mt-2">{error}</div>}
+              {error && (
+                <div className="text-red-500 text-center mt-2">{error}</div>
+              )}
             </form>
           </div>
         </div>
-        {/* </div> */}
       </div>
     </>
   );

@@ -24,7 +24,6 @@ function DisplayData() {
           item.name.toLowerCase().includes(searchInput.toLowerCase()),
         );
         setFilteredData(filteredResults);
-        console.log('search results:', filteredResults);
       } else {
         setFilteredData(data);
       }
@@ -40,7 +39,9 @@ function DisplayData() {
       <div className="bg-[#1A183E] min-h-screen">
         <Header />
         {error ? (
-          <div>Error fetching data: {error.message}</div>
+          <div className="text-center">
+            Error fetching data: {error.message}
+          </div>
         ) : (
           <>
             {isLoading ? (

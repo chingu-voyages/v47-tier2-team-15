@@ -2,7 +2,7 @@ import { useState } from 'react';
 import useNews from '../useNews';
 import Spinner from '../display_data/Spinner';
 import newsImg from '../../assets/img/news.png';
-import Pagination from '../display_data/Pagination'; // Import the Pagination component
+import Pagination from '../display_data/Pagination';
 
 function NewsGrid() {
   const { newsData, isLoading, error } = useNews();
@@ -16,7 +16,7 @@ function NewsGrid() {
   const totalPages = Math.ceil(newsData.length / newsPerPage);
 
   const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber); // Update the current page
+    setCurrentPage(pageNumber);
   };
 
   const formatPublishedDate = (publishedDate) => {

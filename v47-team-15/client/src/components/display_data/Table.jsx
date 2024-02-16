@@ -5,8 +5,9 @@ import { UserContext } from '../userContext';
 import useAddCoin from '../useAddCoin';
 
 function Table({ data, filter, currentPage, itemsPerPage }) {
-  const { username } = useContext(UserContext);
-  const { handleAddCoin, favoriteCoins, successMessage, errorMessage } = useAddCoin();
+  const { userId } = useContext(UserContext);
+  const { handleAddCoin, favoriteCoins, successMessage, errorMessage } =
+    useAddCoin();
 
   const displayData = filter.length > 0 ? filter : data;
 
@@ -41,8 +42,8 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
         <table className="min-w-3/5 mx-auto divide-y divide-gray-200 rounded-md">
           <thead className="sticky top-0 bg-gray-50 z-10">
             <tr>
-              {username && (
-                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+              {userId && (
+                <th className="table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Favorite
                 </th>
               )}
@@ -52,25 +53,25 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Name
               </th>
-              <th className="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="hidden lg:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Symbol
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Price
               </th>
-              <th className="hidden md:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="hidden lg:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                 1h
               </th>
               <th className="hidden md:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                 24h
               </th>
-              <th className="hidden md:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="hidden lg:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                 7d
               </th>
-              <th className="hidden lg:table-cell px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="hidden xl:table-cell px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Circulating Supply
               </th>
-              <th className="hidden lg:table-cell px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="hidden xl:table-cell px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Total Supply
               </th>
               <th className="hidden sm:table-cell px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -81,8 +82,8 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
           <tbody className="bg-[#24224B] text-white text-xs divide-y divide-gray-200">
             {pageData.map((coin, index) => (
               <tr key={index}>
-                {username && (
-                  <td className="py-4 whitespace-nowrap text-center">
+                {userId && (
+                  <td className="table-cell py-4 whitespace-nowrap text-center">
                     <i
                       className={`bx bx-star cursor-pointer ${
                         isCoinInFavorites(coin.id)
@@ -97,19 +98,19 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
                   {coin.rank}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">{coin.name}</td>
-                <td className="hidden sm:table-cell px-6 py-4 text-center whitespace-nowrap">
+                <td className="hidden lg:table-cell px-6 py-4 text-center whitespace-nowrap">
                   {coin.symbol}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   ${formatTableNumbers(coin.price_usd)}
                 </td>
                 <td
-                  className={`hidden md:table-cell px-6 py-4 text-center whitespace-nowrap ${getColor(coin.percent_change_1h)}`}
+                  className={`hidden lg:table-cell px-6 py-4 text-center whitespace-nowrap ${getColor(coin.percent_change_1h)}`}
                 >
                   {formatTableNumbers(coin.percent_change_1h)}%
                 </td>
                 <td
-                  className={`hidden md:table-cell px-6 py-4 text-center whitespace-nowrap ${getColor(coin.percent_change_7d)}`}
+                  className={`hidden lg:table-cell px-6 py-4 text-center whitespace-nowrap ${getColor(coin.percent_change_7d)}`}
                 >
                   {formatTableNumbers(coin.percent_change_7d)}%
                 </td>
@@ -118,10 +119,10 @@ function Table({ data, filter, currentPage, itemsPerPage }) {
                 >
                   {formatTableNumbers(coin.percent_change_24h)}%
                 </td>
-                <td className="hidden lg:table-cell px-6 py-4 text-right whitespace-nowrap">
+                <td className="hidden xl:table-cell px-6 py-4 text-right whitespace-nowrap">
                   {formatTableNumbers(coin.csupply)}
                 </td>
-                <td className="hidden lg:table-cell px-6 py-4 text-right whitespace-nowrap">
+                <td className="hidden xl:table-cell px-6 py-4 text-right whitespace-nowrap">
                   {formatTableNumbers(coin.tsupply)}
                 </td>
                 <td className="hidden sm:table-cell px-6 py-4 text-right whitespace-nowrap">

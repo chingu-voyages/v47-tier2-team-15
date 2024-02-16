@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 
 function CryptoNews() {
   const { newsData } = useNews();
+
   return (
     <>
       <div className="bg-[#1A183E] pb-8 md:py-10">
-        <div className="flex flex-wrap flex-row justify-around items-center bg-[#24224B] rounded text-white p-4 mx-16 md:mx-32">
+        <div className="flex flex-wrap flex-row justify-around items-center bg-[#24224B] rounded text-white p-4 mx-6 sm:mx-32">
           <div className="hidden md:block text-3xl">
             <p>Crypto</p>
             <p>News</p>
@@ -32,7 +33,7 @@ function CryptoNews() {
                     src={news.urlToImage}
                     alt="news-image"
                   />
-                  <p className="text-sm px-2">{news.title}</p>
+                  <p className="text-xs md:text-sm px-2">{news.title}</p>
                 </div>
               ))}
           </div>

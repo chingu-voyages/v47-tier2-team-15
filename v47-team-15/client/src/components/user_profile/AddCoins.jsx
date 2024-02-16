@@ -14,8 +14,9 @@ function AddCoins() {
     successMessage,
     errorMessage,
     setSuccessMessage,
+    setErrorMessage,
   } = useAddCoin();
-  const { data } = useFetch('https://crypto-view-test.onrender.com/api/currencies');
+  const { data } = useFetch('http://localhost:3003/api/currencies');
 
   const handleDropdownChange = (e) => {
     const coinId = e.target.value;
@@ -25,9 +26,8 @@ function AddCoins() {
 
   const handleDelete = async (coinId) => {
     try {
-      console.log('coin id', coinId);
       await axios.post(
-        'https://crypto-view-test.onrender.com/api/favorites/remove',
+        'http://localhost:3003/api/favorites/remove',
         { coinId },
         {
           withCredentials: true,
@@ -36,7 +36,6 @@ function AddCoins() {
       );
 
       const updatedCoins = favoriteCoins.filter((coin) => coin.id !== coinId);
-      console.log('updated coins:', updatedCoins);
       setFavoriteCoins([...updatedCoins]);
       setSuccessMessage('Coin deleted successfully!');
       setTimeout(() => {
@@ -44,9 +43,9 @@ function AddCoins() {
       }, 3000);
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        console.error(`Coin with ID ${coinId} not found.`);
+        setErrorMessage(`Coin with ID ${coinId} not found.`);
       } else {
-        console.error('Error deleting coin:', error);
+        setErrorMessage('Error deleting coin!');
       }
     }
   };
@@ -70,7 +69,7 @@ function AddCoins() {
             {errorMessage}
           </p>
         </div>
-        <div className=" flex flex-wrap flex-row justify-around pt-6">
+        <div className="flex flex-wrap flex-row justify-around  gap-4 lg:gap-0 lg:pt-6">
           <div className="flex flex-col justify-center items-center text-white gap-4 bg-[#24224B] h-40 p-6">
             <h1 className="text-2xl">Add favorite coins</h1>
             <small>Track your favorite cryptocurrencies easily.</small>
@@ -134,7 +133,7 @@ function AddCoins() {
                       <th className="hidden sm:table-cell px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Market Cup
                       </th>
-                      <th className="hidden sm:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Delete
                       </th>
                     </tr>
@@ -163,7 +162,7 @@ function AddCoins() {
                           <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">
                             {formatTableNumbers(coin.market_cap_usd)}$
                           </td>
-                          <td className="hidden sm:table-cell px-6 py-4 whitespace-nowrap">
+                          <td className="table-cell px-6 py-4 whitespace-nowrap">
                             <button
                               className="bg-[#461E3C] rounded px-1"
                               onClick={() => handleDelete(coin.id)}

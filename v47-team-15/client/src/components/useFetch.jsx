@@ -18,10 +18,8 @@ function useFetch(url) {
         });
 
         const responseData = response.data.data;
-        console.log('Global data:', responseData);
         setData(responseData);
       } catch (error) {
-        console.error('Error fetching data:', error.message);
         setError(error);
       } finally {
         setIsLoading(false);

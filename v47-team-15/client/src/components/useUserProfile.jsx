@@ -13,20 +13,23 @@ const useUserProfile = () => {
     const fetchUserProfile = async () => {
       try {
         if (userId) {
-          const response = await axios.get('https://crypto-view-test.onrender.com/profile', {
-            withCredentials: true,
-            responseType: 'json',
-            timeout: '5000',
-          });
+          const response = await axios.get(
+            'https://crypto-view-test.onrender.com/profile',
+            {
+              withCredentials: true,
+              responseType: 'json',
+              timeout: '5000',
+            },
+          );
           const userProfileData = response.data;
           setFavoriteCoins(userProfileData.favoriteCoinsDetails);
           setIsLoading(false);
         } else {
-          console.log('no user found!');
+          setError('No user found!');
         }
       } catch (error) {
         if (error.response && error.response.status === 401) {
-          console.log("Error fetching", error)
+          setError('Error fetching', error);
         } else {
           setError(error);
         }
