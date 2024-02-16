@@ -17,9 +17,6 @@
 Cryptocurrencies are an integral part of today's financial landscape, necessitating real-time insights into the market. The Crypto View Web App aims to fulfill this need by providing users with comprehensive data and a range of features to navigate the cryptocurrency market effectively.
 
 ##  Demo of the Crypto View Web App 
-![cryptoview-ezgif com-video-to-gif-converter](https://github.com/chingu-voyages/v47-tier2-team-15/assets/140349116/12a672ce-401b-4d9a-91e0-1c1bbbb27dda)
-
-
 
 
 https://github.com/chingu-voyages/v47-tier2-team-15/assets/140349116/81c99552-7841-41bd-b5c3-5bac24b2b8ae
