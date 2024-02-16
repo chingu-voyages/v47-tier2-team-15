@@ -31,9 +31,9 @@ Cryptocurrencies are an integral part of today's financial landscape, necessitat
 Chrome, by default, has begun to block the use of 3rd-party cookies. This app is deployed to a free host and utilizes 3rd-party cookies to keep track of users. If your browser does not receive 3rd-party cookies the login and profile features within the app will not work properly.
 
 To ensure your Chrome browser will accept 3rd party cookies for the CrytpoTracker App:
-- open Chrome settings and search for the word "cookies"
-- click "third-party cookies"
-- at the bottom of the page in the section "Allowed to use third-party cookies" click "Add"
+- Open Chrome settings and search for the word "cookies"
+- Click "third-party cookies"
+- At the bottom of the page in the section "Allowed to use third-party cookies" click "Add"
 - Enter the URL: https://cryptoview-us13.onrender.com
   
 ## Deployment
