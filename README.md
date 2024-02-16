@@ -1,6 +1,5 @@
 
-# Crypto View Web App
-## [**Live link**](https://cryptoview-us13.onrender.com)
+# [**Crypto View Web App**](https://cryptoview-us13.onrender.com)
 
 ## Table of Contents
 1. [Project Overview](#project-overview)
