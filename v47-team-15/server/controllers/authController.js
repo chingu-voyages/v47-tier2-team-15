@@ -1,10 +1,6 @@
 const passport = require('passport');
 const User = require('../models/user');
-const uuid = require('uuid');
-const Joi = require('joi');
 const passwordComplexity = require('joi-password-complexity');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
 const passwordComplexityOptions = {
   min: 8,
   max: 30,
@@ -14,11 +10,17 @@ const passwordComplexityOptions = {
   symbol: 1,
 };
 
+/**
+ * Register a new user.
+ * @param {import('express').Request} req - The Express request object.
+ * @param {import('express').Response} res - The Express response object.
+ * @param {import('express').NextFunction} next - The next middleware function.
+ * @returns {Promise<void>} - A promise that resolves once the user is registered and logged in successfully.
+ */
 exports.registerUser = async (req, res, next) => {
   try {
     const { username, email, password, confirmPassword } = req.body;
 
-    // Check if passwords match
     if (password !== confirmPassword) {
       return res.status(400).json({ error: 'Passwords do not match' });
     }
@@ -34,34 +36,47 @@ exports.registerUser = async (req, res, next) => {
       });
     }
 
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res.status(409).json({ error: 'Email already registered' });
+    }
+
     const newUser = new User({
       username,
       email,
       password,
     });
 
-    await newUser.save(); // The pre-save middleware in UserSchema is handling the hashing
-
-    newUser.userId = uuid.v4();
     await newUser.save();
 
-    res.status(201).json({
-      message: 'User registered successfully',
-      user: {
-        userID: newUser.userId,
-        username: newUser.username,
-      },
+    // Automatically log in the user after successful registration
+    req.login(newUser, (err) => {
+      if (err) {
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+
+      res.status(201).json({
+        message: `User ${newUser.username} registered and logged in successfully`,
+        user: {
+          _id: newUser._id,
+          username: newUser.username,
+          email: newUser.email,
+        },
+      });
     });
   } catch (error) {
     console.error('Error registering user:', error.message);
-
-    if (error.code === 11000) {
-      res.status(409).json({ error: 'Email already registered' });
-    } else {
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+/**
+ * Log in a user.
+ * @param {import('express').Request} req - The Express request object.
+ * @param {import('express').Response} res - The Express response object.
+ * @param {import('express').NextFunction} next - The next middleware function.
+ */
 exports.loginUser = (req, res, next) => {
   passport.authenticate('local', (err, user) => {
     if (err) {
@@ -75,30 +90,41 @@ exports.loginUser = (req, res, next) => {
         return res.status(500).json({ error: 'Internal Server Error' });
       }
 
-      // Respond with user information
-      return res.status(200).json({
+      const { _id, username, email } = user;
+      console.log('User logged in');
+      res.status(200).json({
         message: 'Login successful',
         user: {
-          userID: user.userId,
-          username: user.username,
+          _id,
+          username,
+          email,
         },
       });
     });
   })(req, res, next);
 };
 
+/**
+ * Log out a user.
+ * @param {import('express').Request} req - The Express request object.
+ * @param {import('express').Response} res - The Express response object.
+ * @param {import('express').NextFunction} next - The next middleware function.
+ */
 exports.logoutUser = (req, res, next) => {
-  const { userId, username } = req.user;
+  const { username, email, _id } = req.user || {};
 
   req.logout((err) => {
     if (err) {
       return next(err);
     }
-
+    console.log('User logged out');
     res.status(200).json({
       message: 'Logout successful',
-      userID: userId,
-      username: username,
+      user: {
+        _id,
+        username,
+        email,
+      },
     });
   });
 };

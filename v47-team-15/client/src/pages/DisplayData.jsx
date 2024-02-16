@@ -11,7 +11,7 @@ import Registration from '../components/user_auth/Registration.jsx';
 
 function DisplayData() {
   const { data, error, isLoading } = useFetch(
-    'http://localhost:3003/api/currencies',
+    'https://crypto-view-test.onrender.com/api/currencies',
   );
   const [filteredData, setFilteredData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,10 +21,9 @@ function DisplayData() {
     if (data) {
       if (searchInput) {
         const filteredResults = data.filter((item) =>
-          item.name.toLowerCase().includes(searchInput.toLowerCase())
+          item.name.toLowerCase().includes(searchInput.toLowerCase()),
         );
         setFilteredData(filteredResults);
-        console.log('search results:', filteredResults);
       } else {
         setFilteredData(data);
       }
@@ -37,36 +36,44 @@ function DisplayData() {
 
   return (
     <>
-    <div className='bg-[#1A183E] min-h-screen'>
-      <Header />
-      {error ? (
-        <div>Error fetching data: {error.message}</div>
-      ) : (
-        <>
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            <>
-              <InfoCards />
-              <Registration />
-              <Search onSearch={handleSearch} />
-              <Table
-                data={data || []}
-                filter={filteredData || []}
-                currentPage={currentPage}
-                itemsPerPage={itemsPerPage}
-              />
-              <Pagination
-                totalItems={filteredData.length || data.length}
-                itemsPerPage={itemsPerPage}
-                currentPage={currentPage}
-                onPageChange={handlePageChange}
-              />
-              <Footer />
-            </>
-          )}
-        </>
-      )}
+      <div className="bg-[#1A183E] min-h-screen">
+        <Header />
+        {error ? (
+          <div className="text-center text-white">
+            API is not available right now, try later!
+          </div>
+        ) : (
+          <>
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <>
+                <InfoCards />
+                <Registration />
+                <Search
+                  onSearch={handleSearch}
+                  setFilteredData={setFilteredData}
+                  data={data}
+                />
+                <Table
+                  data={data || []}
+                  filter={filteredData || []}
+                  currentPage={currentPage}
+                  itemsPerPage={itemsPerPage}
+                />
+                <Pagination
+                  totalItems={
+                    filteredData.length > 0 ? filteredData.length : data.length
+                  }
+                  itemsPerPage={itemsPerPage}
+                  currentPage={currentPage}
+                  onPageChange={handlePageChange}
+                />
+                <Footer />
+              </>
+            )}
+          </>
+        )}
       </div>
     </>
   );

@@ -8,7 +8,16 @@ const UserProvider = ({ children }) => {
   const [userId, setUserId] = useState('');
 
   return (
-    <UserContext.Provider value={{ username, setUsername, successMessage, setSuccessMessage, userId, setUserId }}>
+    <UserContext.Provider
+      value={{
+        username,
+        setUsername,
+        successMessage,
+        setSuccessMessage,
+        userId,
+        setUserId,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

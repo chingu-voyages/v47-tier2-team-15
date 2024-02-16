@@ -9,12 +9,15 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Header() {
-  const { username, setUsername, userId, setUserId } = useContext(UserContext);
+  const { userId, setUserId } = useContext(UserContext);
   const [active, setActive] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [registrationModalOpen, setRegistrationModalOpen] = useState(false);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
+
+  const isSmallScreen = window.innerWidth <= 768;
 
   const toggleModal = (type) => {
     if (type === 'login') {
@@ -29,7 +32,6 @@ function Header() {
   const closeModal = () => {
     setRegistrationModalOpen(false);
     setLoginModalOpen(false);
-    console.log("close")
   };
 
   const toggleNav = () => {
@@ -38,50 +40,49 @@ function Header() {
   };
 
   const handleProfileClick = () => {
-    if (username) {
-      setUsername(username);
+    if (userId) {
       setUserId(userId);
-      navigate('/profile');
+      navigate('/portfolio');
     } else {
       toggleModal('login');
     }
-  }
+  };
 
   const handleLogout = async () => {
     try {
       const response = await axios.post(
-        'http://localhost:3003/auth/logout',
-        null, 
+        ' https://crypto-view-test.onrender.com/auth/logout',
+        null,
         {
           withCredentials: true,
           responseType: 'json',
-        }
+        },
       );
-  
+
       if (response.status === 200) {
-        localStorage.removeItem('authToken');
-        setUsername('');
         setUserId('');
+        toggleModal('login');
         navigate('/');
-        console.error('Logout successful');
       } else {
-        console.error('Logout failed');
+        setError('Logout failed');
       }
     } catch (error) {
-      console.error('Error during logout:', error);
+      setError('Error during logout:');
     }
   };
-  
 
   return (
     <>
-      <div className={`max-w-screen mx-auto sticky top-0 z-20 ${isOpen ? 'fixed w-full' : ''}`}>
+      <div
+        className={`max-w-screen mx-auto sticky top-0 z-20 ${isOpen ? 'fixed w-full' : ''}`}
+      >
         <nav className="flex flex-wrap justify-between items-center bg-[#1A183E] text-white p-2 px-4">
-          <div className="flex flex-row items-center pb-4">
-            <img src={logo} alt="logo" className="w-[4rem]" />
-            <span className="mt-4 md:text-xl">CryptoView</span>
-          </div>
-
+          <Link to="/">
+            <div className="flex flex-row items-center pb-4">
+              <img src={logo} alt="logo" className="w-[4rem]" />
+              <span className="mt-4 md:text-xl">CryptoView</span>
+            </div>
+          </Link>
           <div
             className={`md:flex justify-between items-center w-full md:w-auto ${
               isOpen ? 'bg-[#24224B] block fixed left-0 top-20 py-4' : 'hidden'
@@ -92,14 +93,20 @@ function Header() {
               className={`flex-col items-center md:flex-row flex md:space-x-16 mt-4 md:mt-0 md:font-medium py-1 md:py-0 px-6`}
             >
               <li className="md:bg-transparent md:text-xl text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
-              <Link to="/">
-                Home
-              </Link>
+                <Link to="/">Home</Link>
               </li>
               <li className="md:bg-transparent md:text-xl text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer">
-              <button onClick={handleProfileClick} type='button' className="">
-                Portfolio
-              </button>
+                {userId ? (
+                  <Link to="/portfolio">Portfolio</Link>
+                ) : (
+                  <button
+                    onClick={handleProfileClick}
+                    type="button"
+                    className=""
+                  >
+                    Portfolio
+                  </button>
+                )}
               </li>
               <li
                 className="md:bg-transparent md:text-xl text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer"
@@ -107,6 +114,52 @@ function Header() {
               >
                 <Link to="/news">News</Link>
               </li>
+              {isSmallScreen && (
+                <>
+                  {userId ? (
+                    <button
+                      onClick={() => handleLogout(userId)}
+                      className="md:hidden md:bg-transparent md:text-xl text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer"
+                    >
+                      Logout
+                    </button>
+                  ) : (
+                    <>
+                      <button
+                        onClick={() => toggleModal('login')}
+                        className="md:hidden md:bg-transparent md:text-xl text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer"
+                      >
+                        Login
+                      </button>
+
+                      {loginModalOpen && (
+                        <Login
+                          closeModal={closeModal}
+                          loginModalOpen={loginModalOpen}
+                          setLoginModalOpen={setLoginModalOpen}
+                          setRegistrationModalOpen={setRegistrationModalOpen}
+                        />
+                      )}
+
+                      <button
+                        onClick={() => toggleModal('signup')}
+                        className="md:hidden md:bg-transparent md:text-xl text-white block pl-3 pr-4 py-2 md:p-0 rounded transition ease-in-out delay-150 hover:scale-125 cursor-pointer"
+                      >
+                        Sign up
+                      </button>
+
+                      {registrationModalOpen && (
+                        <Registration
+                          closeModal={closeModal}
+                          registrationModalOpen={registrationModalOpen}
+                          setLoginModalOpen={setLoginModalOpen}
+                          toggleModal={toggleModal}
+                        />
+                      )}
+                    </>
+                  )}
+                </>
+              )}
             </ul>
           </div>
 
@@ -138,33 +191,56 @@ function Header() {
                 />
               </svg>
             </button>
-            {username ? (
-              // User is logged in, show logout button
-              <button onClick={() => handleLogout(userId)} className="hidden md:block bg-[#00A83E] rounded p-2 mx-1">
-                Logout
-              </button>
-            ) : (
-              // User is not logged in, show login and signup buttons
+            {!isSmallScreen && (
               <>
-                <button onClick={() => toggleModal('login')} className="hidden md:block bg-white text-[#1A183E] rounded p-2 mx-1">
-                  Login
-                </button>
+                {userId ? (
+                  <button
+                    onClick={() => handleLogout(userId)}
+                    className="hidden md:block bg-[#00A83E] rounded p-2 mx-1"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <>
+                    <div className="flex">
+                      <button
+                        onClick={() => toggleModal('login')}
+                        className="hidden md:block bg-white text-[#1A183E] rounded p-2 mx-1 mb-3"
+                      >
+                        Login
+                      </button>
 
-                {loginModalOpen && <Login closeModal={closeModal} loginModalOpen={loginModalOpen} setLoginModalOpen={setLoginModalOpen} setRegistrationModalOpen={setRegistrationModalOpen} />}
+                      {loginModalOpen && (
+                        <Login
+                          closeModal={closeModal}
+                          loginModalOpen={loginModalOpen}
+                          setLoginModalOpen={setLoginModalOpen}
+                          setRegistrationModalOpen={setRegistrationModalOpen}
+                        />
+                      )}
 
-                <button onClick={() => toggleModal('signup')} className="hidden md:block bg-[#00A83E] rounded p-2 mx-1">
-                  Sign up
-                </button>
+                      <button
+                        onClick={() => toggleModal('signup')}
+                        className="hidden md:block bg-[#00A83E] rounded p-2 mx-1 mb-3"
+                      >
+                        Sign up
+                      </button>
 
-                {registrationModalOpen && <Registration closeModal={closeModal} registrationModalOpen={registrationModalOpen} setLoginModalOpen={setLoginModalOpen} toggleModal={toggleModal} />}
+                      {registrationModalOpen && (
+                        <Registration
+                          closeModal={closeModal}
+                          registrationModalOpen={registrationModalOpen}
+                          setLoginModalOpen={setLoginModalOpen}
+                          toggleModal={toggleModal}
+                        />
+                      )}
+                    </div>
+                  </>
+                )}
               </>
             )}
-                  
-            
-
           </div>
         </nav>
-        <hr className="hidden md:block text-white -mt-6"></hr>
       </div>
     </>
   );

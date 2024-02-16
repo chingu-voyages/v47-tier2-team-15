@@ -7,6 +7,7 @@ const UserSchema = new Schema({
   username: {
     type: String,
     required: true,
+    unique: true,
   },
   email: {
     type: String,
@@ -17,8 +18,8 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  favoriteCoinIds: [{ type: String }],
 });
-
 
 // Middleware to hash the password before saving to the database
 UserSchema.pre('save', async function (next) {

@@ -14,13 +14,12 @@ function useFetch(url) {
         const response = await axios.get(url, {
           timeout: 15000,
           withCredentials: true,
+          responseType: 'json',
         });
 
         const responseData = response.data.data;
-        console.log('Global data:', responseData);
         setData(responseData);
       } catch (error) {
-        console.error('Error fetching data:', error.message);
         setError(error);
       } finally {
         setIsLoading(false);

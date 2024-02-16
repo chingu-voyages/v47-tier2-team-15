@@ -6,9 +6,9 @@ import { useContext } from 'react';
 import { UserContext } from '../userContext';
 import { useNavigate } from 'react-router-dom';
 
-function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) {
-  const {username, setUsername, successMessage, setSuccessMessage} = useContext(UserContext);
-  const navigate = useNavigate();
+function Registration({ closeModal, toggleModal, registrationModalOpen, setLoginModalOpen }) {
+  const {setUserId, setUsername, successMessage, setSuccessMessage} = useContext(UserContext);
+  const navigate = useNavigate(); 
 
   const navigateToLogin = () => {
     closeModal('signup'); 
@@ -42,9 +42,25 @@ function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) 
 
   const validateForm = () => {
     const schema = Joi.object({
-      username: Joi.string().alphanum().min(3).max(30).required(),
+      username: Joi.string().alphanum().min(3).max(12).required()
+      .messages({
+        'string.base': 'Username should be unique, containing letters and numbers.',
+        'string.alphanum': 'Username should only contain letters and numbers',
+        'string.min': 'Username should be at least 3 characters long',
+        'string.max': 'Username should not exceed 8 characters',
+        'any.required': 'Username is required',
+      }),
       email: Joi.string().email({ tlds: { allow: false } }).required(),
-      password: Joi.string().min(8).max(30).required(),
+      password: Joi.string()
+    .min(8)
+    .pattern(new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$'))
+    .required()
+    .messages({
+      'string.base': 'Password should be a string',
+      'string.min': 'Password should be at least 8 characters long',
+      'string.pattern.base': 'Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one symbol.',
+      'any.required': 'Password is required',
+    }),
       confirmPassword: Joi.string()
         .valid(Joi.ref('password'))
         .custom((value, helpers) => {
@@ -82,20 +98,19 @@ function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) 
 
     try {
       const response = await axios.post(
-        'http://localhost:3003/auth/register',
+        'https://crypto-view-test.onrender.com/auth/register',
         formData,
         {
           withCredentials: true,
           responseType: 'json',
         },
       );
-
-      // const user = response.data.user;
-      console.log('Registration successful:', response.data);
+      console.log('Registration successful:', response.data.user.username);
       setSuccessMessage(true);
       setUsername(response.data.user.username);
+      setUserId(response.data.user._id);
       closeModal();
-      navigate('/profile');
+      navigate('/portfolio');
     } catch (error) {
       console.error('Registration error:', error.message);
       setErrors({
@@ -188,7 +203,7 @@ function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) 
                   required
                 />
                 {errors.password && (
-                  <div className="text-red-500">{errors.password}</div>
+                  <div className="text-red-500 text-center py-2 mx-6">{errors.password}</div>
                 )}
               </div>
 
@@ -240,6 +255,7 @@ function Registration({ closeModal, registrationModalOpen, setLoginModalOpen }) 
 
 Registration.propTypes = {
   closeModal: PropTypes.func,
+  toggleModal: PropTypes.func,
   registrationModalOpen: PropTypes.bool,
   setLoginModalOpen: PropTypes.func,
 };
