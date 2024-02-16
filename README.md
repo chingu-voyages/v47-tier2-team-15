@@ -1,6 +1,6 @@
 
 # Crypto View Web App
-## Live link: [https://cryptoview-us13.onrender.com](https://cryptoview-us13.onrender.com)
+## [**Live link**](https://cryptoview-us13.onrender.com)
 
 ## Table of Contents
 1. [Project Overview](#project-overview)
@@ -71,8 +71,8 @@ A PR to merge to the master should reflect the goals of the prior week's sprint 
   - Passport.js: Authentication middleware for Node.js.
     
 - **APIs:**
-  - **CoinLore API:** [https://www.coinlore.com/cryptocurrency-data-api](https://www.coinlore.com/cryptocurrency-data-api)for real-time cryptocurrency market data..
-  - **NewsAPI:** [https://newsapi.org](https://newsapi.org) for fetching the latest cryptocurrency news.
+  - [**CoinLore API:**](https://www.coinlore.com/cryptocurrency-data-api) for real-time cryptocurrency market data..
+  - [**NewsAPI:**] for fetching the latest cryptocurrency news.
   
   ## Developers
 - **UI/UX Designer:** [Vruti Shah](https://www.linkedin.com/in/vruti-shah-29a393130/)
