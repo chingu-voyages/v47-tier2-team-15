@@ -61,9 +61,7 @@ function useAddCoin() {
             }
             setSelectedCoinId('');
           }
-        } else {
-          setErrorMessage("Please select your favorite coin before proceeding.");
-        }
+        } 
       } catch (error) {
         setErrorMessage('Failed to add coin. Please try again.');
       }
