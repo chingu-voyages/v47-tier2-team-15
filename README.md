@@ -18,7 +18,7 @@ Cryptocurrencies are an integral part of today's financial landscape, necessitat
 ##  Demo of the Crypto View Web App 
 
 
-![ezgif com-video-to-gif-converter](https://github.com/chingu-voyages/v47-tier2-team-15/assets/140349116/bce8d77d-f73e-4a7d-b677-cadcd59db657)
+https://github.com/chingu-voyages/v47-tier2-team-15/assets/140349116/792c22fe-63b2-4cf3-baaf-1fba3a15e9f6
 
 
 ## Key Features
