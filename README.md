@@ -22,10 +22,10 @@ https://github.com/chingu-voyages/v47-tier2-team-15/assets/140349116/81c99552-78
 
 
 ## Key Features
-1. **Cryptocurrency Data:** Access real-time market data, including market cap, volume, price, and changes.
-2. **Cryptocurrency Information:** Dive into detailed info for each cryptocurrency, including name, symbol, price, 24-hour changes, volume, supply, and market cap.
-3. **Search:** Easily search for cryptocurrencies by name or symbol to quickly find the desired information.
-4. **Portfolio:** View and manage your favorite cryptocurrencies in one place. Add favorites directly from the main crypto page or individual cryptocurrency details.
+1. **Cryptocurrency Data:** Access real-time market data, including market cap, volume, and price changes.
+2. **Cryptocurrency Information:** Dive into detailed information for each cryptocurrency, including name, symbol, price, 1-hour, 24-hour, and 7-day changes, volume, supply, and market cap.
+3. **Search:** Easily search for cryptocurrencies by name to quickly find the desired information.
+4. **Portfolio:** View and manage your favorite cryptocurrencies in one place. Easily add coins from both the main crypto page and your user portfolio.
 5. **News:** Stay informed with the latest cryptocurrency news and updates. Get insights into market trends, regulatory developments, and technology advancements.
 
 
@@ -49,15 +49,15 @@ To ensure your Chrome browser will accept 3rd party cookies for the CrytpoTracke
 ## Development Workflow
 - **Branch Hierarchy:** Use a three-level hierarchy of branches for promoting changes.
 - **Development Branch:** Reflects code for the next release, with all code undergoing testing and peer review.
-- **Master Branch:** Updated only from the development branch Pull Requests and reflects the current production release seen by live users.
+- **Main Branch:** Updated only from the development branch Pull Requests and reflects the current production release seen by live users.
 
 ## Git Strategy
 ### Pull Requests & Merging
 All Pull Requests and code merging will take place in the project's GitHub repo. To reduce merge conflicts, the destination branch should be pulled into the merging branch prior to opening a pull request. After testing changes locally, approve or comment on the PR on GitHub.
 ### Development Branch
 Working branches will be merged into the development branch during weekly development. At least one team member other than the requester must review and approve a request before merging. After successful merge, delete the merged branch from the repository. Resolve any merge conflicts promptly.
-### Master Branch
-A PR to merge to the master should reflect the goals of the prior week's sprint and produce an updated MVP. All team members must approve a request for merging into the master branch.
+### Main Branch
+A PR to merge to the main should reflect the goals of the prior week's sprint and produce an updated MVP. All team members must approve a request for merging into the main branch.
 
 ## Tech Stack
 
