@@ -20,7 +20,10 @@ Cryptocurrencies are an integral part of today's financial landscape, necessitat
 ![cryptoview-ezgif com-video-to-gif-converter](https://github.com/chingu-voyages/v47-tier2-team-15/assets/140349116/12a672ce-401b-4d9a-91e0-1c1bbbb27dda)
 
 
-Uploading cryptoview .mp4…
+
+
+https://github.com/chingu-voyages/v47-tier2-team-15/assets/140349116/81c99552-7841-41bd-b5c3-5bac24b2b8ae
+
 
 ## Key Features
 1. **Cryptocurrency Data:** Access real-time market data, including market cap, volume, price, and changes.
