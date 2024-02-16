@@ -62,7 +62,7 @@ function useAddCoin() {
             setSelectedCoinId('');
           }
         } else {
-          alert('Not logged in or no valid coin selected');
+          setErrorMessage("Please select your favorite coin before proceeding.");
         }
       } catch (error) {
         setErrorMessage('Failed to add coin. Please try again.');

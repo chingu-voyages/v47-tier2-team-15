@@ -6,6 +6,7 @@ import axios from 'axios';
 const DeleteAccount = () => {
   const { userId, setUserId } = useContext(UserContext);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
   const navigate = useNavigate();
 
   const deleteAccount = async () => {
@@ -22,10 +23,10 @@ const DeleteAccount = () => {
         setUserId('');
         navigate('/');
       } else {
-        alert('You must be logged in to delete an account!');
+        setErrorMessage('You must be logged in to delete an account!');
       }
     } catch (error) {
-      alert('Error deleting account:', error);
+      setErrorMessage('Error deleting account:', error);
     }
   };
 
@@ -88,6 +89,9 @@ const DeleteAccount = () => {
                   No
                 </button>
               </div>
+              <p className="text-center text-red-500 bg-[#24224B] rounded p-2">
+            {errorMessage}
+          </p>
             </div>
           </div>
         </div>
