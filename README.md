@@ -22,9 +22,6 @@ To ensure your Chrome browser will accept 3rd party cookies for the CrytpoTracke
 - at the bottom of the page in the section "Allowed to use third-party cookies" click "Add"
 - Enter the URL: https://cryptoview-us13.onrender.com
   
-![git](https://github.com/chingu-voyages/v47-tier2-team-15/assets/140349116/28376b03-7dbc-4a06-a133-2a6b2adfa2f9)
-
-
 Here's a brief preview of the Crypto View Web App in action.
 
 ##  Demo of the Crypto View Web App 
@@ -54,6 +51,7 @@ Working branches will be merged into the development branch during weekly develo
 A PR to merge to the master should reflect the goals of the prior week's sprint and produce an updated MVP. All team members must approve a request for merging into the master branch.
 
 ## Tech Stack
+
 - Backend Node.js Express.js MongoDB Mongoose Passport.js and api delete info about CoinGecko
 - Node.js: JavaScript runtime for server-side applications.
 - Express.js: Minimalist web framework for Node.js.
@@ -66,11 +64,18 @@ A PR to merge to the master should reflect the goals of the prior week's sprint 
   - HTML for structuring the frontend components.
   - Tailwind CSS for rapid UI development with utility-first CSS.
 - **Backend:**
-  - Node.js for server-side JavaScript runtime.
+  for the Backend 
+  - Node.js: JavaScript runtime for server-side applications.
+  - Express.js: Minimalist web framework for Node.js.
+  - MongoDB: NoSQL database for flexible data storage.
+  - Mongoose: MongoDB object modeling for Node.js.
+  - Passport.js: Authentication middleware for Node.js.
+  - 
 - **APIs:**
   - CoinGecko API for real-time cryptocurrency market data.
   - NewsAPI for fetching the latest cryptocurrency news.
   - CoinLore API for cryptocurrency data.
+  - API delete info about CoinGecko
 
 ## Developers
 - **UI/UX Designer:** [Vruti Shah](https://www.linkedin.com/in/vruti-shah-29a393130/)
